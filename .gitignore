@@ -1,0 +1,11 @@
+# Claude Code settings
+.claude/
+
+# Source PDF (keep local only)
+*.pdf
+
+# Debug/intermediate images
+gridline_overlay.png
+margin_*.png
+verification_diff.png
+pattern_preview.png
