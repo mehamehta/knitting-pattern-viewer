@@ -157,6 +157,16 @@ input[type=number] {
   margin-top: 10px;
 }
 
+/* ── main content (scopes overlays away from sidebars) ── */
+#main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  min-width: 0;
+}
+
 /* ── scroll region ── */
 #scroll-wrap {
   flex: 1;
@@ -467,11 +477,126 @@ input[type=number] {
 .pip-fb-btn { cursor: pointer; padding: 2px 8px; color: #aaa; }
 .pip-fb-btn:hover { color: #eee; }
 #pip-fb-label-st { color: #888; font-size: 0.65rem; }
+
+/* ── left nav sidebar (project switcher) ── */
+#nav-sidebar {
+  width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #131f2e;
+  border-right: 1px solid #2a3444;
+  transition: width 0.22s ease;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 40;
+}
+#nav-sidebar.open { width: 200px; }
+
+#nav-sb-header {
+  padding: 14px 14px 10px;
+  border-bottom: 1px solid #2a3444;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+}
+#nav-sb-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+#btn-nav-close {
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+}
+#btn-nav-close:hover { color: #bbb; background: #2a2a2a; }
+
+#nav-project-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+.nav-project-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 14px 10px 17px;
+  cursor: pointer;
+  gap: 3px;
+  transition: background 0.1s;
+  white-space: nowrap;
+  overflow: hidden;
+  border-left: 3px solid transparent;
+}
+.nav-project-item:hover { background: #1e2d40; }
+.nav-project-item.active {
+  background: #1a2e1a;
+  border-left-color: #5a8a5a;
+}
+.nav-project-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ccc;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nav-project-item.active .nav-project-name { color: #8aba8a; }
+.nav-project-status {
+  font-size: 0.65rem;
+  color: #555;
+}
+.nav-project-item.active .nav-project-status { color: #4a7a4a; }
+
+/* ── dummy project placeholder page ── */
+#dummy-page {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: #0a1520;
+  z-index: 30;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+#dummy-page.visible { display: flex; }
+#dummy-page-icon { font-size: 3rem; opacity: 0.25; }
+#dummy-page-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ccc;
+  letter-spacing: 0.02em;
+}
+#dummy-page-sub {
+  font-size: 0.88rem;
+  color: #555;
+}
+#dummy-page-badge {
+  font-size: 0.7rem;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: #1a2332;
+  border: 1px solid #2a3444;
+  color: #5a7a9a;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
 </style>
 </head>
 <body>
 
 <div id="toolbar">
+  <button class="btn" id="btn-nav" title="Switch project">&#9776; Projects</button>
   <h1 id="chart-title">Knitting Chart</h1>
   <div class="divider"></div>
 
@@ -519,9 +644,44 @@ input[type=number] {
 
 <!-- main body: grid + sidebar -->
 <div id="body-row">
-  <div id="scroll-wrap">
-    <canvas id="col-header"></canvas>
-    <canvas id="grid-canvas"></canvas>
+
+  <!-- Left nav sidebar (project switcher) -->
+  <div id="nav-sidebar">
+    <div id="nav-sb-header">
+      <div id="nav-sb-title">Projects</div>
+      <button id="btn-nav-close">&#x2715;</button>
+    </div>
+    <div id="nav-project-list">
+      <div class="nav-project-item active" data-project="current">
+        <div class="nav-project-name">Girl with a Pearl Earring</div>
+        <div class="nav-project-status">Completed</div>
+      </div>
+      <div class="nav-project-item" data-project="new-project">
+        <div class="nav-project-name">New Project</div>
+        <div class="nav-project-status">Coming soon</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content area (overlays are scoped to this) -->
+  <div id="main-content">
+    <div id="scroll-wrap">
+      <canvas id="col-header"></canvas>
+      <canvas id="grid-canvas"></canvas>
+    </div>
+
+    <!-- Right-Side-Row overlay (shown when knitting the plain RS row) -->
+    <div id="rs-overlay">
+      <div id="rs-overlay-ridgenum">Ridge <span id="rs-ridge-num">—</span></div>
+      <div id="rs-overlay-title">Right Side Row</div>
+      <div id="rs-overlay-sub">Knit the entire row</div>
+      <div id="rs-overlay-hint">Press Return when done to see the chart →</div>
+    </div>
+
+    <!-- Dummy project placeholder page -->
+    <div id="dummy-page">
+      <div id="dummy-page-title">BLANK PAGE</div>
+    </div>
   </div>
 
   <!-- Sidebar -->
@@ -547,13 +707,6 @@ input[type=number] {
     </div>
   </div>
 
-  <!-- Right-Side-Row overlay (shown when knitting the plain RS row) -->
-  <div id="rs-overlay">
-    <div id="rs-overlay-ridgenum">Ridge <span id="rs-ridge-num">—</span></div>
-    <div id="rs-overlay-title">Right Side Row</div>
-    <div id="rs-overlay-sub">Knit the entire row</div>
-    <div id="rs-overlay-hint">Press Return when done to see the chart →</div>
-  </div>
 </div>
 
 <div id="status">Loading…</div>
@@ -593,6 +746,7 @@ function ridgeNum(row)  { return RIDGE_AT_ROW0  - row; }
 function rowForRidge(r) { return RIDGE_AT_ROW0  - r;   }
 
 // ─── state ─────────────────────────────────────────────────────────────────
+let activeProject  = "current";
 let cellPx         = 20;
 let activeRidge    = 1;
 let activeStitch   = 1;      // 1-indexed stitch position
@@ -986,8 +1140,9 @@ function updateBadge() {
 
 function updateRSOverlay() {
   const overlay = document.getElementById("rs-overlay");
-  overlay.classList.toggle("visible", isRightSideRow);
-  if (isRightSideRow) {
+  const show = isRightSideRow && activeProject === "current";
+  overlay.classList.toggle("visible", show);
+  if (show) {
     document.getElementById("rs-ridge-num").textContent =
       `${activeRidge} / ${MAX_RIDGE}`;
   }
@@ -1585,6 +1740,43 @@ if (saved) {
 // Full render + scroll to saved position
 setRow(activeRidge, isRightSideRow);
 scrollToActiveStitch();
+
+// ─── nav sidebar (project switcher) ────────────────────────────────────────
+(function () {
+  const navSidebar  = document.getElementById("nav-sidebar");
+  const btnNav      = document.getElementById("btn-nav");
+  const btnNavClose = document.getElementById("btn-nav-close");
+  const dummyPage   = document.getElementById("dummy-page");
+
+  btnNav.addEventListener("click", () => {
+    navSidebar.classList.toggle("open");
+    btnNav.classList.toggle("active");
+  });
+
+  btnNavClose.addEventListener("click", () => {
+    navSidebar.classList.remove("open");
+    btnNav.classList.remove("active");
+  });
+
+  document.querySelectorAll(".nav-project-item").forEach(item => {
+    item.addEventListener("click", () => {
+      const proj = item.dataset.project;
+      if (proj === activeProject) return;
+      activeProject = proj;
+      document.querySelectorAll(".nav-project-item").forEach(i =>
+        i.classList.toggle("active", i.dataset.project === proj)
+      );
+      if (proj === "current") {
+        dummyPage.classList.remove("visible");
+        document.getElementById("chart-title").textContent = PATTERN.title;
+      } else {
+        dummyPage.classList.add("visible");
+        document.getElementById("chart-title").textContent = "New Project";
+      }
+      updateRSOverlay();
+    });
+  });
+})();
 </script>
 </body>
 </html>
