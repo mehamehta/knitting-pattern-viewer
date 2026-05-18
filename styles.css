@@ -188,16 +188,16 @@ input[type=number] {
   background: #0a1520;
   min-width: 0;
   scrollbar-width: thin;
-  scrollbar-color: rgba(80,120,160,0.3) transparent;
+  scrollbar-color: rgba(180,200,220,0.25) transparent;
 }
 #scroll-wrap::-webkit-scrollbar { width: 7px; height: 7px; }
 #scroll-wrap::-webkit-scrollbar-track { background: transparent; }
 #scroll-wrap::-webkit-scrollbar-corner { background: transparent; }
 #scroll-wrap::-webkit-scrollbar-thumb {
-  background: rgba(80,120,160,0.28);
+  background: rgba(180,200,220,0.25);
   border-radius: 4px;
 }
-#scroll-wrap::-webkit-scrollbar-thumb:hover { background: rgba(80,120,160,0.60); }
+#scroll-wrap::-webkit-scrollbar-thumb:hover { background: rgba(180,200,220,0.45); }
 
 #col-header {
   position: sticky;
@@ -217,7 +217,16 @@ input[type=number] {
   flex: 1;
   overflow-y: auto;
   background: #0a1520;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(180,200,220,0.25) transparent;
 }
+.page-doc-wrap::-webkit-scrollbar { width: 7px; }
+.page-doc-wrap::-webkit-scrollbar-track { background: transparent; }
+.page-doc-wrap::-webkit-scrollbar-thumb {
+  background: rgba(180,200,220,0.25);
+  border-radius: 4px;
+}
+.page-doc-wrap::-webkit-scrollbar-thumb:hover { background: rgba(180,200,220,0.45); }
 
 #bb-pattern-doc {
   max-width: 720px;
@@ -437,15 +446,15 @@ input[type=number] {
   overflow-y: auto;
   padding: 4px 0 8px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(60,80,110,0.35) transparent;
+  scrollbar-color: rgba(180,200,220,0.22) transparent;
 }
 #sb-list::-webkit-scrollbar { width: 4px; }
 #sb-list::-webkit-scrollbar-track { background: transparent; }
 #sb-list::-webkit-scrollbar-thumb {
-  background: rgba(60,80,110,0.4);
+  background: rgba(180,200,220,0.22);
   border-radius: 2px;
 }
-#sb-list::-webkit-scrollbar-thumb:hover { background: rgba(80,110,150,0.70); }
+#sb-list::-webkit-scrollbar-thumb:hover { background: rgba(180,200,220,0.40); }
 
 .hist-date-hdr {
   padding: 8px 14px 3px;
