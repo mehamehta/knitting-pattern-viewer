@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knitting Chart Viewer</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Primary toolbar: common across all pages -->
+<div id="toolbar">
+  <button class="btn" id="btn-nav" title="Switch project">&#9776; Projects</button>
+  <div class="divider"></div>
+  <button class="btn" id="btn-history">History <span id="hist-count">0</span></button>
+  <button class="btn" id="btn-pip" title="Floating mini-view (stays on top of other windows)">&#x29C9; Mini View</button>
+</div>
+
+<div id="body-row">
+
+  <!-- Left nav sidebar (project switcher) — populated by shell.js -->
+  <div id="nav-sidebar">
+    <div id="nav-sb-header">
+      <div id="nav-sb-title">Projects</div>
+      <button id="btn-nav-close">&#x2715;</button>
+    </div>
+    <div id="nav-project-list"></div>
+  </div>
+
+  <!-- Main content: page-specific toolbar + page body -->
+  <div id="main-content">
+    <div id="page-toolbar-mount"></div>
+    <div id="page-body-mount"></div>
+  </div>
+
+  <!-- History sidebar (common) -->
+  <div id="sidebar">
+    <div id="sb-header">
+      <div id="sb-header-left">
+        <div id="sb-title">Ridge History</div>
+        <div id="sb-autosave">Position saved automatically</div>
+      </div>
+      <button id="btn-sidebar-close">&#x2715;</button>
+    </div>
+
+    <div id="sb-current">
+      <div id="sb-current-label">Current position</div>
+      <div id="sb-current-ridge">&#x2014;</div>
+      <div id="sb-current-sub">&#x2014;</div>
+    </div>
+
+    <div id="sb-list"></div>
+
+    <div id="sb-footer">
+      <button id="btn-clear-hist">Clear all history</button>
+    </div>
+  </div>
+
+</div>
+
+<div id="status">Loading&#x2026;</div>
+
+<!-- Stitch-marker colour picker (used by chart page, position:fixed) -->
+<div id="guide-popup">
+  <div class="popup-title">Stitch marker at stitch <strong id="popup-stitch-num"></strong></div>
+  <div class="swatch-row" id="popup-swatches"></div>
+</div>
+
+<!-- PiP fallback overlay (used by chart page, position:fixed) -->
+<div id="pip-fallback">
+  <div id="pip-fallback-header">
+    <span>Mini View</span>
+    <span id="pip-fallback-close" style="cursor:pointer;padding:0 6px;">&#x2715;</span>
+  </div>
+  <canvas id="pip-fallback-canvas" style="display:block;image-rendering:pixelated;"></canvas>
+  <div id="pip-fb-scroll">
+    <span class="pip-fb-btn" id="pip-fb-left">&#x25C4;</span>
+    <span id="pip-fb-label-st"></span>
+    <span class="pip-fb-btn" id="pip-fb-right">&#x25BA;</span>
+  </div>
+</div>
+
+<!-- Load scripts: registry first, then page data + page logic, then shell last -->
+<script src="js/registry.js"></script>
+<script src="pages/pearl-earring/pattern-data.js"></script>
+<script src="pages/pearl-earring/page.js"></script>
+<script src="pages/bea-blouse/page.js"></script>
+<script src="js/shell.js"></script>
+</body>
+</html>
