@@ -219,7 +219,7 @@ input[type=number] {
   background: #0a1520;
 }
 
-#pattern-doc {
+#bb-pattern-doc {
   max-width: 720px;
   margin: 0 auto;
   padding: 40px 32px 80px;
@@ -227,7 +227,7 @@ input[type=number] {
   line-height: 1.7;
   color: #ccc;
 }
-#pattern-doc h2 {
+#bb-pattern-doc h2 {
   font-size: 1.05rem;
   font-weight: 700;
   color: #e8d8b0;
@@ -235,25 +235,64 @@ input[type=number] {
   padding-bottom: 4px;
   border-bottom: 1px solid #2a3444;
 }
-#pattern-doc h2:first-child { margin-top: 0; }
-#pattern-doc p { margin: 0.6em 0; }
-#pattern-doc strong { color: #e8d8b0; }
-#pattern-doc em { color: #a0c0d8; font-style: italic; }
-#pattern-doc .row-table {
+#bb-pattern-doc h2:first-child { margin-top: 0; }
+#bb-pattern-doc p { margin: 0.6em 0; }
+#bb-pattern-doc strong { color: #e8d8b0; }
+#bb-pattern-doc em { color: #a0c0d8; font-style: italic; }
+#bb-pattern-doc .row-table {
   display: grid;
   grid-template-columns: max-content 1fr;
   gap: 4px 16px;
   margin: 0.6em 0 0.6em 16px;
 }
-#pattern-doc .row-label {
+#bb-pattern-doc .row-label {
   font-weight: 700;
   color: #e8d8b0;
   white-space: nowrap;
 }
-#pattern-doc .dist {
+#bb-pattern-doc .dist {
   font-style: italic;
   color: #a0c0d8;
   margin: 0.6em 0 0.6em 16px;
+}
+
+/* ── step mode ── */
+/* In step mode: dim all navigatable elements */
+#bb-pattern-doc.step-mode [data-step],
+#bb-pattern-doc.step-mode [data-step-label],
+#bb-pattern-doc.step-mode .substep-intro {
+  opacity: 0.18;
+  transition: opacity 0.18s;
+}
+#bb-pattern-doc.step-mode h2 {
+  opacity: 0.25;
+  transition: opacity 0.18s;
+}
+/* .dist paragraphs have no data-step so target them explicitly */
+#bb-pattern-doc.step-mode .dist {
+  opacity: 0.18;
+  transition: opacity 0.18s;
+}
+
+/* Active step: full brightness + yellow highlight */
+#bb-pattern-doc.step-mode [data-step].step-active {
+  opacity: 1;
+  background: rgba(245, 200, 66, 0.09);
+  border-radius: 4px;
+  box-shadow: 0 0 0 4px rgba(245, 200, 66, 0.09);
+  outline: 1px solid rgba(245, 200, 66, 0.28);
+  outline-offset: 3px;
+}
+#bb-pattern-doc.step-mode [data-step-label].step-active {
+  opacity: 1;
+}
+
+/* When a sub-step is active, show the parent paragraph's intro + dim siblings */
+#bb-pattern-doc.step-mode .has-substeps.substep-active .substep-intro {
+  opacity: 0.65;
+}
+#bb-pattern-doc.step-mode .has-substeps.substep-active [data-step]:not(.step-active) {
+  opacity: 0.32;
 }
 
 /* ── statusbar ── */
