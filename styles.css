@@ -475,18 +475,33 @@ input[type=number] {
 }
 .hist-entry:hover { background: #232323; }
 .hist-entry.is-current { background: #1e2a0e; }
+.hist-page-tag {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 1px 5px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.hist-page-pearl-earring { background: rgba(70,90,190,0.35); color: #8099d8; }
+.hist-page-bea-blouse    { background: rgba(60,150,60,0.28);  color: #6cb86c; }
+
 .hist-ridge {
   font-size: 0.9rem;
   font-weight: 700;
   color: #f5c842;
-  min-width: 90px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .hist-ridge.rs { color: #d48b2a; }
 .hist-entry.is-current .hist-ridge { color: #aad060; }
 .hist-time {
   font-size: 0.68rem;
   color: #555;
-  flex: 1;
+  flex-shrink: 0;
 }
 .hist-del {
   font-size: 0.75rem;

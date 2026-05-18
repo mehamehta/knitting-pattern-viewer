@@ -164,7 +164,7 @@ function scheduleHistEntry() {
     if (key === lastHistKey) return;
     lastHistKey = key;
     const hist = loadHistory();
-    hist.unshift({ ridge: activeRidge, isRightSide: isRightSideRow, ts: Date.now() });
+    hist.unshift({ ridge: activeRidge, stitch: activeStitch, isRightSide: isRightSideRow, ts: Date.now() });
     if (hist.length > MAX_HIST) hist.length = MAX_HIST;
     saveHistory(hist);
     if (_shellAPI) { _shellAPI.updateHistBadge(); _shellAPI.refreshHistory(); }
@@ -902,12 +902,16 @@ PageRegistry.register("pearl-earring", {
     lastHistKey = null;
   },
   clearHistory() { saveHistory([]); lastHistKey = null; },
-  navigateToHistEntry(entry) { setRow(entry.ridge, !!entry.isRightSide); },
+  navigateToHistEntry(entry) {
+    setRow(entry.ridge, !!entry.isRightSide);
+    if (entry.stitch != null) setStitch(entry.stitch);
+  },
   formatHistEntry(entry) {
     const isRS      = !!entry.isRightSide;
     const isCurrent = entry.ridge === activeRidge && isRS === isRightSideRow;
+    const stLabel   = entry.stitch != null ? ` · St.${entry.stitch}` : "";
     return {
-      label:      `Ridge ${entry.ridge} (${isRS ? "RS" : "WS"})`,
+      label:      `Ridge ${entry.ridge}${stLabel}`,
       labelClass: isRS ? "rs" : "",
       isCurrent,
     };
@@ -916,7 +920,7 @@ PageRegistry.register("pearl-earring", {
     const rowType = isRightSideRow ? "Right Side Row" : "Wrong Side Row";
     const pct     = Math.round((activeRidge / MAX_RIDGE) * 100);
     return {
-      label: `Ridge ${activeRidge}`,
+      label: `Ridge ${activeRidge} · St.${activeStitch}`,
       sub:   `${rowType}  ·  ${pct}% through`,
     };
   },

@@ -52,6 +52,7 @@
 
     // Mount new page
     currentPageId = id;
+    localStorage.setItem("knitting_last_page", id);
     const page = PageRegistry.get(id);
     if (page && page.mount) page.mount(toolbarMount, bodyMount, shellAPI);
 
@@ -88,8 +89,10 @@
   }
 
   function updateHistBadge() {
-    const page = currentPageId && PageRegistry.get(currentPageId);
-    const count = page && page.getHistEntries ? page.getHistEntries().length : 0;
+    let count = 0;
+    PageRegistry.getAll().forEach(p => {
+      if (p.getHistEntries) count += p.getHistEntries().length;
+    });
     document.getElementById("hist-count").textContent = count;
   }
 
@@ -128,19 +131,23 @@
     const list = document.getElementById("sb-list");
     list.innerHTML = "";
 
-    if (!page || !page.getHistEntries) {
-      list.innerHTML = `<div id="sb-empty">No history for this page.</div>`;
-      return;
-    }
+    // Build merged history across all pages, sorted newest first
+    const allEntries = [];
+    PageRegistry.getAll().forEach(p => {
+      if (!p.getHistEntries) return;
+      p.getHistEntries().forEach((entry, origIdx) => {
+        allEntries.push({ ...entry, _pageId: p.id, _pageTitle: p.title, _origIdx: origIdx });
+      });
+    });
+    allEntries.sort((a, b) => b.ts - a.ts);
 
-    const hist = page.getHistEntries();
-    if (hist.length === 0) {
+    if (allEntries.length === 0) {
       list.innerHTML = `<div id="sb-empty">No history yet.<br><br>Your position saves automatically. Come back tomorrow and you'll pick up right where you left off.</div>`;
       return;
     }
 
     let currentDate = null;
-    hist.forEach((entry, idx) => {
+    allEntries.forEach(entry => {
       const dateStr = fmtDate(entry.ts);
       if (dateStr !== currentDate) {
         currentDate = dateStr;
@@ -150,37 +157,45 @@
         list.appendChild(hdr);
       }
 
-      const fmt_entry = page.formatHistEntry(entry);
-      const isCurrent = fmt_entry.isCurrent;
+      const entryPage = PageRegistry.get(entry._pageId);
+      const fmt_entry = entryPage.formatHistEntry(entry);
+      const isCurrent = fmt_entry.isCurrent && (entry._pageId === currentPageId);
 
       const row = document.createElement("div");
       row.className = "hist-entry" + (isCurrent ? " is-current" : "");
 
+      // Page tag — 2-letter abbreviation derived from page id segments
+      const pageTagEl = document.createElement("span");
+      pageTagEl.className   = "hist-page-tag hist-page-" + entry._pageId;
+      pageTagEl.textContent = entry._pageId.split("-").map(w => w[0].toUpperCase()).join("");
+      row.appendChild(pageTagEl);
+
       const labelSpan = document.createElement("span");
       labelSpan.className = "hist-ridge" + (fmt_entry.labelClass ? " " + fmt_entry.labelClass : "");
       labelSpan.textContent = fmt_entry.label;
+      labelSpan.title       = `${entry._pageTitle}: ${fmt_entry.label}`;
+      row.appendChild(labelSpan);
 
       const timeEl = document.createElement("span");
       timeEl.className   = "hist-time";
       timeEl.textContent = fmt(entry.ts);
+      row.appendChild(timeEl);
 
       const delEl = document.createElement("span");
       delEl.className   = "hist-del";
       delEl.textContent = "✕";
       delEl.title       = "Remove";
-
-      row.appendChild(labelSpan);
-      row.appendChild(timeEl);
       row.appendChild(delEl);
 
       row.addEventListener("click", e => {
         if (e.target === delEl) {
           e.stopPropagation();
-          page.deleteHistEntry(idx);
+          entryPage.deleteHistEntry(entry._origIdx);
           refreshSidebar();
           updateHistBadge();
         } else {
-          page.navigateToHistEntry(entry);
+          if (entry._pageId !== currentPageId) navigateTo(entry._pageId);
+          PageRegistry.get(entry._pageId).navigateToHistEntry(entry);
         }
       });
 
@@ -192,10 +207,8 @@
   document.getElementById("btn-sidebar-close").addEventListener("click", toggleSidebar);
 
   document.getElementById("btn-clear-hist").addEventListener("click", () => {
-    const page = currentPageId && PageRegistry.get(currentPageId);
-    if (!page || !page.clearHistory) return;
     if (confirm("Clear all history entries?")) {
-      page.clearHistory();
+      PageRegistry.getAll().forEach(p => { if (p.clearHistory) p.clearHistory(); });
       refreshSidebar();
       updateHistBadge();
     }
@@ -220,7 +233,9 @@
     if (page && page.handleKey) page.handleKey(e);
   });
 
-  // ── Boot: navigate to first registered page ─────────────────────────────────
-  const firstPage = PageRegistry.getAll()[0];
-  if (firstPage) navigateTo(firstPage.id);
+  // ── Boot: navigate to last visited page (or first registered) ───────────────
+  const savedPageId = localStorage.getItem("knitting_last_page");
+  const bootPageId  = (savedPageId && PageRegistry.get(savedPageId)) ? savedPageId
+                    : (PageRegistry.getAll()[0] || {}).id;
+  if (bootPageId) navigateTo(bootPageId);
 })();

@@ -100,6 +100,7 @@ let stepMode    = false;
 let currentStep = 0;
 let repCounters = { rg1: 1, rg2: 1 };
 let doc         = null;  // #bb-pattern-doc element
+let _shellAPI   = null;
 
 function loadState() {
   try {
@@ -118,6 +119,34 @@ function saveState() {
     step: currentStep,
     reps: repCounters,
   }));
+}
+
+// ── History ───────────────────────────────────────────────────────────────────
+const LS_HISTORY_BB = 'bea-blouse-history';
+const MAX_HIST_BB   = 500;
+
+let histTimerBB   = null;
+let lastHistKeyBB = null;
+
+function loadHistory() {
+  try { return JSON.parse(localStorage.getItem(LS_HISTORY_BB)) || []; } catch { return []; }
+}
+function saveHistory(hist) {
+  localStorage.setItem(LS_HISTORY_BB, JSON.stringify(hist));
+}
+function scheduleHistEntry() {
+  if (!stepMode) return;
+  clearTimeout(histTimerBB);
+  histTimerBB = setTimeout(() => {
+    const key = String(currentStep);
+    if (key === lastHistKeyBB) return;
+    lastHistKeyBB = key;
+    const hist = loadHistory();
+    hist.unshift({ step: currentStep, ts: Date.now() });
+    if (hist.length > MAX_HIST_BB) hist.length = MAX_HIST_BB;
+    saveHistory(hist);
+    if (_shellAPI) { _shellAPI.updateHistBadge(); _shellAPI.refreshHistory(); }
+  }, 1500);
 }
 
 // ── Display update ────────────────────────────────────────────────────────────
@@ -207,6 +236,7 @@ function advance() {
   }
 
   updateDisplay();
+  scheduleHistEntry();
 }
 
 function retreat() {
@@ -238,14 +268,13 @@ function retreat() {
   }
 
   updateDisplay();
+  scheduleHistEntry();
 }
 
 function toggleStepMode() {
   stepMode = !stepMode;
-  if (stepMode && currentStep === 0) {
-    // start fresh at step 0
-  }
   updateDisplay();
+  if (stepMode) scheduleHistEntry();
 }
 
 // ── Key handler ───────────────────────────────────────────────────────────────
@@ -266,6 +295,7 @@ PageRegistry.register("bea-blouse", {
   status: "Pattern reference",
 
   mount(toolbarMount, bodyMount, shellAPI) {
+    _shellAPI = shellAPI;
     loadState();
 
     toolbarMount.innerHTML = TOOLBAR_HTML;
@@ -279,20 +309,42 @@ PageRegistry.register("bea-blouse", {
     shellAPI.setStatus("Bea Blouse — pattern reference");
     shellAPI.updateHistBadge();
     updateDisplay();
+    scheduleHistEntry();
   },
 
   unmount() {
+    clearTimeout(histTimerBB);
+    lastHistKeyBB = null;
+    _shellAPI = null;
     doc = null;
   },
 
   handleKey(e) { handleKey(e); },
 
-  getHistEntries()      { return []; },
-  deleteHistEntry()     {},
-  clearHistory()        {},
-  navigateToHistEntry() {},
-  formatHistEntry()     { return { label: "", labelClass: "", isCurrent: false }; },
-  getCurrentPos()       { return { label: "—", sub: "Pattern reference" }; },
+  getHistEntries() { return loadHistory(); },
+  deleteHistEntry(idx) {
+    const h = loadHistory(); h.splice(idx, 1); saveHistory(h);
+    lastHistKeyBB = null;
+  },
+  clearHistory()   { saveHistory([]); lastHistKeyBB = null; },
+  navigateToHistEntry(entry) {
+    currentStep = entry.step;
+    stepMode    = true;
+    updateDisplay();
+  },
+  formatHistEntry(entry) {
+    return {
+      label:      `Step ${entry.step + 1}`,
+      labelClass: "",
+      isCurrent:  stepMode && entry.step === currentStep,
+    };
+  },
+  getCurrentPos() {
+    return {
+      label: stepMode ? `Step ${currentStep + 1}` : "No active step",
+      sub:   "Bea Blouse",
+    };
+  },
 });
 
 })();
