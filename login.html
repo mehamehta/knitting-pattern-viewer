@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knitting Patterns — Sign In</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0d1b2a;
+    color: #ccc;
+    font-family: system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100dvh;
+  }
+  .box {
+    background: #1a2332;
+    border: 1px solid #2a3444;
+    border-radius: 8px;
+    padding: 2rem;
+    width: min(320px, 90vw);
+  }
+  h1 {
+    font-size: 1.05rem;
+    color: #e8d8b0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+  input[type=password] {
+    width: 100%;
+    background: #0d1b2a;
+    border: 1px solid #3a4a5a;
+    border-radius: 4px;
+    color: #ccc;
+    font-size: 1rem;
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 1rem;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  input[type=password]:focus { border-color: #f5c842; }
+  button {
+    width: 100%;
+    background: #f5c842;
+    color: #0d1b2a;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.65rem;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  button:hover:not(:disabled) { background: #ffd84a; }
+  button:disabled { opacity: 0.6; cursor: default; }
+  .error {
+    color: #e05050;
+    font-size: 0.85rem;
+    margin-top: 0.75rem;
+    text-align: center;
+    min-height: 1.2em;
+  }
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>Knitting Patterns</h1>
+  <input type="password" id="pw" placeholder="Password" autofocus autocomplete="current-password">
+  <button id="btn">Sign in</button>
+  <div class="error" id="err"></div>
+</div>
+<script>
+  const pw  = document.getElementById('pw');
+  const btn = document.getElementById('btn');
+  const err = document.getElementById('err');
+
+  async function login() {
+    if (!pw.value) return;
+    btn.disabled = true;
+    btn.textContent = 'Signing in…';
+    err.textContent = '';
+    try {
+      const resp = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pw.value }),
+      });
+      if (resp.ok) {
+        window.location.href = '/';
+      } else {
+        err.textContent = 'Incorrect password.';
+        btn.disabled = false;
+        btn.textContent = 'Sign in';
+        pw.select();
+      }
+    } catch {
+      err.textContent = 'Connection error — try again.';
+      btn.disabled = false;
+      btn.textContent = 'Sign in';
+    }
+  }
+
+  btn.addEventListener('click', login);
+  pw.addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+</script>
+</body>
+</html>

@@ -233,9 +233,11 @@
     if (page && page.handleKey) page.handleKey(e);
   });
 
-  // ── Boot: navigate to last visited page (or first registered) ───────────────
-  const savedPageId = localStorage.getItem("knitting_last_page");
-  const bootPageId  = (savedPageId && PageRegistry.get(savedPageId)) ? savedPageId
-                    : (PageRegistry.getAll()[0] || {}).id;
-  if (bootPageId) navigateTo(bootPageId);
+  // ── Boot: wait for server sync, then navigate to last visited page ───────────
+  KnittingSync.init().then(() => {
+    const savedPageId = localStorage.getItem("knitting_last_page");
+    const bootPageId  = (savedPageId && PageRegistry.get(savedPageId)) ? savedPageId
+                      : (PageRegistry.getAll()[0] || {}).id;
+    if (bootPageId) navigateTo(bootPageId);
+  });
 })();
