@@ -12,11 +12,12 @@ async function getProgress() {
 }
 
 async function saveProgress(data) {
-  // Delete existing blob then re-put to guarantee overwrite
   const { blobs } = await list({ prefix: BLOB_PATH, limit: 1 });
-  if (blobs.length > 0) await del(blobs[0].url);
+  if (blobs.length > 0) {
+    try { await del(blobs[0].url); } catch { /* stale blob, proceed with put */ }
+  }
   await put(BLOB_PATH, JSON.stringify(data), {
-    access: 'private',
+    access: 'public',
     addRandomSuffix: false,
   });
 }
