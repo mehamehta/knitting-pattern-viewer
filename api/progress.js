@@ -16,7 +16,7 @@ async function saveProgress(data) {
   const { blobs } = await list({ prefix: BLOB_PATH, limit: 1 });
   if (blobs.length > 0) await del(blobs[0].url);
   await put(BLOB_PATH, JSON.stringify(data), {
-    access: 'public',
+    access: 'private',
     addRandomSuffix: false,
   });
 }
