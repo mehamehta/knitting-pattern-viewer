@@ -831,3 +831,53 @@ input[type=number] {
   color: #555;
 }
 .nav-project-item.active .nav-project-status { color: #4a7a4a; }
+
+/* ── Pull-to-refresh indicator ── */
+#pull-refresh-indicator {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-40px);
+  background: #1a2332;
+  border: 1px solid #2a3444;
+  border-radius: 20px;
+  padding: 5px 16px;
+  font-size: 0.75rem;
+  color: #888;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+  user-select: none;
+}
+#pull-refresh-indicator.releasing { color: #f5c842; }
+
+/* ── Mobile styles ── */
+@media (max-width: 640px) {
+  /* Toolbars scroll horizontally instead of wrapping */
+  #toolbar, #page-toolbar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 8px;
+    padding: 6px 10px;
+  }
+  #toolbar::-webkit-scrollbar,
+  #page-toolbar::-webkit-scrollbar { display: none; }
+
+  /* Pattern doc — less padding on narrow screens */
+  #bb-pattern-doc {
+    padding: 20px 14px 60px;
+  }
+
+  /* Sleeve tracker — stack panels vertically */
+  .slt-two-col {
+    grid-template-columns: 1fr;
+  }
+  .slt-panel + .slt-panel {
+    border-left: none;
+    border-top: 1px solid #2a3a4a;
+  }
+}

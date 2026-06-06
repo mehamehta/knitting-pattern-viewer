@@ -240,4 +240,83 @@
                       : (PageRegistry.getAll()[0] || {}).id;
     if (bootPageId) navigateTo(bootPageId);
   });
+
+  // ── Pull-to-refresh ─────────────────────────────────────────────────────────
+  {
+    let startY       = 0;
+    let pulling      = false;
+    let refreshing   = false;
+    let indicator    = null;
+    const THRESHOLD  = 72;
+
+    function getScrollEl() {
+      return bodyMount.querySelector(".page-doc-wrap") ||
+             bodyMount.querySelector("#scroll-wrap");
+    }
+
+    function ensureIndicator() {
+      if (!indicator) {
+        indicator = document.createElement("div");
+        indicator.id = "pull-refresh-indicator";
+        bodyMount.appendChild(indicator);
+      }
+      return indicator;
+    }
+
+    function hideIndicator() {
+      if (!indicator) return;
+      indicator.style.opacity = "0";
+      indicator.style.transform = "translateX(-50%) translateY(-40px)";
+      const el = indicator;
+      setTimeout(() => { el.remove(); }, 300);
+      indicator = null;
+    }
+
+    bodyMount.addEventListener("touchstart", e => {
+      if (refreshing) return;
+      const scrollEl = getScrollEl();
+      if (scrollEl && scrollEl.scrollTop > 2) return;
+      startY  = e.touches[0].clientY;
+      pulling = true;
+    }, { passive: true });
+
+    bodyMount.addEventListener("touchmove", e => {
+      if (!pulling || refreshing) return;
+      const scrollEl = getScrollEl();
+      if (scrollEl && scrollEl.scrollTop > 2) { pulling = false; return; }
+      const dy = e.touches[0].clientY - startY;
+      if (dy <= 0) { pulling = false; return; }
+      const el       = ensureIndicator();
+      const progress = Math.min(dy / THRESHOLD, 1);
+      el.style.transform = `translateX(-50%) translateY(${Math.min(dy * 0.38, THRESHOLD * 0.5)}px)`;
+      el.style.opacity   = String(Math.min(progress * 1.6, 1));
+      el.textContent     = progress >= 1 ? "↑ Release to refresh" : "↓ Pull to refresh";
+      el.classList.toggle("releasing", progress >= 1);
+    }, { passive: true });
+
+    bodyMount.addEventListener("touchend", async e => {
+      if (!pulling) return;
+      pulling = false;
+      const dy = e.changedTouches[0].clientY - startY;
+      if (dy >= THRESHOLD && !refreshing) {
+        refreshing = true;
+        const el = ensureIndicator();
+        el.textContent   = "Refreshing…";
+        el.style.opacity = "1";
+        el.classList.remove("releasing");
+        try {
+          await KnittingSync.push();
+          await KnittingSync.init();
+          if (currentPageId) {
+            const id = currentPageId;
+            currentPageId = null;
+            navigateTo(id);
+          }
+        } finally {
+          refreshing = false;
+        }
+      }
+      hideIndicator();
+    }, { passive: true });
+  }
 })();
