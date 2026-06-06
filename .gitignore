@@ -10,5 +10,4 @@ margin_*.png
 verification_diff.png
 pattern_preview.png
 
-# Generated pattern data (built from pattern.json by generate_viewer.py)
-pages/pearl-earring/pattern-data.js
+
