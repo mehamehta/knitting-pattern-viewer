@@ -9,6 +9,7 @@ const STATIC = [
   '/js/sync.js',
   '/js/shell.js',
   '/pages/bea-blouse/page.js',
+  '/pages/baby-booties/page.js',
   '/pages/pearl-earring/page.js',
   '/pages/pearl-earring/pattern-data.js',
 ];

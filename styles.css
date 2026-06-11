@@ -674,6 +674,24 @@ input[type=number] {
 .pip-slt-log:hover { background: #3a4a5a; color: #aad0e8; }
 .pip-slt-cadence { font-size: 0.68rem; color: #667; padding-left: 1.6em; }
 
+/* ── Baby Booties PiP overlay ── */
+#bbt-pip-overlay {
+  display: none;
+  position: fixed;
+  bottom: 48px;
+  right: 16px;
+  z-index: 9999;
+  background: #0d1b2a;
+  border: 1px solid #3a5a7a;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.8);
+  width: 480px;
+  font-size: 0.82rem;
+  color: #ccc;
+  user-select: none;
+}
+#bbt-pip-overlay.visible { display: block; }
+
 /* ── Sleeve tracker ── */
 #bb-sleeve-tracker {
   margin: 1.4em 0;
