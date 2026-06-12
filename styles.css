@@ -304,6 +304,183 @@ input[type=number] {
   opacity: 0.32;
 }
 
+/* ── Srajan's Sweater doc ── */
+#ss-pattern-doc {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 32px 80px;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: #ccc;
+}
+#ss-pattern-doc h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #e8d8b0;
+  margin: 2em 0 0.5em;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #2a3444;
+}
+#ss-pattern-doc h2:first-child { margin-top: 0; }
+#ss-pattern-doc p { margin: 0.6em 0; }
+#ss-pattern-doc strong { color: #e8d8b0; }
+#ss-pattern-doc em { color: #a0c0d8; font-style: italic; }
+#ss-pattern-doc .row-table {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 16px;
+  margin: 0.6em 0 0.6em 16px;
+}
+#ss-pattern-doc .row-label {
+  font-weight: 700;
+  color: #e8d8b0;
+  white-space: nowrap;
+}
+#ss-pattern-doc .ss-dist {
+  font-style: italic;
+  color: #a0c0d8;
+  margin: 0.6em 0 0.6em 16px;
+}
+#ss-pattern-doc .ss-note {
+  font-size: 0.84rem;
+  color: #7a9ab0;
+  margin: 0.5em 0;
+}
+
+/* option blocks */
+#ss-pattern-doc .option-section {
+  border: 1px solid #2a3a4a;
+  border-radius: 6px;
+  margin: 0.9em 0;
+  overflow: hidden;
+}
+#ss-pattern-doc .option-hdr {
+  background: #1a2a3a;
+  padding: 5px 14px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #8ab0c8;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+#ss-pattern-doc .option-body {
+  padding: 8px 14px 10px;
+}
+#ss-pattern-doc .option-body p:first-child { margin-top: 0; }
+#ss-pattern-doc .option-body p:last-child  { margin-bottom: 0; }
+
+/* step mode */
+#ss-pattern-doc.step-mode [data-step],
+#ss-pattern-doc.step-mode [data-step-label],
+#ss-pattern-doc.step-mode .substep-intro {
+  opacity: 0.18;
+  transition: opacity 0.18s;
+}
+#ss-pattern-doc.step-mode h2 {
+  opacity: 0.25;
+  transition: opacity 0.18s;
+}
+#ss-pattern-doc.step-mode .ss-dist,
+#ss-pattern-doc.step-mode .ss-note {
+  opacity: 0.18;
+  transition: opacity 0.18s;
+}
+#ss-pattern-doc.step-mode [data-step].step-active {
+  opacity: 1;
+  background: rgba(245, 200, 66, 0.09);
+  border-radius: 4px;
+  box-shadow: 0 0 0 4px rgba(245, 200, 66, 0.09);
+  outline: 1px solid rgba(245, 200, 66, 0.28);
+  outline-offset: 3px;
+}
+#ss-pattern-doc.step-mode [data-step-label].step-active {
+  opacity: 1;
+}
+#ss-pattern-doc.step-mode .has-substeps.substep-active .substep-intro {
+  opacity: 0.65;
+}
+#ss-pattern-doc.step-mode .has-substeps.substep-active [data-step]:not(.step-active) {
+  opacity: 0.32;
+}
+
+/* ── Srajan's Sweater sleeve tracker ── */
+#ss-sleeve-tracker {
+  margin: 1.4em 0;
+  border: 1px solid #2a3a4a;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #111e2d;
+}
+
+/* ── Srajan's Sweater PiP overlay ── */
+#ss-pip-overlay {
+  display: none;
+  position: fixed;
+  bottom: 48px;
+  right: 16px;
+  z-index: 9999;
+  background: #0d1b2a;
+  border: 1px solid #3a5a7a;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.8);
+  width: 480px;
+  font-size: 0.82rem;
+  color: #ccc;
+  user-select: none;
+}
+#ss-pip-overlay.visible { display: block; }
+#ss-pip-hdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  background: #1a2332;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid #2a3444;
+  cursor: move;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #aaa;
+}
+#ss-pip-close { cursor: pointer; padding: 0 4px; color: #667; }
+#ss-pip-close:hover { color: #eee; }
+#ss-pip-content {
+  padding: 10px 12px;
+  max-height: 160px;
+  overflow-y: auto;
+  line-height: 1.6;
+}
+.ss-pip-intro { font-size: 0.75rem; color: #667; margin-bottom: 6px; }
+#ss-pip-content strong { color: #e8d8b0; }
+#ss-pip-content em { color: #a0c0d8; font-style: italic; }
+#ss-pip-rep {
+  display: none;
+  padding: 0 12px 6px;
+  font-size: 0.75rem;
+  color: #f5c842;
+}
+#ss-pip-ftr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  background: #1a2332;
+  border-radius: 0 0 8px 8px;
+  border-top: 1px solid #2a3444;
+}
+.ss-pip-nav {
+  cursor: pointer;
+  padding: 2px 10px;
+  border-radius: 4px;
+  background: #2a3444;
+  color: #aaa;
+}
+.ss-pip-nav:hover { background: #3a4a5a; color: #eee; }
+#ss-pip-badge { font-size: 0.72rem; color: #888; }
+#ss-pip-slt-btn { cursor: pointer; padding: 0 5px; color: #556; font-size: 0.7rem; border-radius: 3px; }
+#ss-pip-slt-btn:hover { color: #aaa; background: #2a3444; }
+#ss-pip-slt { display: none; padding: 6px 12px; overflow-y: auto; }
+
 /* ── statusbar ── */
 #status {
   padding: 3px 14px;
