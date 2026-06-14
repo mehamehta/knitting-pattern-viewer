@@ -305,7 +305,6 @@
         el.style.opacity = "1";
         el.classList.remove("releasing");
         try {
-          await KnittingSync.push();
           await KnittingSync.init();
           if (currentPageId) {
             const id = currentPageId;

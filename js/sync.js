@@ -25,8 +25,9 @@ window.KnittingSync = (() => {
 
   // Intercept writes to known keys so we know when to push
   localStorage.setItem = function (key, value) {
+    const old = _getItem(key);
     _setItem(key, value);
-    if (KEYS.includes(key)) {
+    if (KEYS.includes(key) && value !== old) {
       dirty = true;
       schedulePush();
     }
