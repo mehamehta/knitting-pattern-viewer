@@ -90,6 +90,26 @@ const CONTENT_HTML = `
     <p data-step="26">Switch to 4.5mm 80cm needles and knit one round.</p>
     <p data-step="27">Work in rib (<em>*k1 p1*</em>) until the ribbing measures <strong>7cm</strong>. Bind off loosely.</p>
 
+    <div id="ss-stripe-tracker">
+      <div class="slt-hdr">
+        <span class="slt-hdr-title">Stripe Tracker</span>
+        <button class="btn small" id="ss-str-reset">Reset</button>
+      </div>
+      <div class="str-body">
+        <div class="slt-ctrl-row">
+          <span class="slt-lbl">Row</span>
+          <div class="slt-ctrls">
+            <button class="btn small" id="ss-str-minus">&#x2212;</button>
+            <span class="slt-num" id="ss-str-rows">0</span>
+            <button class="btn small" id="ss-str-plus">+</button>
+          </div>
+          <span class="str-cur-colour-wrap">Colour: <strong id="ss-str-colour" class="str-mc">multicolour</strong></span>
+        </div>
+        <button class="btn slt-dec-btn" id="ss-str-change-btn">Log colour change at row <span id="ss-str-change-row">0</span></button>
+        <div class="slt-log" id="ss-str-log"><div class="slt-empty">No colour changes logged yet.</div></div>
+      </div>
+    </div>
+
     <h2>Arms</h2>
     <p class="ss-note">Repeat this section for each arm.</p>
     <p data-step="28">Transfer the <strong>52 sleeve stitches</strong> from scrap yarn onto your 5.5mm 40cm needle.</p>
@@ -161,6 +181,7 @@ const TOOLBAR_HTML = `
 // ── State ─────────────────────────────────────────────────────────────────────
 const STORAGE_KEY = 'srajans-sweater-step';
 const SLT_KEY     = 'srajans-sweater-sleeves';
+const STRIPE_KEY  = 'srajans-sweater-stripes';
 const LS_HISTORY  = 'srajans-sweater-history';
 const MAX_HIST    = 500;
 
@@ -171,9 +192,10 @@ let doc         = null;
 let _shellAPI   = null;
 let ssPipEl     = null;
 let ssPipWindow = null;
-let pipSleeveMode = false;
+let pipMode = 'steps'; // 'steps' | 'sleeves' | 'stripes'
 
-let slt = [{ rows: 0, decs: [] }, { rows: 0, decs: [] }];
+let slt   = [{ rows: 0, decs: [] }, { rows: 0, decs: [] }];
+let stripe = { rows: 0, changes: [] }; // changes: row numbers where colour toggled
 
 function loadState() {
   try {
@@ -266,10 +288,89 @@ function renderSlt(i) {
     }
   }
 
-  if (pipSleeveMode) updatePip();
+  if (pipMode === 'sleeves') updatePip();
 }
 
 function updateSleeveTracker() { renderSlt(0); renderSlt(1); }
+
+// ── Stripe tracker ────────────────────────────────────────────────────────────
+const STRIPE_COLOURS = ['multicolour', 'black'];
+
+function loadStripeState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STRIPE_KEY) || 'null');
+    if (saved && typeof saved === 'object') stripe = saved;
+  } catch (_) {}
+}
+
+function saveStripeState() {
+  localStorage.setItem(STRIPE_KEY, JSON.stringify(stripe));
+}
+
+function renderStripe() {
+  const curIdx    = stripe.changes.length % 2;
+  const curColour = STRIPE_COLOURS[curIdx];
+
+  const rowsEl    = document.getElementById('ss-str-rows');
+  const colourEl  = document.getElementById('ss-str-colour');
+  const changeRow = document.getElementById('ss-str-change-row');
+  const logEl     = document.getElementById('ss-str-log');
+
+  if (rowsEl)    rowsEl.textContent    = stripe.rows;
+  if (changeRow) changeRow.textContent = stripe.rows;
+  if (colourEl) {
+    colourEl.textContent = curColour;
+    colourEl.className   = curIdx === 0 ? 'str-mc' : 'str-bk';
+  }
+
+  if (logEl) {
+    const completedBlocks = stripe.changes.map((endRow, i) => {
+      const startRow = i === 0 ? 1 : stripe.changes[i - 1] + 1;
+      const colour   = STRIPE_COLOURS[i % 2];
+      return { colour, startRow, endRow, count: endRow - startRow + 1, idx: i };
+    });
+
+    const currentStart = stripe.changes.length > 0
+      ? stripe.changes[stripe.changes.length - 1] + 1
+      : 1;
+    const currentCount = Math.max(0, stripe.rows - currentStart + 1);
+
+    if (completedBlocks.length === 0 && stripe.rows === 0) {
+      logEl.innerHTML = '<div class="slt-empty">No colour changes logged yet.</div>';
+    } else {
+      let html = completedBlocks.map(b => {
+        const cls = b.colour === 'multicolour' ? 'str-mc' : 'str-bk';
+        return `<div class="slt-entry">
+          <span class="slt-n ${cls}">${b.colour}</span>
+          <span class="slt-r">Rows ${b.startRow}–${b.endRow}</span>
+          <span class="slt-iv">${b.count} rows</span>
+          <span class="slt-del" data-str-j="${b.idx}">×</span>
+        </div>`;
+      }).join('');
+
+      if (stripe.rows > 0) {
+        const cls = curColour === 'multicolour' ? 'str-mc' : 'str-bk';
+        html += `<div class="slt-entry str-cur">
+          <span class="slt-n ${cls}">${curColour}</span>
+          <span class="slt-r">Row ${currentStart}…</span>
+          <span class="slt-iv">${currentCount} rows</span>
+        </div>`;
+      }
+
+      logEl.innerHTML = html;
+      logEl.querySelectorAll('[data-str-j]').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const j = parseInt(e.target.dataset.strJ);
+          stripe.changes.splice(j, 1);
+          saveStripeState();
+          renderStripe();
+        });
+      });
+    }
+  }
+
+  if (pipMode === 'stripes') updatePip();
+}
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function findRowLabel(stepEl) {
@@ -453,45 +554,93 @@ function pipSltHTML() {
   }).join('');
 }
 
+function pipStripesHTML() {
+  const curIdx    = stripe.changes.length % 2;
+  const curColour = STRIPE_COLOURS[curIdx];
+  const curCls    = curIdx === 0 ? 'str-mc' : 'str-bk';
+
+  const completedBlocks = stripe.changes.map((endRow, i) => {
+    const startRow = i === 0 ? 1 : stripe.changes[i - 1] + 1;
+    const colour   = STRIPE_COLOURS[i % 2];
+    const cls      = colour === 'multicolour' ? 'str-mc' : 'str-bk';
+    return `<div style="display:flex;gap:6px;font-size:0.72rem;padding:1px 0;border-top:1px solid #1a2a3a">
+      <span class="${cls}" style="font-weight:700;min-width:7em">${colour}</span>
+      <span style="color:#aaa">rows ${startRow}–${endRow} (${endRow - startRow + 1})</span>
+    </div>`;
+  }).join('');
+
+  const currentStart = stripe.changes.length > 0
+    ? stripe.changes[stripe.changes.length - 1] + 1 : 1;
+  const currentCount = Math.max(0, stripe.rows - currentStart + 1);
+  const curBlockHtml = stripe.rows > 0
+    ? `<div style="display:flex;gap:6px;font-size:0.72rem;padding:1px 0;border-top:1px solid #1a2a3a">
+        <span class="${curCls}" style="font-weight:700;min-width:7em">${curColour}</span>
+        <span style="color:#aaa">row ${currentStart}… (${currentCount})</span>
+      </div>` : '';
+
+  return `<div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <span class="pip-slt-label">Row</span>
+      <span class="pip-slt-rows">${stripe.rows}</span>
+      <span class="pip-slt-ctrl" data-pip-str-action="minus">−</span>
+      <span class="pip-slt-ctrl" data-pip-str-action="plus">+</span>
+      <span class="pip-slt-log" data-pip-str-action="change">Change at ${stripe.rows}</span>
+    </div>
+    <div style="font-size:0.72rem;color:#888;margin-bottom:4px">Current: <strong class="${curCls}">${curColour}</strong></div>
+    ${completedBlocks || ''}${curBlockHtml}
+    ${!completedBlocks && stripe.rows === 0 ? '<div style="color:#444;font-style:italic;font-size:0.72rem">No changes logged yet.</div>' : ''}
+  </div>`;
+}
+
 function updatePip() {
-  const fbVis = ssPipEl  && ssPipEl.classList.contains('visible');
+  const fbVis = ssPipEl  && ssPipEl.classList.contains(‘visible’);
   const winOk = ssPipWindow && !ssPipWindow.closed;
   if (!fbVis && !winOk) return;
 
-  function apply(d) {
-    const contentEl = d.getElementById('ss-pip-content');
-    const repEl     = d.getElementById('ss-pip-rep');
-    const badgeEl   = d.getElementById('ss-pip-badge');
-    const sltEl     = d.getElementById('ss-pip-slt');
-    const titleEl   = d.getElementById('ss-pip-title');
-    const sltBtnEl  = d.getElementById('ss-pip-slt-btn');
-    const prevEl    = d.getElementById('ss-pip-prev');
-    const nextEl    = d.getElementById('ss-pip-next');
+  const NEXT_LABEL = { steps: ‘Sleeves’, sleeves: ‘Stripes’, stripes: ‘Steps’ };
 
-    if (pipSleeveMode) {
-      if (contentEl) contentEl.style.display = 'none';
-      if (repEl)     repEl.style.display     = 'none';
-      if (sltEl)   { sltEl.style.display = 'block'; sltEl.innerHTML = pipSltHTML(); }
+  function apply(d) {
+    const contentEl = d.getElementById(‘ss-pip-content’);
+    const repEl     = d.getElementById(‘ss-pip-rep’);
+    const badgeEl   = d.getElementById(‘ss-pip-badge’);
+    const sltEl     = d.getElementById(‘ss-pip-slt’);
+    const strEl     = d.getElementById(‘ss-pip-str’);
+    const titleEl   = d.getElementById(‘ss-pip-title’);
+    const sltBtnEl  = d.getElementById(‘ss-pip-slt-btn’);
+    const prevEl    = d.getElementById(‘ss-pip-prev’);
+    const nextEl    = d.getElementById(‘ss-pip-next’);
+
+    if (contentEl) contentEl.style.display = ‘none’;
+    if (repEl)     repEl.style.display     = ‘none’;
+    if (sltEl)     sltEl.style.display     = ‘none’;
+    if (strEl)     strEl.style.display     = ‘none’;
+    if (sltBtnEl)  sltBtnEl.textContent    = NEXT_LABEL[pipMode];
+
+    if (pipMode === ‘sleeves’) {
+      if (sltEl)   { sltEl.style.display = ‘block’; sltEl.innerHTML = pipSltHTML(); }
       if (titleEl)   titleEl.textContent     = "Srajan’s Sweater — Sleeves";
-      if (sltBtnEl)  sltBtnEl.textContent    = 'Steps';
-      if (prevEl)    prevEl.style.visibility = 'hidden';
-      if (nextEl)    nextEl.style.visibility = 'hidden';
-      if (badgeEl)   badgeEl.textContent     = '';
+      if (prevEl)    prevEl.style.visibility = ‘hidden’;
+      if (nextEl)    nextEl.style.visibility = ‘hidden’;
+      if (badgeEl)   badgeEl.textContent     = ‘’;
+    } else if (pipMode === ‘stripes’) {
+      if (strEl)   { strEl.style.display = ‘block’; strEl.innerHTML = pipStripesHTML(); }
+      if (titleEl)   titleEl.textContent     = "Srajan’s Sweater — Stripes";
+      if (prevEl)    prevEl.style.visibility = ‘hidden’;
+      if (nextEl)    nextEl.style.visibility = ‘hidden’;
+      if (badgeEl)   badgeEl.textContent     = ‘’;
     } else {
       const html    = pipStepHTML();
       const gid     = stepMode ? STEP_GROUP[currentStep] : null;
       const repText = gid
         ? `Rep ${repCounters[gid]} / ${REPEAT_GROUPS[gid].totalCount} · ${REPEAT_GROUPS[gid].label}`
-        : '';
-      const badge   = stepMode ? `Step ${currentStep + 1} / ${TOTAL_STEPS}` : '—';
+        : ‘’;
+      const badge   = stepMode ? `Step ${currentStep + 1} / ${TOTAL_STEPS}` : ‘—‘;
 
-      if (contentEl) { contentEl.style.display = ''; contentEl.innerHTML = html; }
-      if (repEl)   { repEl.textContent = repText; repEl.style.display = repText ? '' : 'none'; }
-      if (sltEl)     sltEl.style.display     = 'none';
+      if (contentEl) { contentEl.style.display = ‘’; contentEl.innerHTML = html; }
+      if (repEl)   { repEl.textContent = repText; repEl.style.display = repText ? ‘’ : ‘none’; }
       if (titleEl)   titleEl.textContent     = "Srajan’s Sweater — Mini View";
-      if (sltBtnEl)  sltBtnEl.textContent    = 'Sleeves';
-      if (prevEl)    prevEl.style.visibility = '';
-      if (nextEl)    nextEl.style.visibility = '';
+      if (prevEl)    prevEl.style.visibility = ‘’;
+      if (nextEl)    nextEl.style.visibility = ‘’;
       if (badgeEl)   badgeEl.textContent     = badge;
     }
   }
@@ -532,6 +681,9 @@ const PIP_CSS = `
   #ss-pip-slt-btn { cursor: pointer; padding: 0 5px; color: #556; font-size: 0.7rem; border-radius: 3px; }
   #ss-pip-slt-btn:hover { color: #aaa; background: #2a3444; }
   #ss-pip-slt { flex: 1; overflow-y: auto; padding: 6px 12px; display: none; }
+  #ss-pip-str { flex: 1; overflow-y: auto; padding: 6px 12px; display: none; }
+  .str-mc { color: #e8c06a; }
+  .str-bk { color: #9aa0aa; }
   .pip-slt-s2 { border-top: 1px solid #2a3a4a; margin-top: 5px; padding-top: 5px; }
   .pip-slt-main { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
   .pip-slt-label { font-size: 0.72rem; font-weight: 700; color: #e8d8b0; min-width: 1.6em; }
@@ -556,6 +708,7 @@ const PIP_BODY_HTML = `
   <div id="ss-pip-content"></div>
   <div id="ss-pip-rep"></div>
   <div id="ss-pip-slt"></div>
+  <div id="ss-pip-str"></div>
   <div id="ss-pip-ftr">
     <span class="ss-pip-nav" id="ss-pip-prev">&#x25C4;</span>
     <span id="ss-pip-badge"></span>
@@ -568,7 +721,8 @@ function wirePipDoc(d) {
   d.getElementById('ss-pip-prev').addEventListener('click',  retreat);
   d.getElementById('ss-pip-next').addEventListener('click',  advance);
   d.getElementById('ss-pip-slt-btn').addEventListener('click', () => {
-    pipSleeveMode = !pipSleeveMode;
+    const cycle = { steps: 'sleeves', sleeves: 'stripes', stripes: 'steps' };
+    pipMode = cycle[pipMode];
     updatePip();
   });
   d.getElementById('ss-pip-slt').addEventListener('click', e => {
@@ -583,8 +737,19 @@ function wirePipDoc(d) {
     renderSlt(si);
     updatePip();
   });
+  d.getElementById('ss-pip-str').addEventListener('click', e => {
+    const btn = e.target.closest('[data-pip-str-action]');
+    if (!btn) return;
+    const action = btn.dataset.pipStrAction;
+    if (action === 'minus')  { if (stripe.rows > 0) stripe.rows--; }
+    if (action === 'plus')   { stripe.rows++; }
+    if (action === 'change') { stripe.changes.push(stripe.rows); }
+    saveStripeState();
+    renderStripe();
+    updatePip();
+  });
   d.addEventListener('keydown', e => {
-    if (pipSleeveMode) {
+    if (pipMode !== 'steps') {
       if (e.key === 'Escape') closePip();
       return;
     }
@@ -687,6 +852,25 @@ PageRegistry.register("srajans-sweater", {
     shellAPI.updateHistBadge();
     updateDisplay();
     scheduleHistEntry();
+
+    loadStripeState();
+    renderStripe();
+    document.getElementById('ss-str-plus').addEventListener('click', () => {
+      stripe.rows++; saveStripeState(); renderStripe();
+    });
+    document.getElementById('ss-str-minus').addEventListener('click', () => {
+      if (stripe.rows > 0) { stripe.rows--; saveStripeState(); renderStripe(); }
+    });
+    document.getElementById('ss-str-change-btn').addEventListener('click', () => {
+      stripe.changes.push(stripe.rows); saveStripeState(); renderStripe();
+    });
+    document.getElementById('ss-str-reset').addEventListener('click', () => {
+      if (confirm('Reset stripe tracker?')) {
+        stripe = { rows: 0, changes: [] };
+        saveStripeState();
+        renderStripe();
+      }
+    });
 
     loadSltState();
     updateSleeveTracker();

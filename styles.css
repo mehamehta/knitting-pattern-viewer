@@ -412,6 +412,19 @@ input[type=number] {
   background: #111e2d;
 }
 
+#ss-stripe-tracker {
+  margin: 1.4em 0;
+  border: 1px solid #2a3a4a;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #111e2d;
+}
+.str-body { padding: 12px 14px; }
+.str-cur-colour-wrap { font-size: 0.8rem; color: #888; }
+.str-mc { color: #e8c06a; }
+.str-bk { color: #9aa0aa; }
+.str-cur { opacity: 0.7; }
+
 /* ── Srajan's Sweater PiP overlay ── */
 #ss-pip-overlay {
   display: none;
