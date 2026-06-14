@@ -593,54 +593,54 @@ function pipStripesHTML() {
 }
 
 function updatePip() {
-  const fbVis = ssPipEl  && ssPipEl.classList.contains(‘visible’);
+  const fbVis = ssPipEl  && ssPipEl.classList.contains('visible');
   const winOk = ssPipWindow && !ssPipWindow.closed;
   if (!fbVis && !winOk) return;
 
-  const NEXT_LABEL = { steps: ‘Sleeves’, sleeves: ‘Stripes’, stripes: ‘Steps’ };
+  const NEXT_LABEL = { steps: 'Sleeves', sleeves: 'Stripes', stripes: 'Steps' };
 
   function apply(d) {
-    const contentEl = d.getElementById(‘ss-pip-content’);
-    const repEl     = d.getElementById(‘ss-pip-rep’);
-    const badgeEl   = d.getElementById(‘ss-pip-badge’);
-    const sltEl     = d.getElementById(‘ss-pip-slt’);
-    const strEl     = d.getElementById(‘ss-pip-str’);
-    const titleEl   = d.getElementById(‘ss-pip-title’);
-    const sltBtnEl  = d.getElementById(‘ss-pip-slt-btn’);
-    const prevEl    = d.getElementById(‘ss-pip-prev’);
-    const nextEl    = d.getElementById(‘ss-pip-next’);
+    const contentEl = d.getElementById('ss-pip-content');
+    const repEl     = d.getElementById('ss-pip-rep');
+    const badgeEl   = d.getElementById('ss-pip-badge');
+    const sltEl     = d.getElementById('ss-pip-slt');
+    const strEl     = d.getElementById('ss-pip-str');
+    const titleEl   = d.getElementById('ss-pip-title');
+    const sltBtnEl  = d.getElementById('ss-pip-slt-btn');
+    const prevEl    = d.getElementById('ss-pip-prev');
+    const nextEl    = d.getElementById('ss-pip-next');
 
-    if (contentEl) contentEl.style.display = ‘none’;
-    if (repEl)     repEl.style.display     = ‘none’;
-    if (sltEl)     sltEl.style.display     = ‘none’;
-    if (strEl)     strEl.style.display     = ‘none’;
+    if (contentEl) contentEl.style.display = 'none';
+    if (repEl)     repEl.style.display     = 'none';
+    if (sltEl)     sltEl.style.display     = 'none';
+    if (strEl)     strEl.style.display     = 'none';
     if (sltBtnEl)  sltBtnEl.textContent    = NEXT_LABEL[pipMode];
 
-    if (pipMode === ‘sleeves’) {
-      if (sltEl)   { sltEl.style.display = ‘block’; sltEl.innerHTML = pipSltHTML(); }
-      if (titleEl)   titleEl.textContent     = "Srajan’s Sweater — Sleeves";
-      if (prevEl)    prevEl.style.visibility = ‘hidden’;
-      if (nextEl)    nextEl.style.visibility = ‘hidden’;
-      if (badgeEl)   badgeEl.textContent     = ‘’;
-    } else if (pipMode === ‘stripes’) {
-      if (strEl)   { strEl.style.display = ‘block’; strEl.innerHTML = pipStripesHTML(); }
-      if (titleEl)   titleEl.textContent     = "Srajan’s Sweater — Stripes";
-      if (prevEl)    prevEl.style.visibility = ‘hidden’;
-      if (nextEl)    nextEl.style.visibility = ‘hidden’;
-      if (badgeEl)   badgeEl.textContent     = ‘’;
+    if (pipMode === 'sleeves') {
+      if (sltEl)   { sltEl.style.display = 'block'; sltEl.innerHTML = pipSltHTML(); }
+      if (titleEl)   titleEl.textContent     = "Srajan's Sweater — Sleeves";
+      if (prevEl)    prevEl.style.visibility = 'hidden';
+      if (nextEl)    nextEl.style.visibility = 'hidden';
+      if (badgeEl)   badgeEl.textContent     = '';
+    } else if (pipMode === 'stripes') {
+      if (strEl)   { strEl.style.display = 'block'; strEl.innerHTML = pipStripesHTML(); }
+      if (titleEl)   titleEl.textContent     = "Srajan's Sweater — Stripes";
+      if (prevEl)    prevEl.style.visibility = 'hidden';
+      if (nextEl)    nextEl.style.visibility = 'hidden';
+      if (badgeEl)   badgeEl.textContent     = '';
     } else {
       const html    = pipStepHTML();
       const gid     = stepMode ? STEP_GROUP[currentStep] : null;
       const repText = gid
         ? `Rep ${repCounters[gid]} / ${REPEAT_GROUPS[gid].totalCount} · ${REPEAT_GROUPS[gid].label}`
-        : ‘’;
-      const badge   = stepMode ? `Step ${currentStep + 1} / ${TOTAL_STEPS}` : ‘—‘;
+        : '';
+      const badge   = stepMode ? `Step ${currentStep + 1} / ${TOTAL_STEPS}` : '—';
 
-      if (contentEl) { contentEl.style.display = ‘’; contentEl.innerHTML = html; }
-      if (repEl)   { repEl.textContent = repText; repEl.style.display = repText ? ‘’ : ‘none’; }
-      if (titleEl)   titleEl.textContent     = "Srajan’s Sweater — Mini View";
-      if (prevEl)    prevEl.style.visibility = ‘’;
-      if (nextEl)    nextEl.style.visibility = ‘’;
+      if (contentEl) { contentEl.style.display = ''; contentEl.innerHTML = html; }
+      if (repEl)   { repEl.textContent = repText; repEl.style.display = repText ? '' : 'none'; }
+      if (titleEl)   titleEl.textContent     = "Srajan's Sweater — Mini View";
+      if (prevEl)    prevEl.style.visibility = '';
+      if (nextEl)    nextEl.style.visibility = '';
       if (badgeEl)   badgeEl.textContent     = badge;
     }
   }
@@ -699,7 +699,7 @@ const PIP_CSS = `
 
 const PIP_BODY_HTML = `
   <div id="ss-pip-hdr">
-    <span id="ss-pip-title">Srajan’s Sweater — Mini View</span>
+    <span id="ss-pip-title">Srajan's Sweater — Mini View</span>
     <div style="display:flex;align-items:center;gap:8px">
       <span id="ss-pip-slt-btn">Sleeves</span>
       <span id="ss-pip-close">✕</span>
@@ -833,7 +833,7 @@ function handleKey(e) {
 // ── Registration ───────────────────────────────────────────────────────────────
 PageRegistry.register("srajans-sweater", {
   id:     "srajans-sweater",
-  title:  "Srajan’s Sweater",
+  title:  "Srajan's Sweater",
   status: "Pattern reference",
 
   mount(toolbarMount, bodyMount, shellAPI) {
@@ -848,7 +848,7 @@ PageRegistry.register("srajans-sweater", {
     document.getElementById('ss-step-next').addEventListener('click',   advance);
     document.getElementById('ss-step-prev').addEventListener('click',   retreat);
 
-    shellAPI.setStatus("Srajan’s Sweater — pattern reference");
+    shellAPI.setStatus("Srajan's Sweater — pattern reference");
     shellAPI.updateHistBadge();
     updateDisplay();
     scheduleHistEntry();
@@ -927,7 +927,7 @@ PageRegistry.register("srajans-sweater", {
   getCurrentPos() {
     return {
       label: stepMode ? `Step ${currentStep + 1}` : 'No active step',
-      sub:   "Srajan’s Sweater",
+      sub:   "Srajan's Sweater",
     };
   },
 });
