@@ -563,9 +563,10 @@ function pipStripesHTML() {
     const startRow = i === 0 ? 1 : stripe.changes[i - 1] + 1;
     const colour   = STRIPE_COLOURS[i % 2];
     const cls      = colour === 'multicolour' ? 'str-mc' : 'str-bk';
-    return `<div style="display:flex;gap:6px;font-size:0.72rem;padding:1px 0;border-top:1px solid #1a2a3a">
-      <span class="${cls}" style="font-weight:700;min-width:7em">${colour}</span>
-      <span style="color:#aaa">rows ${startRow}–${endRow} (${endRow - startRow + 1})</span>
+    return `<div style="display:flex;gap:6px;font-size:0.72rem;padding:1px 0;border-top:1px solid #1a2a3a;align-items:center">
+      <span class="${cls}" style="font-weight:700;min-width:6em">${colour}</span>
+      <span style="color:#aaa;flex:1">rows ${startRow}–${endRow} (${endRow - startRow + 1})</span>
+      <span data-pip-str-action="del" data-pip-str-j="${i}" style="cursor:pointer;color:#445;padding:0 6px">×</span>
     </div>`;
   }).join('');
 
@@ -592,29 +593,40 @@ function pipStripesHTML() {
   </div>`;
 }
 
+function visiblePipModes() {
+  if (stepMode && currentStep >= 28 && currentStep <= 36) return ['steps', 'sleeves', 'stripes'];
+  return ['steps', 'stripes'];
+}
+
 function updatePip() {
   const fbVis = ssPipEl  && ssPipEl.classList.contains('visible');
   const winOk = ssPipWindow && !ssPipWindow.closed;
   if (!fbVis && !winOk) return;
 
-  const NEXT_LABEL = { steps: 'Sleeves', sleeves: 'Stripes', stripes: 'Steps' };
+  const available = visiblePipModes();
+  if (!available.includes(pipMode)) pipMode = 'steps';
 
   function apply(d) {
-    const contentEl = d.getElementById('ss-pip-content');
-    const repEl     = d.getElementById('ss-pip-rep');
-    const badgeEl   = d.getElementById('ss-pip-badge');
-    const sltEl     = d.getElementById('ss-pip-slt');
-    const strEl     = d.getElementById('ss-pip-str');
-    const titleEl   = d.getElementById('ss-pip-title');
-    const sltBtnEl  = d.getElementById('ss-pip-slt-btn');
-    const prevEl    = d.getElementById('ss-pip-prev');
-    const nextEl    = d.getElementById('ss-pip-next');
+    const contentEl  = d.getElementById('ss-pip-content');
+    const repEl      = d.getElementById('ss-pip-rep');
+    const badgeEl    = d.getElementById('ss-pip-badge');
+    const sltEl      = d.getElementById('ss-pip-slt');
+    const strEl      = d.getElementById('ss-pip-str');
+    const titleEl    = d.getElementById('ss-pip-title');
+    const prevEl     = d.getElementById('ss-pip-prev');
+    const nextEl     = d.getElementById('ss-pip-next');
+    const btnSteps   = d.getElementById('ss-pip-btn-steps');
+    const btnStripes = d.getElementById('ss-pip-btn-stripes');
+    const btnSleeves = d.getElementById('ss-pip-btn-sleeves');
 
     if (contentEl) contentEl.style.display = 'none';
     if (repEl)     repEl.style.display     = 'none';
     if (sltEl)     sltEl.style.display     = 'none';
     if (strEl)     strEl.style.display     = 'none';
-    if (sltBtnEl)  sltBtnEl.textContent    = NEXT_LABEL[pipMode];
+
+    if (btnSteps)   { btnSteps.style.display   = available.includes('steps')   ? '' : 'none'; btnSteps.classList.toggle('active',   pipMode === 'steps');   }
+    if (btnStripes) { btnStripes.style.display = available.includes('stripes') ? '' : 'none'; btnStripes.classList.toggle('active', pipMode === 'stripes'); }
+    if (btnSleeves) { btnSleeves.style.display = available.includes('sleeves') ? '' : 'none'; btnSleeves.classList.toggle('active', pipMode === 'sleeves'); }
 
     if (pipMode === 'sleeves') {
       if (sltEl)   { sltEl.style.display = 'block'; sltEl.innerHTML = pipSltHTML(); }
@@ -678,8 +690,9 @@ const PIP_CSS = `
   strong { color: #e8d8b0; }
   em { color: #a0c0d8; font-style: italic; }
   .pip-lbl { font-weight: 700; color: #e8d8b0; }
-  #ss-pip-slt-btn { cursor: pointer; padding: 0 5px; color: #556; font-size: 0.7rem; border-radius: 3px; }
-  #ss-pip-slt-btn:hover { color: #aaa; background: #2a3444; }
+  .pip-mode-btn { cursor: pointer; padding: 1px 7px; color: #445; font-size: 0.7rem; border-radius: 3px; user-select: none; }
+  .pip-mode-btn:hover { color: #aaa; background: #2a3444; }
+  .pip-mode-btn.active { color: #e8d8b0; background: #2a3444; }
   #ss-pip-slt { flex: 1; overflow-y: auto; padding: 6px 12px; display: none; }
   #ss-pip-str { flex: 1; overflow-y: auto; padding: 6px 12px; display: none; }
   .str-mc { color: #e8c06a; }
@@ -700,9 +713,11 @@ const PIP_CSS = `
 const PIP_BODY_HTML = `
   <div id="ss-pip-hdr">
     <span id="ss-pip-title">Srajan's Sweater — Mini View</span>
-    <div style="display:flex;align-items:center;gap:8px">
-      <span id="ss-pip-slt-btn">Sleeves</span>
-      <span id="ss-pip-close">✕</span>
+    <div style="display:flex;align-items:center;gap:2px">
+      <span class="pip-mode-btn" id="ss-pip-btn-steps">Steps</span>
+      <span class="pip-mode-btn" id="ss-pip-btn-stripes">Stripes</span>
+      <span class="pip-mode-btn" id="ss-pip-btn-sleeves">Sleeves</span>
+      <span id="ss-pip-close" style="margin-left:6px">✕</span>
     </div>
   </div>
   <div id="ss-pip-content"></div>
@@ -720,10 +735,9 @@ function wirePipDoc(d) {
   d.getElementById('ss-pip-close').addEventListener('click', closePip);
   d.getElementById('ss-pip-prev').addEventListener('click',  retreat);
   d.getElementById('ss-pip-next').addEventListener('click',  advance);
-  d.getElementById('ss-pip-slt-btn').addEventListener('click', () => {
-    const cycle = { steps: 'sleeves', sleeves: 'stripes', stripes: 'steps' };
-    pipMode = cycle[pipMode];
-    updatePip();
+  ['steps', 'stripes', 'sleeves'].forEach(mode => {
+    const btn = d.getElementById(`ss-pip-btn-${mode}`);
+    if (btn) btn.addEventListener('click', () => { pipMode = mode; updatePip(); });
   });
   d.getElementById('ss-pip-slt').addEventListener('click', e => {
     const btn = e.target.closest('[data-pip-slt-action]');
@@ -744,6 +758,7 @@ function wirePipDoc(d) {
     if (action === 'minus')  { if (stripe.rows > 0) stripe.rows--; }
     if (action === 'plus')   { stripe.rows++; }
     if (action === 'change') { stripe.changes.push(stripe.rows); }
+    if (action === 'del')    { stripe.changes.splice(parseInt(btn.dataset.pipStrJ), 1); }
     saveStripeState();
     renderStripe();
     updatePip();
