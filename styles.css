@@ -424,6 +424,30 @@ input[type=number] {
 .str-mc { color: #e8c06a; }
 .str-bk { color: #9aa0aa; }
 .str-cur { opacity: 0.7; }
+.str-freeze-note {
+  font-size: 0.72rem;
+  color: #6a9a8a;
+  padding: 4px 14px;
+  border-bottom: 1px solid #1a2e3a;
+}
+.str-freeze-note:empty { display: none; }
+.slt-stripe-sec {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #1e3a4a;
+}
+.slt-stripe-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.73rem;
+  font-weight: 700;
+  color: #8ab0c8;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+.slt-offset { color: #667; font-size: 0.68rem; }
 
 /* ── Srajan's Sweater PiP overlay ── */
 #ss-pip-overlay {

@@ -93,8 +93,12 @@ const CONTENT_HTML = `
     <div id="ss-stripe-tracker">
       <div class="slt-hdr">
         <span class="slt-hdr-title">Stripe Tracker</span>
-        <button class="btn small" id="ss-str-reset">Reset</button>
+        <div style="display:flex;gap:6px">
+          <button class="btn small" id="ss-str-freeze">Freeze for sleeves</button>
+          <button class="btn small" id="ss-str-reset">Reset</button>
+        </div>
       </div>
+      <div class="str-freeze-note" id="ss-str-freeze-note"></div>
       <div class="str-body">
         <div class="slt-ctrl-row">
           <span class="slt-lbl">Row</span>
@@ -140,6 +144,11 @@ const CONTENT_HTML = `
           </div>
           <button class="btn slt-dec-btn" id="ss-slt-d0-log">Log decrease at round <span id="ss-slt-d0-row">0</span></button>
           <div class="slt-log" id="ss-slt-d0-log-list"></div>
+          <div class="slt-stripe-sec">
+            <div class="slt-stripe-hdr"><span>Stripes</span><strong id="ss-slt-sc0">—</strong></div>
+            <button class="btn slt-dec-btn" id="ss-slt-sch0-btn" disabled>Log colour change at round <span id="ss-slt-sch0-row">0</span></button>
+            <div class="slt-log" id="ss-slt-sch0-log"><div class="slt-empty">Freeze the body stripe tracker first.</div></div>
+          </div>
         </div>
         <div class="slt-panel">
           <div class="slt-panel-hdr">Sleeve 2</div>
@@ -153,6 +162,11 @@ const CONTENT_HTML = `
           </div>
           <button class="btn slt-dec-btn" id="ss-slt-d1-log">Log decrease at round <span id="ss-slt-d1-row">0</span></button>
           <div class="slt-log" id="ss-slt-d1-log-list"></div>
+          <div class="slt-stripe-sec">
+            <div class="slt-stripe-hdr"><span>Stripes</span><strong id="ss-slt-sc1">—</strong></div>
+            <button class="btn slt-dec-btn" id="ss-slt-sch1-btn" disabled>Log colour change at round <span id="ss-slt-sch1-row">0</span></button>
+            <div class="slt-log" id="ss-slt-sch1-log"><div class="slt-empty">Freeze the body stripe tracker first.</div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -181,7 +195,8 @@ const TOOLBAR_HTML = `
 // ── State ─────────────────────────────────────────────────────────────────────
 const STORAGE_KEY = 'srajans-sweater-step';
 const SLT_KEY     = 'srajans-sweater-sleeves';
-const STRIPE_KEY  = 'srajans-sweater-stripes';
+const STRIPE_KEY      = 'srajans-sweater-stripes';
+const SLEEVE_SEED_KEY = 'srajans-sweater-sleeve-stripe-seed';
 const LS_HISTORY  = 'srajans-sweater-history';
 const MAX_HIST    = 500;
 
@@ -194,8 +209,9 @@ let ssPipEl     = null;
 let ssPipWindow = null;
 let pipMode = 'steps'; // 'steps' | 'sleeves' | 'stripes'
 
-let slt   = [{ rows: 0, decs: [] }, { rows: 0, decs: [] }];
-let stripe = { rows: 0, changes: [] }; // changes: row numbers where colour toggled
+let slt      = [{ rows: 0, decs: [], stripeChanges: [] }, { rows: 0, decs: [], stripeChanges: [] }];
+let stripe   = { rows: 0, changes: [] }; // changes: row numbers where colour toggled
+let sleeveSeed = null; // { startColourIdx, bodyRowsIntoStripe } — frozen from body tracker
 
 function loadState() {
   try {
@@ -245,7 +261,13 @@ function scheduleHistEntry() {
 function loadSltState() {
   try {
     const saved = JSON.parse(localStorage.getItem(SLT_KEY) || 'null');
-    if (saved && Array.isArray(saved) && saved.length === 2) slt = saved;
+    if (saved && Array.isArray(saved) && saved.length === 2) {
+      slt = saved.map(s => ({
+        rows: s.rows ?? 0,
+        decs: s.decs ?? [],
+        stripeChanges: s.stripeChanges ?? [],
+      }));
+    }
   } catch (_) {}
 }
 
@@ -288,10 +310,104 @@ function renderSlt(i) {
     }
   }
 
+  renderSleeveStripe(i);
   if (pipMode === 'sleeves') updatePip();
 }
 
 function updateSleeveTracker() { renderSlt(0); renderSlt(1); }
+
+function renderSleeveStripe(i) {
+  const s        = slt[i];
+  const colourEl = document.getElementById(`ss-slt-sc${i}`);
+  const rowLblEl = document.getElementById(`ss-slt-sch${i}-row`);
+  const logEl    = document.getElementById(`ss-slt-sch${i}-log`);
+  const btnEl    = document.getElementById(`ss-slt-sch${i}-btn`);
+
+  if (!colourEl) return;
+
+  if (!sleeveSeed) {
+    colourEl.textContent    = '—';
+    colourEl.className      = '';
+    if (logEl)    logEl.innerHTML       = '<div class="slt-empty">Freeze the body stripe tracker first.</div>';
+    if (btnEl)    btnEl.disabled        = true;
+    if (rowLblEl) rowLblEl.textContent  = s.rows;
+    return;
+  }
+
+  if (btnEl)    btnEl.disabled        = false;
+  if (rowLblEl) rowLblEl.textContent  = s.rows;
+
+  const colourIdx = (sleeveSeed.startColourIdx + s.stripeChanges.length) % 2;
+  const curColour = STRIPE_COLOURS[colourIdx];
+
+  colourEl.textContent = curColour;
+  colourEl.className   = colourIdx === 0 ? 'str-mc' : 'str-bk';
+
+  if (!logEl) return;
+
+  const completedBlocks = s.stripeChanges.map((endRow, j) => {
+    const startRow   = j === 0 ? 1 : s.stripeChanges[j - 1] + 1;
+    const colour     = STRIPE_COLOURS[(sleeveSeed.startColourIdx + j) % 2];
+    const sleeveRows = endRow - startRow + 1;
+    const bodyOffset = j === 0 ? sleeveSeed.bodyRowsIntoStripe : 0;
+    return { colour, startRow, endRow, sleeveRows, bodyOffset, idx: j };
+  });
+
+  const currentStart   = s.stripeChanges.length > 0 ? s.stripeChanges[s.stripeChanges.length - 1] + 1 : 1;
+  const currentSlvRows = Math.max(0, s.rows - currentStart + 1);
+  const currentBodyOff = s.stripeChanges.length === 0 ? sleeveSeed.bodyRowsIntoStripe : 0;
+  const totalInBlock   = currentSlvRows + currentBodyOff;
+
+  let html = completedBlocks.map(b => {
+    const cls        = b.colour === 'multicolour' ? 'str-mc' : 'str-bk';
+    const offsetNote = b.bodyOffset > 0
+      ? ` <span class="slt-offset">(+${b.bodyOffset} from body)</span>`
+      : '';
+    return `<div class="slt-entry">
+      <span class="slt-n ${cls}">${b.colour}</span>
+      <span class="slt-r">Rnds ${b.startRow}–${b.endRow}</span>
+      <span class="slt-iv">${b.sleeveRows} rnds${offsetNote}</span>
+      <span class="slt-del" data-ssl-i="${i}" data-ssl-j="${b.idx}">×</span>
+    </div>`;
+  }).join('');
+
+  const curCls    = curColour === 'multicolour' ? 'str-mc' : 'str-bk';
+  const curOffset = currentBodyOff > 0
+    ? ` <span class="slt-offset">(+${currentBodyOff} from body)</span>`
+    : '';
+
+  html += `<div class="slt-entry str-cur">
+    <span class="slt-n ${curCls}">${curColour}</span>
+    <span class="slt-r">Rnd ${currentStart}…</span>
+    <span class="slt-iv">${totalInBlock} total${curOffset}</span>
+  </div>`;
+
+  logEl.innerHTML = html;
+  logEl.querySelectorAll('[data-ssl-j]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const si = parseInt(e.target.dataset.sslI);
+      const j  = parseInt(e.target.dataset.sslJ);
+      slt[si].stripeChanges.splice(j, 1);
+      saveSltState();
+      renderSleeveStripe(si);
+    });
+  });
+}
+
+function renderSleeveSeedNote() {
+  const noteEl   = document.getElementById('ss-str-freeze-note');
+  const freezeEl = document.getElementById('ss-str-freeze');
+  if (!noteEl) return;
+  if (sleeveSeed) {
+    const colour = STRIPE_COLOURS[sleeveSeed.startColourIdx];
+    const cls    = sleeveSeed.startColourIdx === 0 ? 'str-mc' : 'str-bk';
+    noteEl.innerHTML = `Sleeve baseline: <strong class="${cls}">${colour}</strong>, ${sleeveSeed.bodyRowsIntoStripe} rows already in stripe`;
+    if (freezeEl) freezeEl.textContent = 'Re-freeze';
+  } else {
+    noteEl.textContent = '';
+    if (freezeEl) freezeEl.textContent = 'Freeze for sleeves';
+  }
+}
 
 // ── Stripe tracker ────────────────────────────────────────────────────────────
 const STRIPE_COLOURS = ['multicolour', 'black'];
@@ -305,6 +421,17 @@ function loadStripeState() {
 
 function saveStripeState() {
   localStorage.setItem(STRIPE_KEY, JSON.stringify(stripe));
+}
+
+function loadSleeveSeedState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(SLEEVE_SEED_KEY) || 'null');
+    if (saved && typeof saved === 'object') sleeveSeed = saved;
+  } catch (_) {}
+}
+
+function saveSleeveSeedState() {
+  localStorage.setItem(SLEEVE_SEED_KEY, JSON.stringify(sleeveSeed));
 }
 
 function renderStripe() {
@@ -541,6 +668,18 @@ function pipSltHTML() {
       const uniform = ivs.every(v => v === ivs[0]);
       cadence = `${s.decs.length} dec · ${uniform ? `every ${ivs[0]} rnds` : 'intervals: ' + ivs.join(', ')}`;
     }
+
+    let stripeHtml = '';
+    if (sleeveSeed) {
+      const colourIdx = (sleeveSeed.startColourIdx + s.stripeChanges.length) % 2;
+      const curColour = STRIPE_COLOURS[colourIdx];
+      const cls       = colourIdx === 0 ? 'str-mc' : 'str-bk';
+      stripeHtml = `<div class="pip-slt-stripe">
+        <span class="${cls}">${curColour}</span>
+        <span class="pip-slt-log" data-pip-slt-action="str-change" data-pip-slt-sleeve="${i}">Change at ${s.rows}</span>
+      </div>`;
+    }
+
     return `<div class="${i === 1 ? 'pip-slt-s2' : ''}">
       <div class="pip-slt-main">
         <span class="pip-slt-label">S${i + 1}</span>
@@ -550,6 +689,7 @@ function pipSltHTML() {
         <span class="pip-slt-log"  data-pip-slt-action="dec"   data-pip-slt-sleeve="${i}">Log dec at ${s.rows}</span>
       </div>
       <div class="pip-slt-cadence">${cadence}</div>
+      ${stripeHtml}
     </div>`;
   }).join('');
 }
@@ -708,6 +848,7 @@ const PIP_CSS = `
     color: #8ab0c8; font-size: 0.7rem; flex: 1; text-align: center; user-select: none; }
   .pip-slt-log:hover { background: #3a4a5a; color: #aad0e8; }
   .pip-slt-cadence { font-size: 0.68rem; color: #667; padding-left: 1.6em; }
+  .pip-slt-stripe { display: flex; align-items: center; gap: 6px; padding-top: 3px; border-top: 1px solid #1a2a3a; margin-top: 2px; }
 `;
 
 const PIP_BODY_HTML = `
@@ -746,7 +887,8 @@ function wirePipDoc(d) {
     const si     = parseInt(btn.dataset.pipSltSleeve);
     if (action === 'minus') { if (slt[si].rows > 0) slt[si].rows--; }
     if (action === 'plus')  { slt[si].rows++; }
-    if (action === 'dec')   { slt[si].decs.push(slt[si].rows); }
+    if (action === 'dec')        { slt[si].decs.push(slt[si].rows); }
+    if (action === 'str-change') { slt[si].stripeChanges.push(slt[si].rows); }
     saveSltState();
     renderSlt(si);
     updatePip();
@@ -868,8 +1010,10 @@ PageRegistry.register("srajans-sweater", {
     updateDisplay();
     scheduleHistEntry();
 
+    loadSleeveSeedState();
     loadStripeState();
     renderStripe();
+    renderSleeveSeedNote();
     document.getElementById('ss-str-plus').addEventListener('click', () => {
       stripe.rows++; saveStripeState(); renderStripe();
     });
@@ -878,6 +1022,18 @@ PageRegistry.register("srajans-sweater", {
     });
     document.getElementById('ss-str-change-btn').addEventListener('click', () => {
       stripe.changes.push(stripe.rows); saveStripeState(); renderStripe();
+    });
+    document.getElementById('ss-str-freeze').addEventListener('click', () => {
+      const curStart = stripe.changes.length > 0 ? stripe.changes[stripe.changes.length - 1] + 1 : 1;
+      const bodyRowsIntoStripe = Math.max(0, stripe.rows - curStart + 1);
+      const colour = STRIPE_COLOURS[stripe.changes.length % 2];
+      if (confirm(`Set sleeve stripe baseline to: ${colour}, ${bodyRowsIntoStripe} rows into current stripe?`)) {
+        sleeveSeed = { startColourIdx: stripe.changes.length % 2, bodyRowsIntoStripe };
+        saveSleeveSeedState();
+        renderSleeveSeedNote();
+        renderSleeveStripe(0);
+        renderSleeveStripe(1);
+      }
     });
     document.getElementById('ss-str-reset').addEventListener('click', () => {
       if (confirm('Reset stripe tracker?')) {
@@ -899,10 +1055,13 @@ PageRegistry.register("srajans-sweater", {
       document.getElementById(`ss-slt-d${i}-log`).addEventListener('click', () => {
         slt[i].decs.push(slt[i].rows); saveSltState(); renderSlt(i);
       });
+      document.getElementById(`ss-slt-sch${i}-btn`).addEventListener('click', () => {
+        slt[i].stripeChanges.push(slt[i].rows); saveSltState(); renderSleeveStripe(i);
+      });
     });
     document.getElementById('ss-slt-reset').addEventListener('click', () => {
       if (confirm('Reset sleeve tracker for both sleeves?')) {
-        slt = [{ rows: 0, decs: [] }, { rows: 0, decs: [] }];
+        slt = [{ rows: 0, decs: [], stripeChanges: [] }, { rows: 0, decs: [], stripeChanges: [] }];
         saveSltState();
         updateSleeveTracker();
       }
