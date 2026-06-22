@@ -11,6 +11,8 @@ window.KnittingSync = (() => {
     'srajans-sweater-step',
     'srajans-sweater-sleeves',
     'srajans-sweater-history',
+    'srajans-sweater-stripes',
+    'srajans-sweater-sleeve-stripe-seed',
     'knitting_pearl_earring_state',
     'knitting_pearl_earring_history',
     'knitting_pearl_earring_stitch_guide',
