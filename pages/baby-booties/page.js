@@ -71,6 +71,26 @@ function getContentHTML(sz) {
     <p data-step="21">Sew sole seam.</p>
     <p data-step="22">Sew back seam, reversing seam 1½&nbsp;ins [4&nbsp;cm] from cast off edge for turn back.</p>
 
+    <h2 class="bb-glossary-hdr">Glossary</h2>
+    <div class="bb-glossary">
+      <div class="bb-gloss-entry"><span class="bb-gloss-term">Cast on</span><span class="bb-gloss-def">Place the starting stitches onto your needle to begin knitting.</span></div>
+      <div class="bb-gloss-entry"><span class="bb-gloss-term">Cast off</span><span class="bb-gloss-def">Secure the live stitches and remove them from the needle to finish a piece; also called bind off.</span></div>
+      <div class="bb-gloss-entry"><span class="bb-gloss-term">Garter stitch</span><span class="bb-gloss-def">Knit every row (both RS and WS rows); produces a ridged, stretchy fabric.</span></div>
+      <div class="bb-gloss-entry"><span class="bb-gloss-term">K</span><span class="bb-gloss-def">Knit. Insert the right needle into the front of the stitch left to right and pull a loop through.</span></div>
+      <div class="bb-gloss-entry"><span class="bb-gloss-term">K2tog</span><span class="bb-gloss-def">Knit 2 together. Insert the needle through 2 stitches at once and knit them as one; leans to the right and removes one stitch.</span></div>
+      <div class="bb-gloss-entry"><span class="bb-gloss-term">P</span><span class="bb-gloss-def">Purl. Insert the right needle into the front of the stitch right to left and pull a loop through; the reverse of a knit stitch.</span></div>
+      <div class="bb-gloss-entry"><span class="bb-gloss-term">P2tog</span><span class="bb-gloss-def">Purl 2 together. Insert the needle through 2 stitches and purl them as one; a decrease that leans to the right on the right side.</span></div>
+      <div class="bb-gloss-entry"><span class="bb-gloss-term">P2togtbl</span><span class="bb-gloss-def">Purl 2 together through back loop. Insert the needle through the back loops of 2 stitches and purl them together; a decrease that leans to the left on the right side.</span></div>
+      <div class="bb-gloss-entry"><span class="bb-gloss-term">psso</span><span class="bb-gloss-def">Pass slipped stitch over. Lift the previously slipped stitch up and over the stitch just worked and off the needle; always used with Sl1, K1 to make a left-leaning decrease.</span></div>
+      <div class="bb-gloss-entry"><span class="bb-gloss-term">RS</span><span class="bb-gloss-def">Right Side. The public-facing side of the work — the outside of the finished bootie.</span></div>
+      <div class="bb-gloss-entry"><span class="bb-gloss-term">Sl1</span><span class="bb-gloss-def">Slip 1. Transfer one stitch from the left needle to the right needle without knitting it, with yarn held at the back.</span></div>
+      <div class="bb-gloss-entry"><span class="bb-gloss-term">Sl1P</span><span class="bb-gloss-def">Slip 1 purlwise. Transfer one stitch as if to purl (right needle entering right to left), with yarn held in front.</span></div>
+      <div class="bb-gloss-entry"><span class="bb-gloss-term">sts</span><span class="bb-gloss-def">Stitches. The total number of loops currently on your needle.</span></div>
+      <div class="bb-gloss-entry"><span class="bb-gloss-term">Turn</span><span class="bb-gloss-def">Turn the work around mid-row so the other side faces you, leaving the remaining stitches unworked; used in short-row toe shaping.</span></div>
+      <div class="bb-gloss-entry"><span class="bb-gloss-term">WS</span><span class="bb-gloss-def">Wrong Side. The inside-facing side of the work — the interior of the finished bootie.</span></div>
+      <div class="bb-gloss-entry"><span class="bb-gloss-term">yf / yfwd</span><span class="bb-gloss-def">Yarn forward. Bring the yarn to the front of the work between the needles; when used before a slipped stitch it carries the yarn over without creating a new stitch, and when used mid-row it creates an eyelet increase.</span></div>
+    </div>
+
   </div>
 </div>`;
 }

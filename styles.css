@@ -304,6 +304,43 @@ input[type=number] {
   opacity: 0.32;
 }
 
+/* Glossary stays readable in step mode */
+#bb-pattern-doc.step-mode .bb-glossary,
+#bb-pattern-doc.step-mode .bb-glossary-hdr {
+  opacity: 1;
+}
+
+/* ── Baby Booties glossary ── */
+.bb-glossary {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 0.4em 0 0.6em;
+  border: 1px solid #1e2e40;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.bb-gloss-entry {
+  display: grid;
+  grid-template-columns: 9em 1fr;
+  gap: 0 12px;
+  padding: 6px 14px;
+  border-bottom: 1px solid #1a2a3a;
+  line-height: 1.5;
+}
+.bb-gloss-entry:last-child { border-bottom: none; }
+.bb-gloss-entry:nth-child(even) { background: #0c1a28; }
+.bb-gloss-term {
+  font-weight: 700;
+  color: #e8d8b0;
+  font-size: 0.88rem;
+  padding-top: 1px;
+}
+.bb-gloss-def {
+  color: #aab8c4;
+  font-size: 0.87rem;
+}
+
 /* ── Srajan's Sweater doc ── */
 #ss-pattern-doc {
   max-width: 720px;
