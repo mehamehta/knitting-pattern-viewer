@@ -12,6 +12,7 @@ const STATIC = [
   '/pages/baby-booties/page.js',
   '/pages/pearl-earring/page.js',
   '/pages/pearl-earring/pattern-data.js',
+  '/pages/moon-set-polo/page.js',
 ];
 
 self.addEventListener('install', e => {
