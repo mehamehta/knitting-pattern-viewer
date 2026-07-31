@@ -6,15 +6,16 @@
 // firstStep/lastStep: step indices of the repeating rows
 // endStep: the "Repeat Rows X and Y a total of N times" paragraph that follows
 const REPEAT_GROUPS = {
-  rg1: { label: 'Back short rows',        totalCount: 13, firstStep:  7, lastStep:  8, endStep:  9 },
-  rg2: { label: 'Left front rows',        totalCount: 9,  firstStep: 13, lastStep: 14, endStep: 15 },
-  rg3: { label: 'Left front neck inc',    totalCount: 4,  firstStep: 17, lastStep: 18, endStep: 19 },
-  rg4: { label: 'Left front rib rows',    totalCount: 19, firstStep: 25, lastStep: 26, endStep: 27 },
-  rg5: { label: 'Right front rows',       totalCount: 9,  firstStep: 31, lastStep: 32, endStep: 33 },
-  rg6: { label: 'Right front neck inc',   totalCount: 4,  firstStep: 35, lastStep: 36, endStep: 37 },
-  rg7: { label: 'Right front rib rows',   totalCount: 19, firstStep: 42, lastStep: 43, endStep: 44 },
-  rg8: { label: 'Join collar sts',        totalCount: 7,  firstStep: 49, lastStep: 49, endStep: 50 },
-  rg9: { label: 'Sleeve short rows',      totalCount: 3,  firstStep: 69, lastStep: 70, endStep: 71 },
+  rg1:  { label: 'Back short rows',        totalCount: 13, firstStep:  7, lastStep:  8, endStep:  9 },
+  rg1b: { label: 'Back stockinette rows',  totalCount: 16, firstStep: 11, lastStep: 12, endStep: 13 },
+  rg2:  { label: 'Left front rows',        totalCount: 9,  firstStep: 16, lastStep: 17, endStep: 18 },
+  rg3:  { label: 'Left front neck inc',    totalCount: 4,  firstStep: 20, lastStep: 21, endStep: 22 },
+  rg4:  { label: 'Left front rib rows',    totalCount: 19, firstStep: 28, lastStep: 29, endStep: 30 },
+  rg5:  { label: 'Right front rows',       totalCount: 9,  firstStep: 34, lastStep: 35, endStep: 36 },
+  rg6:  { label: 'Right front neck inc',   totalCount: 4,  firstStep: 38, lastStep: 39, endStep: 40 },
+  rg7:  { label: 'Right front rib rows',   totalCount: 19, firstStep: 45, lastStep: 46, endStep: 47 },
+  rg8:  { label: 'Join collar sts',        totalCount: 7,  firstStep: 52, lastStep: 52, endStep: 53 },
+  rg9:  { label: 'Sleeve short rows',      totalCount: 3,  firstStep: 72, lastStep: 73, endStep: 74 },
 };
 
 // Which repeat group each step belongs to (populated below)
@@ -23,7 +24,7 @@ for (const [gid, g] of Object.entries(REPEAT_GROUPS)) {
   for (let s = g.firstStep; s <= g.lastStep; s++) STEP_GROUP[s] = gid;
 }
 
-const TOTAL_STEPS = 90; // indices 0–89
+const TOTAL_STEPS = 93; // indices 0–92
 
 // ── Glossary ──────────────────────────────────────────────────────────────────
 const GLOSSARY = [
@@ -78,100 +79,105 @@ const CONTENT_HTML = `
     </div>
     <p class="mp-note">Tip: If you're having trouble keeping track of your ds, mark its place with a removable stitch marker.</p>
     <p data-step="9">Repeat Short Rows 3 and 4, 12 more times. At the last turn there will be 2 unworked sts remaining after the ds on both the left and right side of your work. The next row will be a RS row. The back now measures approx. <strong>4&frac34;" [12 cm]</strong>, as measured from center back cast-on edge.</p>
-    <p data-step="10">You will continue working back and forth in stockinette st across all back sts, resolving the final two ds as you work, for <strong>32 more rows</strong>, until back measures approx. <strong>10" [25 cm]</strong>, as measured from center back cast-on edge. End by working a WS row. You are now at RS. Break yarn and let sts rest.</p>
+    <p data-step="10">You will continue working back and forth in stockinette st across all back sts as follows:</p>
+    <div class="row-table">
+      <span class="row-label" data-step-label="11">Row 1 (RS):</span><span data-step="11">Knit across, resolving the final two ds as you work.</span>
+      <span class="row-label" data-step-label="12">Row 2 (WS):</span><span data-step="12">Purl across.</span>
+    </div>
+    <p data-step="13">Repeat Rows 1 and 2, 15 more times, for a total of <strong>32 rows</strong>, until back measures approx. <strong>10" [25 cm]</strong>, as measured from center back cast-on edge. End by working a WS row. You are now at RS. Break yarn and let sts rest.</p>
 
     <h2>Left Front</h2>
-    <p data-step="11">With RS of back piece facing and CO sts on top, pick up and knit <strong>30 sts</strong> along left slanted edge, beginning at center back.</p>
-    <p data-step="12">Work back and forth as follows:</p>
+    <p data-step="14">With RS of back piece facing and CO sts on top, pick up and knit <strong>30 sts</strong> along left slanted edge, beginning at center back.</p>
+    <p data-step="15">Work back and forth as follows:</p>
     <div class="row-table">
-      <span class="row-label" data-step-label="13">Row 1 (WS):</span><span data-step="13">P across.</span>
-      <span class="row-label" data-step-label="14">Row 2 (RS):</span><span data-step="14">K across.</span>
+      <span class="row-label" data-step-label="16">Row 1 (WS):</span><span data-step="16">P across.</span>
+      <span class="row-label" data-step-label="17">Row 2 (RS):</span><span data-step="17">K across.</span>
     </div>
-    <p data-step="15">Repeat Rows 1 and 2, 8 more times, for a total of 18 rows, then work one more repeat of Row 1 only. Left front measures approx. 3&frac12;" [8.5 cm] as measured from the picked-up sts. You are now at RS.</p>
-    <p data-step="16">Next, work increases to shape the neck edge as follows:</p>
+    <p data-step="18">Repeat Rows 1 and 2, 8 more times, for a total of 18 rows, then work one more repeat of Row 1 only. Left front measures approx. 3&frac12;" [8.5 cm] as measured from the picked-up sts. You are now at RS.</p>
+    <p data-step="19">Next, work increases to shape the neck edge as follows:</p>
     <div class="row-table">
-      <span class="row-label" data-step-label="17">Row 1 (RS):</span><span data-step="17">K4, ${gl('m1l', 'M1L')}, K across. (1 st increased).</span>
-      <span class="row-label" data-step-label="18">Row 2 (WS):</span><span data-step="18">P across.</span>
+      <span class="row-label" data-step-label="20">Row 1 (RS):</span><span data-step="20">K4, ${gl('m1l', 'M1L')}, K across. (1 st increased).</span>
+      <span class="row-label" data-step-label="21">Row 2 (WS):</span><span data-step="21">P across.</span>
     </div>
-    <p data-step="19">Repeat Rows 1 and 2, 3 more times, for a total of 8 rows. <strong>34 sts</strong>.</p>
-    <p data-step="20">Break yarn. You will break yarn to maintain the same amount of rows worked as the right front band.</p>
-    <p data-step="21">Next, you will cast on sts to shape the neck edge as follows:</p>
-    <p data-step="22">Next Row (RS): With new yarn, CO 11 sts using the ${gl('backwards-loop-co', 'backwards loop cast-on')} method on right hand needle, K4, M1L, K across. (12 sts increased). <strong>46 sts</strong>.</p>
-    <p data-step="23">Following Row (WS): P across until 7 sts remain, ${gl('pm', 'PM')}, *K1, P1* repeat *-* until 3 sts remain, K1, Sl 2 ${gl('wyif', 'wyif')}.</p>
-    <p data-step="24">You will now work as follows:</p>
+    <p data-step="22">Repeat Rows 1 and 2, 3 more times, for a total of 8 rows. <strong>34 sts</strong>.</p>
+    <p data-step="23">Break yarn. You will break yarn to maintain the same amount of rows worked as the right front band.</p>
+    <p data-step="24">Next, you will cast on sts to shape the neck edge as follows:</p>
+    <p data-step="25">Next Row (RS): With new yarn, CO 11 sts using the ${gl('backwards-loop-co', 'backwards loop cast-on')} method on right hand needle, K4, M1L, K across. (12 sts increased). <strong>46 sts</strong>.</p>
+    <p data-step="26">Following Row (WS): P across until 7 sts remain, ${gl('pm', 'PM')}, *K1, P1* repeat *-* until 3 sts remain, K1, Sl 2 ${gl('wyif', 'wyif')}.</p>
+    <p data-step="27">You will now work as follows:</p>
     <div class="row-table">
-      <span class="row-label" data-step-label="25">Row 1 (RS):</span><span data-step="25">K2, *P1, K1* repeat *-* until 1 st before marker, P1, ${gl('sm', 'SM')}, K across.</span>
-      <span class="row-label" data-step-label="26">Row 2 (WS):</span><span data-step="26">P across until marker, SM, *K1, P1* repeat *-* until 3 sts remain, K1, Sl 2 wyif.</span>
+      <span class="row-label" data-step-label="28">Row 1 (RS):</span><span data-step="28">K2, *P1, K1* repeat *-* until 1 st before marker, P1, ${gl('sm', 'SM')}, K across.</span>
+      <span class="row-label" data-step-label="29">Row 2 (WS):</span><span data-step="29">P across until marker, SM, *K1, P1* repeat *-* until 3 sts remain, K1, Sl 2 wyif.</span>
     </div>
-    <p data-step="27">Repeat Rows 1 and 2, 18 more times, for a total of 38 rows. Left front measures approx. 11&frac14;" [28.5 cm] as measured from the picked-up sts.</p>
-    <p data-step="28">Break yarn and let sts rest while working right front.</p>
+    <p data-step="30">Repeat Rows 1 and 2, 18 more times, for a total of 38 rows. Left front measures approx. 11&frac14;" [28.5 cm] as measured from the picked-up sts.</p>
+    <p data-step="31">Break yarn and let sts rest while working right front.</p>
 
     <h2>Right Front</h2>
-    <p data-step="29">With RS of back piece facing and CO sts on top, pick up and knit <strong>30 sts</strong>, beginning from right slanted edge.</p>
-    <p data-step="30">Work back and forth as follows:</p>
+    <p data-step="32">With RS of back piece facing and CO sts on top, pick up and knit <strong>30 sts</strong>, beginning from right slanted edge.</p>
+    <p data-step="33">Work back and forth as follows:</p>
     <div class="row-table">
-      <span class="row-label" data-step-label="31">Row 1 (WS):</span><span data-step="31">P across.</span>
-      <span class="row-label" data-step-label="32">Row 2 (RS):</span><span data-step="32">K across.</span>
+      <span class="row-label" data-step-label="34">Row 1 (WS):</span><span data-step="34">P across.</span>
+      <span class="row-label" data-step-label="35">Row 2 (RS):</span><span data-step="35">K across.</span>
     </div>
-    <p data-step="33">Repeat Rows 1 and 2, 8 more times, for a total of 18 rows, then work one more repeat of Row 1 only. Right front measures approx. 3&frac12;" [8.5 cm] as measured from the picked-up sts. You are now at RS.</p>
-    <p data-step="34">Next, work increases to shape the neck edge as follows:</p>
+    <p data-step="36">Repeat Rows 1 and 2, 8 more times, for a total of 18 rows, then work one more repeat of Row 1 only. Right front measures approx. 3&frac12;" [8.5 cm] as measured from the picked-up sts. You are now at RS.</p>
+    <p data-step="37">Next, work increases to shape the neck edge as follows:</p>
     <div class="row-table">
-      <span class="row-label" data-step-label="35">Row 1 (RS):</span><span data-step="35">K across until 4 sts remain, ${gl('m1r', 'M1R')}, K4. (1 st increased).</span>
-      <span class="row-label" data-step-label="36">Row 2 (WS):</span><span data-step="36">P across.</span>
+      <span class="row-label" data-step-label="38">Row 1 (RS):</span><span data-step="38">K across until 4 sts remain, ${gl('m1r', 'M1R')}, K4. (1 st increased).</span>
+      <span class="row-label" data-step-label="39">Row 2 (WS):</span><span data-step="39">P across.</span>
     </div>
-    <p data-step="37">Repeat Rows 1 and 2, 3 more times, for a total of 8 rows. <strong>34 sts</strong>.</p>
-    <p data-step="38">Next, you will cast on sts in extension of right front to shape the neck edge as follows:</p>
-    <p data-step="39">Next Row (RS): K across until 4 sts remain, M1R, K4, CO 11 sts in extension of right front using the backwards loop cast-on method. (12 sts increased). <strong>46 sts</strong>.</p>
-    <p data-step="40">Following Row (WS): Sl 2 wyif, *K1, P1* over 4 sts, K1, PM, P across.</p>
-    <p data-step="41">You will now work as follows:</p>
+    <p data-step="40">Repeat Rows 1 and 2, 3 more times, for a total of 8 rows. <strong>34 sts</strong>.</p>
+    <p data-step="41">Next, you will cast on sts in extension of right front to shape the neck edge as follows:</p>
+    <p data-step="42">Next Row (RS): K across until 4 sts remain, M1R, K4, CO 11 sts in extension of right front using the backwards loop cast-on method. (12 sts increased). <strong>46 sts</strong>.</p>
+    <p data-step="43">Following Row (WS): Sl 2 wyif, *K1, P1* over 4 sts, K1, PM, P across.</p>
+    <p data-step="44">You will now work as follows:</p>
     <div class="row-table">
-      <span class="row-label" data-step-label="42">Row 1 (RS):</span><span data-step="42">K across until marker, SM, *P1, K1* repeat *-* until 1 st remains, K1.</span>
-      <span class="row-label" data-step-label="43">Row 2 (WS):</span><span data-step="43">Sl 2 wyif, *K1, P1* repeat *-* until 1 st before marker, K1, SM, P across.</span>
+      <span class="row-label" data-step-label="45">Row 1 (RS):</span><span data-step="45">K across until marker, SM, *P1, K1* repeat *-* until 1 st remains, K1.</span>
+      <span class="row-label" data-step-label="46">Row 2 (WS):</span><span data-step="46">Sl 2 wyif, *K1, P1* repeat *-* until 1 st before marker, K1, SM, P across.</span>
     </div>
-    <p data-step="44">Repeat Rows 1 and 2, 18 more times, for a total of 38 rows. Right front measures approx. 11&frac14;" [28.5 cm] as measured from the picked-up sts.</p>
-    <p data-step="45">Do not break yarn.</p>
+    <p data-step="47">Repeat Rows 1 and 2, 18 more times, for a total of 38 rows. Right front measures approx. 11&frac14;" [28.5 cm] as measured from the picked-up sts.</p>
+    <p data-step="48">Do not break yarn.</p>
 
     <h2>Join Right Front and Left Front</h2>
-    <p data-step="46">To form the v-neck of your polo, your collar stitches will now be knitted together so that the right front 7 sts will lay on top of left front 7 sts. The neckline opening will therefore be closed here, and the 14 v-neck stitches will be reduced to 7. These 7 stitches will then become part of the stockinette body.</p>
-    <p data-step="47">Using the working yarn currently attached to the right front and with RS of your work facing, K across right front sts to marker, remove marker.</p>
-    <p data-step="48">Transfer held stitches of left front to a spare circular needle and hold the collar stitches of the left front directly behind the collar stitches of the right front.</p>
-    <p data-step="49">*K the first stitch on the needle held in front together with the first stitch on the needle held in back.*</p>
-    <p data-step="50">Repeat *-* 6 more times so that all collar stitches on both the front and the back needles have been worked.</p>
-    <p data-step="51">At this point, there are no remaining stitches on the front needle and you are at the stitch marker on the back needle. Remove marker and K across the remaining sts for the left front. All front sts are on the same needle and the left front and the right front sections have been joined to form a single front piece. <strong>85 sts</strong>.</p>
-    <p data-step="52">Following Row (WS): P across.</p>
-    <p data-step="53"><strong>Size XS:</strong> Front measures approx. 11&frac34;" [29 cm], as measured from picked up sts at either shoulder. Proceed to Body instructions.</p>
+    <p data-step="49">To form the v-neck of your polo, your collar stitches will now be knitted together so that the right front 7 sts will lay on top of left front 7 sts. The neckline opening will therefore be closed here, and the 14 v-neck stitches will be reduced to 7. These 7 stitches will then become part of the stockinette body.</p>
+    <p data-step="50">Using the working yarn currently attached to the right front and with RS of your work facing, K across right front sts to marker, remove marker.</p>
+    <p data-step="51">Transfer held stitches of left front to a spare circular needle and hold the collar stitches of the left front directly behind the collar stitches of the right front.</p>
+    <p data-step="52">*K the first stitch on the needle held in front together with the first stitch on the needle held in back.*</p>
+    <p data-step="53">Repeat *-* 6 more times so that all collar stitches on both the front and the back needles have been worked.</p>
+    <p data-step="54">At this point, there are no remaining stitches on the front needle and you are at the stitch marker on the back needle. Remove marker and K across the remaining sts for the left front. All front sts are on the same needle and the left front and the right front sections have been joined to form a single front piece. <strong>85 sts</strong>.</p>
+    <p data-step="55">Following Row (WS): P across.</p>
+    <p data-step="56"><strong>Size XS:</strong> Front measures approx. 11&frac34;" [29 cm], as measured from picked up sts at either shoulder. Proceed to Body instructions.</p>
 
     <h2>Body</h2>
-    <p data-step="54">You will now join the front panel to the back panel and form the armholes as follows:</p>
-    <p data-step="55">With RS facing, K across <strong>85 front sts</strong>, place back sts on needles and K across <strong>85 sts</strong>, PM, join to work in the round. The ${gl('bor', 'BOR')} is now at the right underarm. <strong>170 sts</strong>.</p>
-    <p data-step="56">Work in the round in stockinette st (knit all sts) until the body measures approx. 8&frac34;" [21.5 cm] as measured from the underarm or until the body of your sweater measures 3" [7.5 cm] less than your desired final length. <em>Note: Adding additional length will require more yardage.</em></p>
+    <p data-step="57">You will now join the front panel to the back panel and form the armholes as follows:</p>
+    <p data-step="58">With RS facing, K across <strong>85 front sts</strong>, place back sts on needles and K across <strong>85 sts</strong>, PM, join to work in the round. The ${gl('bor', 'BOR')} is now at the right underarm. <strong>170 sts</strong>.</p>
+    <p data-step="59">Work in the round in stockinette st (knit all sts) until the body measures approx. 8&frac34;" [21.5 cm] as measured from the underarm or until the body of your sweater measures 3" [7.5 cm] less than your desired final length. <em>Note: Adding additional length will require more yardage.</em></p>
 
     <h2>Hem</h2>
-    <p data-step="57">With US 8 (5 mm)/32 or 40" [80 or 100 cm] circular needles, finish the body of your polo by working the hem as follows:</p>
-    <p data-step="58">*K1, P1* repeat *-* until hem measures approx. 3" [7.5 cm].</p>
-    <p data-step="59">Work two set-up rounds at the end of your ribbing using the Italian bind-off method as follows:</p>
+    <p data-step="60">With US 8 (5 mm)/32 or 40" [80 or 100 cm] circular needles, finish the body of your polo by working the hem as follows:</p>
+    <p data-step="61">*K1, P1* repeat *-* until hem measures approx. 3" [7.5 cm].</p>
+    <p data-step="62">Work two set-up rounds at the end of your ribbing using the Italian bind-off method as follows:</p>
     <div class="row-table">
-      <span class="row-label" data-step-label="60">Round 1:</span><span data-step="60">*K1, Sl 1 wyif* repeat *-*.</span>
-      <span class="row-label" data-step-label="61">Round 2:</span><span data-step="61">*Sl 1 wyib, P1* repeat *-*.</span>
+      <span class="row-label" data-step-label="63">Round 1:</span><span data-step="63">*K1, Sl 1 wyif* repeat *-*.</span>
+      <span class="row-label" data-step-label="64">Round 2:</span><span data-step="64">*Sl 1 wyib, P1* repeat *-*.</span>
     </div>
-    <p data-step="62">Bind off all sts using the ${gl('italian-bindoff', 'Italian bind-off')} method.</p>
+    <p data-step="65">Bind off all sts using the ${gl('italian-bindoff', 'Italian bind-off')} method.</p>
 
     <h2>Sleeves</h2>
-    <p data-step="63">Beginning at the bottom of the armhole opening with US 9 (5.5 mm)/16" [40 cm] circular needles, pick up and knit <strong>68 sts</strong> divided into three sections as follows:</p>
-    <p data-step="64">Pick up and knit <strong>23 sts</strong>, PM (referred to as the first marker), pick up and knit <strong>22 sts</strong>, PM (referred to as the second marker), pick up and knit <strong>23 sts</strong>, PM at underarm to mark BOR. <em>Note: All sts are picked up at a ratio of approx. 2 sts out of every 3 rows or until sts are spread evenly.</em></p>
-    <p data-step="65">You will now shape the upper sleeve with German Short Rows as follows:</p>
+    <p data-step="66">Beginning at the bottom of the armhole opening with US 9 (5.5 mm)/16" [40 cm] circular needles, pick up and knit <strong>68 sts</strong> divided into three sections as follows:</p>
+    <p data-step="67">Pick up and knit <strong>23 sts</strong>, PM (referred to as the first marker), pick up and knit <strong>22 sts</strong>, PM (referred to as the second marker), pick up and knit <strong>23 sts</strong>, PM at underarm to mark BOR. <em>Note: All sts are picked up at a ratio of approx. 2 sts out of every 3 rows or until sts are spread evenly.</em></p>
+    <p data-step="68">You will now shape the upper sleeve with German Short Rows as follows:</p>
     <div class="row-table">
-      <span class="row-label" data-step-label="66">Short Row 1 (RS):</span><span data-step="66">K across until second marker, SM, K5 sts, turn, make ds.</span>
-      <span class="row-label" data-step-label="67">Short Row 2 (WS):</span><span data-step="67">P across until first marker, SM, P5 sts, turn, make ds.</span>
+      <span class="row-label" data-step-label="69">Short Row 1 (RS):</span><span data-step="69">K across until second marker, SM, K5 sts, turn, make ds.</span>
+      <span class="row-label" data-step-label="70">Short Row 2 (WS):</span><span data-step="70">P across until first marker, SM, P5 sts, turn, make ds.</span>
     </div>
-    <p data-step="68">You will continue working German Short Rows, each time turning 5 sts after last turn. Meaning, work to your last ds, resolve the ds by knitting (RS) or purling (WS) the ds as one st, work another 5 sts, and turn as follows:</p>
+    <p data-step="71">You will continue working German Short Rows, each time turning 5 sts after last turn. Meaning, work to your last ds, resolve the ds by knitting (RS) or purling (WS) the ds as one st, work another 5 sts, and turn as follows:</p>
     <div class="row-table">
-      <span class="row-label" data-step-label="69">Short Row 3 (RS):</span><span data-step="69">K across until second marker, SM, K to the ds, resolve by knitting ds, K5 sts, turn, make ds.</span>
-      <span class="row-label" data-step-label="70">Short Row 4 (WS):</span><span data-step="70">P across until first marker, SM, P to the ds, resolve by purling ds, P5 sts, turn, make ds.</span>
+      <span class="row-label" data-step-label="72">Short Row 3 (RS):</span><span data-step="72">K across until second marker, SM, K to the ds, resolve by knitting ds, K5 sts, turn, make ds.</span>
+      <span class="row-label" data-step-label="73">Short Row 4 (WS):</span><span data-step="73">P across until first marker, SM, P to the ds, resolve by purling ds, P5 sts, turn, make ds.</span>
     </div>
-    <p data-step="71">Repeat Short Rows 3 and 4, 2 more times, for a total of 6 rows. You have now worked 8 short rows. At the last turn there will be <strong>3 unworked sts</strong> remaining after the ds on either side of the BOR marker. You are now at RS. From your last turn, K across to BOR resolving the ds and removing the first and second markers as you come to them.</p>
-    <p data-step="72">Continue to work in the round in stockinette st until the sleeves measure approx. 13" [32.5 cm] as measured from underarm, while at the same time working a decrease round on every <strong>11 rounds</strong> for a total of <strong>7 decrease rounds</strong>. At the conclusion of your final decrease round, you should have <strong>54 sts</strong> remaining.</p>
-    <p data-step="73">Decrease round: K1, ${gl('k2tog', 'K2tog')}, K in stockinette st until 3 sts remain before marker, ${gl('k2togl', 'K2tog-L')}, K1. (2 sts decreased).</p>
+    <p data-step="74">Repeat Short Rows 3 and 4, 2 more times, for a total of 6 rows. You have now worked 8 short rows. At the last turn there will be <strong>3 unworked sts</strong> remaining after the ds on either side of the BOR marker. You are now at RS. From your last turn, K across to BOR resolving the ds and removing the first and second markers as you come to them.</p>
+    <p data-step="75">Continue to work in the round in stockinette st until the sleeves measure approx. 13" [32.5 cm] as measured from underarm, while at the same time working a decrease round on every <strong>11 rounds</strong> for a total of <strong>7 decrease rounds</strong>. At the conclusion of your final decrease round, you should have <strong>54 sts</strong> remaining.</p>
+    <p data-step="76">Decrease round: K1, ${gl('k2tog', 'K2tog')}, K in stockinette st until 3 sts remain before marker, ${gl('k2togl', 'K2tog-L')}, K1. (2 sts decreased).</p>
 
     <div id="mp-sleeve-tracker">
       <div class="slt-hdr">
@@ -208,34 +214,34 @@ const CONTENT_HTML = `
       </div>
     </div>
 
-    <p data-step="74">At this point, you may move on to knitting the sleeve cuff or continue working in stockinette until your sleeve measures 3" [7.5 cm] less than your desired final length.</p>
+    <p data-step="77">At this point, you may move on to knitting the sleeve cuff or continue working in stockinette until your sleeve measures 3" [7.5 cm] less than your desired final length.</p>
 
     <h2>Sleeve Cuffs</h2>
-    <p data-step="75">With US 8 (5 mm)/16" [40 cm] circular needles or magic loop method, finish your sleeve by working the cuff as follows:</p>
-    <p data-step="76">*K1, P1* repeat *-* until cuff measures approx. 3" [7.5 cm].</p>
-    <p data-step="77">Work two set-up rounds at the end of your ribbing using the Italian bind-off method as follows:</p>
+    <p data-step="78">With US 8 (5 mm)/16" [40 cm] circular needles or magic loop method, finish your sleeve by working the cuff as follows:</p>
+    <p data-step="79">*K1, P1* repeat *-* until cuff measures approx. 3" [7.5 cm].</p>
+    <p data-step="80">Work two set-up rounds at the end of your ribbing using the Italian bind-off method as follows:</p>
     <div class="row-table">
-      <span class="row-label" data-step-label="78">Round 1:</span><span data-step="78">*K1, Sl 1 wyif* repeat *-*.</span>
-      <span class="row-label" data-step-label="79">Round 2:</span><span data-step="79">*Sl 1 wyib, P1* repeat *-*.</span>
+      <span class="row-label" data-step-label="81">Round 1:</span><span data-step="81">*K1, Sl 1 wyif* repeat *-*.</span>
+      <span class="row-label" data-step-label="82">Round 2:</span><span data-step="82">*Sl 1 wyib, P1* repeat *-*.</span>
     </div>
-    <p data-step="80">Bind off all sts using the Italian bind-off method.</p>
+    <p data-step="83">Bind off all sts using the Italian bind-off method.</p>
 
     <h2>Collar</h2>
-    <p data-step="81">Beginning at right v-neck band, with US 8 (5 mm)/16" [40 cm] circular needles and with RS facing, pick up and knit 7 sts along top of band, 4 sts along straight edge, 22 sts up the right neckline (1 st every shaping row and 2 sts every 3 straight rows), 25 sts along the back (one in each initial cast-on stitch), 22 sts down the left neckline (1 st every shaping row and 2 sts every 3 straight rows), 4 sts along straight edge, and 7 sts along top of band. <strong>91 sts</strong>.</p>
+    <p data-step="84">Beginning at right v-neck band, with US 8 (5 mm)/16" [40 cm] circular needles and with RS facing, pick up and knit 7 sts along top of band, 4 sts along straight edge, 22 sts up the right neckline (1 st every shaping row and 2 sts every 3 straight rows), 25 sts along the back (one in each initial cast-on stitch), 22 sts down the left neckline (1 st every shaping row and 2 sts every 3 straight rows), 4 sts along straight edge, and 7 sts along top of band. <strong>91 sts</strong>.</p>
     <div class="row-table">
-      <span class="row-label" data-step-label="82">Row 1 (WS):</span><span data-step="82">Sl 2 wyif, *K1, P1* repeat *-* until 3 sts remain, K1, Sl 2 wyif.</span>
-      <span class="row-label" data-step-label="83">Row 2 (RS):</span><span data-step="83">K1, *K1, P1* repeat until 2 sts remain, K2.</span>
+      <span class="row-label" data-step-label="85">Row 1 (WS):</span><span data-step="85">Sl 2 wyif, *K1, P1* repeat *-* until 3 sts remain, K1, Sl 2 wyif.</span>
+      <span class="row-label" data-step-label="86">Row 2 (RS):</span><span data-step="86">K1, *K1, P1* repeat until 2 sts remain, K2.</span>
     </div>
-    <p data-step="84">Repeat Rows 1 and 2 until collar measures approx. 5" [12.5 cm]. End by working a WS row.</p>
-    <p data-step="85">Work two set-up rows at the end of your ribbing using the Italian bind-off method as follows:</p>
+    <p data-step="87">Repeat Rows 1 and 2 until collar measures approx. 5" [12.5 cm]. End by working a WS row.</p>
+    <p data-step="88">Work two set-up rows at the end of your ribbing using the Italian bind-off method as follows:</p>
     <div class="row-table">
-      <span class="row-label" data-step-label="86">Row 1 (RS):</span><span data-step="86">K1, *K1, Sl 1 wyif* repeat *-* until 2 sts remain, K2.</span>
-      <span class="row-label" data-step-label="87">Row 2 (WS):</span><span data-step="87">Sl 1 wyif, *Sl 1 wyif, K1* repeat *-* until 2 sts remain, Sl 2 wyif.</span>
+      <span class="row-label" data-step-label="89">Row 1 (RS):</span><span data-step="89">K1, *K1, Sl 1 wyif* repeat *-* until 2 sts remain, K2.</span>
+      <span class="row-label" data-step-label="90">Row 2 (WS):</span><span data-step="90">Sl 1 wyif, *Sl 1 wyif, K1* repeat *-* until 2 sts remain, Sl 2 wyif.</span>
     </div>
-    <p data-step="88">Bind off all sts using the Italian bind-off method. <em>Note: The first two sts and last two sts of the collar should be treated as one st to correctly maintain the ribbing pattern when binding off.</em></p>
+    <p data-step="91">Bind off all sts using the Italian bind-off method. <em>Note: The first two sts and last two sts of the collar should be treated as one st to correctly maintain the ribbing pattern when binding off.</em></p>
 
     <h2>Finishing</h2>
-    <p data-step="89">Weave in all loose ends. Block your sweater to measurements listed in the schematic. Wear forever.</p>
+    <p data-step="92">Weave in all loose ends. Block your sweater to measurements listed in the schematic. Wear forever.</p>
 
     <h2 class="mp-glossary-hdr">Glossary</h2>
     <div class="bb-glossary">
@@ -264,7 +270,7 @@ const SLT_KEY     = 'moon-set-polo-sleeves';
 
 let stepMode    = false;
 let currentStep = 0;
-let repCounters = { rg1: 1, rg2: 1, rg3: 1, rg4: 1, rg5: 1, rg6: 1, rg7: 1, rg8: 1, rg9: 1 };
+let repCounters = { rg1: 1, rg1b: 1, rg2: 1, rg3: 1, rg4: 1, rg5: 1, rg6: 1, rg7: 1, rg8: 1, rg9: 1 };
 let doc         = null;  // #mp-pattern-doc element
 let _shellAPI   = null;
 let mpPipEl     = null;  // fallback overlay element
