@@ -504,7 +504,7 @@ async function openPip() {
       const style = doc.createElement("style");
       style.textContent = [
         "* { box-sizing: border-box; margin: 0; padding: 0; }",
-        "body { background: #290d13; color: #ecdcc4; font-family: system-ui, sans-serif;",
+        "body { background: #290d13 url('/background/background.jpg') 22% 32% / cover no-repeat; color: #ecdcc4; font-family: system-ui, sans-serif;",
         "  display: flex; flex-direction: column; height: 100dvh; overflow: hidden; user-select: none; }",
         "canvas { display: block; image-rendering: pixelated; flex-shrink: 0; }",
         "#pip-scroll { display: flex; justify-content: space-between; align-items: center;",

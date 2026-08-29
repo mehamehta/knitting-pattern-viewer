@@ -810,7 +810,7 @@ function closePip() {
 
 const PIP_CSS = `
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #290d13; color: #d8c4a8; font-family: system-ui, sans-serif;
+  body { background: #290d13 url("/background/background.jpg") 22% 32% / cover no-repeat; color: #d8c4a8; font-family: system-ui, sans-serif;
     font-size: 0.85rem; display: flex; flex-direction: column;
     height: 100dvh; overflow: hidden; user-select: none; }
   #ss-pip-hdr { display: flex; justify-content: space-between; align-items: center;
