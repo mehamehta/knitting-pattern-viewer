@@ -185,11 +185,11 @@ const TOOLBAR_HTML = `
   <div class="divider"></div>
   <button class="btn" id="ss-step-toggle">Step Mode</button>
   <button class="btn small" id="ss-step-prev" title="Previous step (Left arrow)">&#8592;</button>
-  <span id="ss-step-badge" style="font-size:0.82rem;color:#888;white-space:nowrap;">Step — / ${TOTAL_STEPS}</span>
+  <span id="ss-step-badge" style="font-size:0.82rem;color:#b0897a;white-space:nowrap;">Step — / ${TOTAL_STEPS}</span>
   <button class="btn small" id="ss-step-next" title="Next step (Space / Right arrow)">&#8594;</button>
   <div class="divider" id="ss-rep-divider" style="display:none"></div>
-  <span id="ss-rep-badge" style="display:none;font-size:0.9rem;font-weight:700;color:#f5c842;white-space:nowrap;"></span>
-  <span id="ss-rep-label" style="display:none;font-size:0.75rem;color:#888;white-space:nowrap;"></span>
+  <span id="ss-rep-badge" style="display:none;font-size:0.9rem;font-weight:700;color:#d7a13f;white-space:nowrap;"></span>
+  <span id="ss-rep-label" style="display:none;font-size:0.75rem;color:#b0897a;white-space:nowrap;"></span>
 </div>`;
 
 // ── State ─────────────────────────────────────────────────────────────────────
@@ -703,10 +703,10 @@ function pipStripesHTML() {
     const startRow = i === 0 ? 1 : stripe.changes[i - 1] + 1;
     const colour   = STRIPE_COLOURS[i % 2];
     const cls      = colour === 'multicolour' ? 'str-mc' : 'str-bk';
-    return `<div style="display:flex;gap:6px;font-size:0.72rem;padding:1px 0;border-top:1px solid #1a2a3a;align-items:center">
+    return `<div style="display:flex;gap:6px;font-size:0.72rem;padding:1px 0;border-top:1px solid #4a1f2a;align-items:center">
       <span class="${cls}" style="font-weight:700;min-width:6em">${colour}</span>
-      <span style="color:#aaa;flex:1">rows ${startRow}–${endRow} (${endRow - startRow + 1})</span>
-      <span data-pip-str-action="del" data-pip-str-j="${i}" style="cursor:pointer;color:#445;padding:0 6px">×</span>
+      <span style="color:#b98f7d;flex:1">rows ${startRow}–${endRow} (${endRow - startRow + 1})</span>
+      <span data-pip-str-action="del" data-pip-str-j="${i}" style="cursor:pointer;color:#6d4a45;padding:0 6px">×</span>
     </div>`;
   }).join('');
 
@@ -714,9 +714,9 @@ function pipStripesHTML() {
     ? stripe.changes[stripe.changes.length - 1] + 1 : 1;
   const currentCount = Math.max(0, stripe.rows - currentStart + 1);
   const curBlockHtml = stripe.rows > 0
-    ? `<div style="display:flex;gap:6px;font-size:0.72rem;padding:1px 0;border-top:1px solid #1a2a3a">
+    ? `<div style="display:flex;gap:6px;font-size:0.72rem;padding:1px 0;border-top:1px solid #4a1f2a">
         <span class="${curCls}" style="font-weight:700;min-width:7em">${curColour}</span>
-        <span style="color:#aaa">row ${currentStart}… (${currentCount})</span>
+        <span style="color:#b98f7d">row ${currentStart}… (${currentCount})</span>
       </div>` : '';
 
   return `<div>
@@ -727,9 +727,9 @@ function pipStripesHTML() {
       <span class="pip-slt-ctrl" data-pip-str-action="plus">+</span>
       <span class="pip-slt-log" data-pip-str-action="change">Change at ${stripe.rows}</span>
     </div>
-    <div style="font-size:0.72rem;color:#888;margin-bottom:4px">Current: <strong class="${curCls}">${curColour}</strong></div>
+    <div style="font-size:0.72rem;color:#b0897a;margin-bottom:4px">Current: <strong class="${curCls}">${curColour}</strong></div>
     ${completedBlocks || ''}${curBlockHtml}
-    ${!completedBlocks && stripe.rows === 0 ? '<div style="color:#444;font-style:italic;font-size:0.72rem">No changes logged yet.</div>' : ''}
+    ${!completedBlocks && stripe.rows === 0 ? '<div style="color:#5a2733;font-style:italic;font-size:0.72rem">No changes logged yet.</div>' : ''}
   </div>`;
 }
 
@@ -810,45 +810,45 @@ function closePip() {
 
 const PIP_CSS = `
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #0d1b2a; color: #ccc; font-family: system-ui, sans-serif;
+  body { background: #290d13; color: #d8c4a8; font-family: system-ui, sans-serif;
     font-size: 0.85rem; display: flex; flex-direction: column;
     height: 100dvh; overflow: hidden; user-select: none; }
   #ss-pip-hdr { display: flex; justify-content: space-between; align-items: center;
-    padding: 6px 10px; background: #1a2332; border-bottom: 1px solid #2a3444;
-    flex-shrink: 0; font-size: 0.75rem; font-weight: 700; color: #aaa; }
-  #ss-pip-close { cursor: pointer; padding: 0 4px; color: #667; }
-  #ss-pip-close:hover { color: #eee; }
+    padding: 6px 10px; background: #3b1720; border-bottom: 1px solid #562634;
+    flex-shrink: 0; font-size: 0.75rem; font-weight: 700; color: #b98f7d; }
+  #ss-pip-close { cursor: pointer; padding: 0 4px; color: #6d4a45; }
+  #ss-pip-close:hover { color: #f2e7d5; }
   #ss-pip-content { flex: 1; padding: 10px 12px; overflow-y: auto; line-height: 1.6; }
-  .ss-pip-intro { font-size: 0.75rem; color: #667; margin-bottom: 6px; }
-  #ss-pip-rep { display: none; padding: 0 12px 6px; font-size: 0.75rem; color: #f5c842; flex-shrink: 0; }
+  .ss-pip-intro { font-size: 0.75rem; color: #6d4a45; margin-bottom: 6px; }
+  #ss-pip-rep { display: none; padding: 0 12px 6px; font-size: 0.75rem; color: #d7a13f; flex-shrink: 0; }
   #ss-pip-ftr { display: flex; justify-content: space-between; align-items: center;
-    padding: 4px 8px; background: #1a2332; border-top: 1px solid #2a3444; flex-shrink: 0; }
+    padding: 4px 8px; background: #3b1720; border-top: 1px solid #562634; flex-shrink: 0; }
   .ss-pip-nav { cursor: pointer; padding: 2px 10px; border-radius: 4px;
-    background: #2a3444; color: #aaa; font-size: 0.9rem; }
-  .ss-pip-nav:hover { background: #3a4a5a; color: #eee; }
-  #ss-pip-badge { font-size: 0.72rem; color: #888; }
-  strong { color: #e8d8b0; }
-  em { color: #a0c0d8; font-style: italic; }
-  .pip-lbl { font-weight: 700; color: #e8d8b0; }
-  .pip-mode-btn { cursor: pointer; padding: 1px 7px; color: #445; font-size: 0.7rem; border-radius: 3px; user-select: none; }
-  .pip-mode-btn:hover { color: #aaa; background: #2a3444; }
-  .pip-mode-btn.active { color: #e8d8b0; background: #2a3444; }
+    background: #562634; color: #b98f7d; font-size: 0.9rem; }
+  .ss-pip-nav:hover { background: #63303d; color: #f2e7d5; }
+  #ss-pip-badge { font-size: 0.72rem; color: #b0897a; }
+  strong { color: #e8dcc4; }
+  em { color: #c9a08f; font-style: italic; }
+  .pip-lbl { font-weight: 700; color: #e8dcc4; }
+  .pip-mode-btn { cursor: pointer; padding: 1px 7px; color: #6d4a45; font-size: 0.7rem; border-radius: 3px; user-select: none; }
+  .pip-mode-btn:hover { color: #b98f7d; background: #562634; }
+  .pip-mode-btn.active { color: #e8dcc4; background: #562634; }
   #ss-pip-slt { flex: 1; overflow-y: auto; padding: 6px 12px; display: none; }
   #ss-pip-str { flex: 1; overflow-y: auto; padding: 6px 12px; display: none; }
-  .str-mc { color: #e8c06a; }
-  .str-bk { color: #9aa0aa; }
-  .pip-slt-s2 { border-top: 1px solid #2a3a4a; margin-top: 5px; padding-top: 5px; }
+  .str-mc { color: #d7a13f; }
+  .str-bk { color: #a9847a; }
+  .pip-slt-s2 { border-top: 1px solid #562f3a; margin-top: 5px; padding-top: 5px; }
   .pip-slt-main { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
-  .pip-slt-label { font-size: 0.72rem; font-weight: 700; color: #e8d8b0; min-width: 1.6em; }
-  .pip-slt-rows { font-size: 0.88rem; font-weight: 700; color: #f5c842; min-width: 4.5em; }
-  .pip-slt-ctrl { cursor: pointer; padding: 1px 8px; background: #2a3444; border-radius: 3px;
-    color: #aaa; font-weight: 700; user-select: none; }
-  .pip-slt-ctrl:hover { background: #3a4a5a; color: #eee; }
-  .pip-slt-log { cursor: pointer; padding: 1px 8px; background: #2a3444; border-radius: 3px;
-    color: #8ab0c8; font-size: 0.7rem; flex: 1; text-align: center; user-select: none; }
-  .pip-slt-log:hover { background: #3a4a5a; color: #aad0e8; }
-  .pip-slt-cadence { font-size: 0.68rem; color: #667; padding-left: 1.6em; }
-  .pip-slt-stripe { display: flex; align-items: center; gap: 6px; padding-top: 3px; border-top: 1px solid #1a2a3a; margin-top: 2px; }
+  .pip-slt-label { font-size: 0.72rem; font-weight: 700; color: #e8dcc4; min-width: 1.6em; }
+  .pip-slt-rows { font-size: 0.88rem; font-weight: 700; color: #d7a13f; min-width: 4.5em; }
+  .pip-slt-ctrl { cursor: pointer; padding: 1px 8px; background: #562634; border-radius: 3px;
+    color: #b98f7d; font-weight: 700; user-select: none; }
+  .pip-slt-ctrl:hover { background: #63303d; color: #f2e7d5; }
+  .pip-slt-log { cursor: pointer; padding: 1px 8px; background: #562634; border-radius: 3px;
+    color: #b98f7d; font-size: 0.7rem; flex: 1; text-align: center; user-select: none; }
+  .pip-slt-log:hover { background: #63303d; color: #9ab8a0; }
+  .pip-slt-cadence { font-size: 0.68rem; color: #6d4a45; padding-left: 1.6em; }
+  .pip-slt-stripe { display: flex; align-items: center; gap: 6px; padding-top: 3px; border-top: 1px solid #4a1f2a; margin-top: 2px; }
 `;
 
 const PIP_BODY_HTML = `

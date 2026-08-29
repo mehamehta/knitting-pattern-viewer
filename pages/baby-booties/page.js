@@ -110,11 +110,11 @@ const TOOLBAR_HTML = `
   <div class="divider"></div>
   <button class="btn" id="bbt-step-toggle">Step Mode</button>
   <button class="btn small" id="bbt-step-prev" title="Previous step (Left arrow)">&#8592;</button>
-  <span id="bbt-step-badge" style="font-size:0.82rem;color:#888;white-space:nowrap;">Step — / ${TOTAL_STEPS}</span>
+  <span id="bbt-step-badge" style="font-size:0.82rem;color:#b0897a;white-space:nowrap;">Step — / ${TOTAL_STEPS}</span>
   <button class="btn small" id="bbt-step-next" title="Next step (Space / Right arrow)">&#8594;</button>
   <div class="divider" id="bbt-rep-divider" style="display:none"></div>
-  <span id="bbt-rep-badge" style="display:none;font-size:0.9rem;font-weight:700;color:#f5c842;white-space:nowrap;"></span>
-  <span id="bbt-rep-label" style="display:none;font-size:0.75rem;color:#888;white-space:nowrap;"></span>
+  <span id="bbt-rep-badge" style="display:none;font-size:0.9rem;font-weight:700;color:#d7a13f;white-space:nowrap;"></span>
+  <span id="bbt-rep-label" style="display:none;font-size:0.75rem;color:#b0897a;white-space:nowrap;"></span>
 </div>`;
 
 // ── Storage keys ──────────────────────────────────────────────────────────────
@@ -404,25 +404,25 @@ function closePip() {
 
 const PIP_CSS = `
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #0d1b2a; color: #ccc; font-family: system-ui, sans-serif;
+  body { background: #290d13; color: #d8c4a8; font-family: system-ui, sans-serif;
     font-size: 0.85rem; display: flex; flex-direction: column;
     height: 100dvh; overflow: hidden; user-select: none; }
   #bb-pip-hdr { display: flex; justify-content: space-between; align-items: center;
-    padding: 6px 10px; background: #1a2332; border-bottom: 1px solid #2a3444;
-    flex-shrink: 0; font-size: 0.75rem; font-weight: 700; color: #aaa; }
-  #bb-pip-close { cursor: pointer; padding: 0 4px; color: #667; }
-  #bb-pip-close:hover { color: #eee; }
+    padding: 6px 10px; background: #3b1720; border-bottom: 1px solid #562634;
+    flex-shrink: 0; font-size: 0.75rem; font-weight: 700; color: #b98f7d; }
+  #bb-pip-close { cursor: pointer; padding: 0 4px; color: #6d4a45; }
+  #bb-pip-close:hover { color: #f2e7d5; }
   #bb-pip-content { flex: 1; padding: 10px 12px; overflow-y: auto; line-height: 1.6; }
-  #bb-pip-rep { display: none; padding: 0 12px 6px; font-size: 0.75rem; color: #f5c842; flex-shrink: 0; }
+  #bb-pip-rep { display: none; padding: 0 12px 6px; font-size: 0.75rem; color: #d7a13f; flex-shrink: 0; }
   #bb-pip-ftr { display: flex; justify-content: space-between; align-items: center;
-    padding: 4px 8px; background: #1a2332; border-top: 1px solid #2a3444; flex-shrink: 0; }
+    padding: 4px 8px; background: #3b1720; border-top: 1px solid #562634; flex-shrink: 0; }
   .bb-pip-nav { cursor: pointer; padding: 2px 10px; border-radius: 4px;
-    background: #2a3444; color: #aaa; }
-  .bb-pip-nav:hover { background: #3a4a5a; color: #eee; }
-  #bb-pip-badge { font-size: 0.72rem; color: #888; }
-  strong { color: #e8d8b0; }
-  em { color: #a0c0d8; font-style: italic; }
-  .pip-lbl { font-weight: 700; color: #e8d8b0; }
+    background: #562634; color: #b98f7d; }
+  .bb-pip-nav:hover { background: #63303d; color: #f2e7d5; }
+  #bb-pip-badge { font-size: 0.72rem; color: #b0897a; }
+  strong { color: #e8dcc4; }
+  em { color: #c9a08f; font-style: italic; }
+  .pip-lbl { font-weight: 700; color: #e8dcc4; }
 `;
 
 const PIP_BODY_HTML = `

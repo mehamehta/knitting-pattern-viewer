@@ -91,7 +91,7 @@ const PIP_LH   = 18;
 
 const MARKER_COLORS = [
   { name: "none",   solid: "rgba(120,120,120,0.4)", guide: "rgba(120,120,120,0.4)" },
-  { name: "red",    solid: "#e05050",               guide: "rgba(210,60,60,0.75)"  },
+  { name: "red",    solid: "#c8443a",               guide: "rgba(210,60,60,0.75)"  },
   { name: "green",  solid: "#50b050",               guide: "rgba(50,160,50,0.75)"  },
   { name: "blue",   solid: "#4080e0",               guide: "rgba(50,100,220,0.75)" },
   { name: "yellow", solid: "#d0a020",               guide: "rgba(200,160,30,0.75)" },
@@ -101,18 +101,18 @@ const DEFAULT_MARKER = MARKER_COLORS[1];
 const stitchGuide = {};
 function guideEntry(sn) { return stitchGuide[sn] || DEFAULT_MARKER; }
 
-const CELL_COLOR  = ["#ffffff", "#aaaaaa", "#2e2e2e"];
+const CELL_COLOR  = ["#f2e7d5", "#aaaaaa", "#2e2e2e"];
 const RIDGE_GUIDE = "rgba(210,60,60,0.75)";
 const CELL_LINE   = "rgba(0,0,0,0.30)";
-const HL_FILL     = "rgba(245,200,66,0.20)";
-const HL_STROKE   = "rgba(245,200,66,0.90)";
-const ST_HL_FILL  = "rgba(80,200,255,0.13)";
-const ST_HL_STROKE= "rgba(80,200,255,0.70)";
-const LBL_BG_NORM = "rgba(28,28,28,0.85)";
-const LBL_BG_ACT  = "rgba(55,45,0,0.95)";
-const LBL_FG_NORM = "#666";
-const LBL_FG_ACT  = "#f5c842";
-const HDR_BG      = "#1a2332";
+const HL_FILL     = "rgba(215,161,63,0.22)";
+const HL_STROKE   = "rgba(215,161,63,0.90)";
+const ST_HL_FILL  = "rgba(125,154,138,0.15)";
+const ST_HL_STROKE= "rgba(125,154,138,0.75)";
+const LBL_BG_NORM = "rgba(40,15,20,0.88)";
+const LBL_BG_ACT  = "rgba(58,30,12,0.95)";
+const LBL_FG_NORM = "#8a6255";
+const LBL_FG_ACT  = "#d7a13f";
+const HDR_BG      = "#3b1720";
 
 const MIN_RIDGE = 1;
 const MAX_RIDGE = RIDGE_AT_ROW0;
@@ -201,7 +201,7 @@ function drawColHeader() {
     const labelX = ROW_LABEL_W + c * cellPx + cellPx / 2;
     chCtx.strokeStyle = guideEntry(sn).guide;
     chCtx.beginPath(); chCtx.moveTo(lineX, 0); chCtx.lineTo(lineX, H); chCtx.stroke();
-    chCtx.fillStyle = "#999";
+    chCtx.fillStyle = "#a9847a";
     chCtx.fillText(String(sn), labelX, H / 2);
   }
   const stStartCol = activeStitch - STITCH_AT_COL0;
@@ -209,7 +209,7 @@ function drawColHeader() {
   if (stStartCol >= 0 && stStartCol < NCOLS) {
     const ax = ROW_LABEL_W + stStartCol * cellPx;
     const aw = (stEndCol - stStartCol + 1) * cellPx;
-    chCtx.fillStyle = "rgba(80,200,255,0.22)";
+    chCtx.fillStyle = "rgba(125,154,138,0.24)";
     chCtx.fillRect(ax, 0, aw, H);
 
     const dotR = Math.max(3, Math.min(Math.floor(H / 2) - 2, 5));
@@ -248,9 +248,9 @@ function drawGrid() {
   gridCanvas.width  = W;
   gridCanvas.height = H;
 
-  gCtx.fillStyle = "#0d1b2a";
+  gCtx.fillStyle = "#290d13";
   gCtx.fillRect(0, 0, W, H);
-  gCtx.fillStyle = "#0a1520";
+  gCtx.fillStyle = "#23090f";
   gCtx.fillRect(0, 0, ROW_LABEL_W + patternW, patternH);
 
   for (let r = 0; r < NROWS; r++) {
@@ -504,16 +504,16 @@ async function openPip() {
       const style = doc.createElement("style");
       style.textContent = [
         "* { box-sizing: border-box; margin: 0; padding: 0; }",
-        "body { background: #0d1b2a; color: #ddd; font-family: system-ui, sans-serif;",
+        "body { background: #290d13; color: #ecdcc4; font-family: system-ui, sans-serif;",
         "  display: flex; flex-direction: column; height: 100dvh; overflow: hidden; user-select: none; }",
         "canvas { display: block; image-rendering: pixelated; flex-shrink: 0; }",
         "#pip-scroll { display: flex; justify-content: space-between; align-items: center;",
         "  padding: 3px 6px;",
-        "  background: #1a2332; border-top: 1px solid #2a3444; flex-shrink: 0; }",
+        "  background: #3b1720; border-top: 1px solid #562634; flex-shrink: 0; }",
         ".sbtn { cursor: pointer; padding: 2px 10px; border-radius: 4px;",
-        "  background: #2a3444; color: #aaa; font-size: 0.9rem; }",
-        ".sbtn:hover { background: #3a4a5a; color: #eee; }",
-        "#pip-off { font-size: 0.65rem; color: #667; }",
+        "  background: #562634; color: #b98f7d; font-size: 0.9rem; }",
+        ".sbtn:hover { background: #63303d; color: #f2e7d5; }",
+        "#pip-off { font-size: 0.65rem; color: #6d4a45; }",
       ].join("\n");
       doc.head.appendChild(style);
 
@@ -591,16 +591,16 @@ function drawPip() {
   let startRow    = activeRow - Math.floor(PIP_ROWS / 2);
   startRow = Math.max(0, Math.min(NROWS - PIP_ROWS, startRow));
 
-  ctx.fillStyle = "#0a1520";
+  ctx.fillStyle = "#23090f";
   ctx.fillRect(0, 0, canvasW, canvasH);
 
-  ctx.fillStyle = "#1a2332";
+  ctx.fillStyle = "#3b1720";
   ctx.fillRect(PIP_LW, 0, PIP_COLS * PIP_CS, PIP_LH);
   ctx.font = "9px monospace"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
   for (let i = 0; i < PIP_COLS; i++) {
     const sn = STITCH_AT_COL0 + startCol + i;
     if (sn % 10 === 0) {
-      ctx.fillStyle = "#666";
+      ctx.fillStyle = "#8a6255";
       ctx.fillText(String(sn), PIP_LW + i * PIP_CS + PIP_CS / 2, PIP_LH / 2);
     }
   }
@@ -683,27 +683,27 @@ function drawPip() {
     const rn   = ridgeNum(gr);
     const isAct = rn === activeRidge;
     const y    = PIP_LH + ri * PIP_CS;
-    ctx.fillStyle = isAct ? LBL_BG_ACT : "rgba(10,21,32,0.9)";
+    ctx.fillStyle = isAct ? LBL_BG_ACT : "rgba(41,13,19,0.92)";
     ctx.fillRect(0, y, PIP_LW, PIP_CS);
     ctx.fillStyle = isAct ? LBL_FG_ACT : LBL_FG_NORM;
     ctx.fillText(String(rn), PIP_LW - 4, y + PIP_CS / 2);
   }
 
-  ctx.fillStyle = "#1a2332";
+  ctx.fillStyle = "#3b1720";
   ctx.fillRect(0, 0, PIP_LW, PIP_LH);
 
   if (isRightSideRow) {
     const patX = PIP_LW, patY = PIP_LH;
     const patW = PIP_COLS * PIP_CS, patH = PIP_ROWS * PIP_CS;
-    ctx.fillStyle = "rgba(6,6,6,0.82)";
+    ctx.fillStyle = "rgba(20,6,9,0.85)";
     ctx.fillRect(patX, patY, patW, patH);
     const cx = patX + patW / 2, cy = patY + patH / 2;
     ctx.textAlign = "center"; ctx.textBaseline = "middle";
     ctx.font = "bold 13px system-ui, sans-serif";
-    ctx.fillStyle = "#e8a030";
+    ctx.fillStyle = "#c4693f";
     ctx.fillText("Right Side Row", cx, cy - 8);
     ctx.font = "10px system-ui, sans-serif";
-    ctx.fillStyle = "#aaa";
+    ctx.fillStyle = "#b98f7d";
     ctx.fillText("Knit all — Return when done", cx, cy + 8);
   }
 
