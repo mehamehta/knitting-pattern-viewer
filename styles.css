@@ -1511,6 +1511,39 @@ input[type=number] {
   outline-color: rgba(163, 50, 46, 0.30);
 }
 
+/* dimmed steps: 0.18 vanishes on parchment — lift to a readable grey */
+#bb-pattern-doc.step-mode [data-step],
+#bb-pattern-doc.step-mode [data-step-label],
+#bb-pattern-doc.step-mode .substep-intro,
+#bb-pattern-doc.step-mode .dist,
+#ss-pattern-doc.step-mode [data-step],
+#ss-pattern-doc.step-mode [data-step-label],
+#ss-pattern-doc.step-mode .substep-intro,
+#ss-pattern-doc.step-mode .ss-dist,
+#ss-pattern-doc.step-mode .ss-note,
+#mp-pattern-doc.step-mode [data-step],
+#mp-pattern-doc.step-mode [data-step-label],
+#mp-pattern-doc.step-mode .mp-note,
+#cs-pattern-doc.step-mode [data-step],
+#cs-pattern-doc.step-mode [data-step-label],
+#cs-pattern-doc.step-mode .cs-note {
+  opacity: 0.42;
+}
+#bb-pattern-doc.step-mode h2,
+#ss-pattern-doc.step-mode h2,
+#mp-pattern-doc.step-mode h2,
+#cs-pattern-doc.step-mode h2 {
+  opacity: 0.5;
+}
+#bb-pattern-doc.step-mode .has-substeps.substep-active [data-step]:not(.step-active),
+#ss-pattern-doc.step-mode .has-substeps.substep-active [data-step]:not(.step-active) {
+  opacity: 0.5;
+}
+#bb-pattern-doc.step-mode .has-substeps.substep-active .substep-intro,
+#ss-pattern-doc.step-mode .has-substeps.substep-active .substep-intro {
+  opacity: 0.78;
+}
+
 /* glossary block inside the parchment doc */
 .bb-glossary { border-color: var(--parchment-line); }
 .bb-gloss-entry { border-bottom-color: #e7d8bf; }
