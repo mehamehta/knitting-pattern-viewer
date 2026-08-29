@@ -738,6 +738,7 @@ input[type=number] {
 .hist-page-pearl-earring { background: rgba(70,90,190,0.35); color: #8099d8; }
 .hist-page-bea-blouse    { background: rgba(60,150,60,0.28);  color: #6cb86c; }
 .hist-page-moon-set-polo { background: rgba(180,120,60,0.3);  color: #d4a06c; }
+.hist-page-ciro-sweater  { background: rgba(150,90,170,0.3);  color: #c08ad0; }
 
 .hist-ridge {
   font-size: 0.9rem;
@@ -1152,6 +1153,137 @@ input[type=number] {
   user-select: none;
 }
 #mp-pip-overlay.visible { display: block; }
+
+/* ═══ Ciro Sweater ═══════════════════════════════════════════════════════════ */
+#cs-pattern-doc {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 32px 80px;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: #ccc;
+}
+#cs-pattern-doc h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #e8d8b0;
+  margin: 2em 0 0.5em;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #2a3444;
+}
+#cs-pattern-doc h2:first-child { margin-top: 0; }
+#cs-pattern-doc p { margin: 0.6em 0; }
+#cs-pattern-doc strong { color: #e8d8b0; }
+#cs-pattern-doc em { color: #a0c0d8; font-style: italic; }
+#cs-pattern-doc .row-table {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 16px;
+  margin: 0.6em 0 0.6em 16px;
+}
+#cs-pattern-doc .row-label {
+  font-weight: 700;
+  color: #e8d8b0;
+  white-space: nowrap;
+}
+#cs-pattern-doc .cs-note {
+  font-size: 0.84rem;
+  color: #7a9ab0;
+  margin: 0.5em 0 0.5em 16px;
+  font-style: italic;
+}
+
+/* step mode */
+#cs-pattern-doc.step-mode [data-step],
+#cs-pattern-doc.step-mode [data-step-label] {
+  opacity: 0.18;
+  transition: opacity 0.18s;
+}
+#cs-pattern-doc.step-mode h2 {
+  opacity: 0.25;
+  transition: opacity 0.18s;
+}
+#cs-pattern-doc.step-mode .cs-note {
+  opacity: 0.18;
+  transition: opacity 0.18s;
+}
+#cs-pattern-doc.step-mode [data-step].step-active {
+  opacity: 1;
+  background: rgba(245, 200, 66, 0.09);
+  border-radius: 4px;
+  box-shadow: 0 0 0 4px rgba(245, 200, 66, 0.09);
+  outline: 1px solid rgba(245, 200, 66, 0.28);
+  outline-offset: 3px;
+}
+#cs-pattern-doc.step-mode [data-step-label].step-active {
+  opacity: 1;
+}
+/* Glossary stays readable in step mode */
+#cs-pattern-doc.step-mode .cs-glossary-hdr,
+#cs-pattern-doc.step-mode .bb-glossary {
+  opacity: 1;
+}
+
+/* ── Ciro Sweater sleeve tracker ── */
+#cs-sleeve-tracker {
+  margin: 1.4em 0;
+  border: 1px solid #2a3a4a;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #111e2d;
+}
+#cs-sleeve-tracker .slt-target {
+  padding: 8px 14px;
+  font-size: 0.76rem;
+  color: #7a9ab0;
+  font-style: italic;
+  border-bottom: 1px solid #2a3a4a;
+}
+
+/* ── Ciro Sweater glossary term links + "back to pattern" ── */
+#cs-pattern-doc .gloss-link {
+  cursor: pointer;
+  border-bottom: 1px dotted currentColor;
+}
+#cs-pattern-doc .gloss-link:hover { color: #f5c842; }
+.cs-gloss-back-btn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 500;
+  align-items: center;
+  gap: 6px;
+  background: #1a2a3a;
+  border: 1px solid #3a5a7a;
+  color: #cfe0ee;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.55);
+}
+.cs-gloss-back-btn.visible { display: flex; }
+.cs-gloss-back-btn:hover { background: #24384a; border-color: #4a7aa5; }
+
+/* ── Ciro Sweater mini-view overlay ── */
+#cs-pip-overlay {
+  display: none;
+  position: fixed;
+  bottom: 48px;
+  right: 16px;
+  z-index: 9999;
+  background: #0d1b2a;
+  border: 1px solid #3a5a7a;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.8);
+  width: 500px;
+  font-size: 0.82rem;
+  color: #ccc;
+  user-select: none;
+}
+#cs-pip-overlay.visible { display: block; }
 
 /* ── left nav sidebar ── */
 #nav-sidebar {
