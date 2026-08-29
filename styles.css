@@ -20,13 +20,25 @@
   --parchment-ink: #33211c;
   --parchment-line: #dcc7a6;
   --oxblood-red: #a3322e;
+  /* Yarn-skein photo, colour-graded to the theme in-browser via blend modes:
+     the `color` layer recolours the texture to burgundy, `multiply` deepens it. */
+  --yarn-img: url("background/background.jpg");
+  --yarn-grade:
+    linear-gradient(rgba(28, 10, 15, 0.32), rgba(20, 7, 11, 0.60)),
+    linear-gradient(#3f1a26, #3f1a26);
+  --yarn-blend: multiply, color, normal;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: var(--font-serif);
-  background: #290d13;
+  background-color: #290d13;
+  background-image: var(--yarn-grade), var(--yarn-img);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: var(--yarn-blend);
   color: #ecdcc4;
   display: flex;
   flex-direction: column;
@@ -1558,6 +1570,27 @@ input[type=number] {
 /* ── RS overlay ── */
 #rs-overlay { background: rgba(20, 6, 9, 0.9); }
 #rs-overlay-title { color: #c4693f; }
+
+/* ── yarn-skein texture: let the fixed body photo show through the wells ── */
+#scroll-wrap { background: rgba(20, 6, 9, 0.46); }
+.page-doc-wrap { background: rgba(20, 6, 9, 0.40); }
+
+/* Mini View panels — a tighter crop of the same graded texture */
+#ss-pip-overlay, #bb-pip-overlay, #bbt-pip-overlay,
+#mp-pip-overlay, #cs-pip-overlay, #pip-fallback {
+  background-color: #290d13;
+  background-image:
+    linear-gradient(rgba(20, 6, 9, 0.62), rgba(16, 4, 8, 0.82)),
+    linear-gradient(#3b1720, #3b1720),
+    var(--yarn-img);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 22% 32%;
+  background-blend-mode: multiply, color, normal;
+}
+/* keep the draggable header / footer bands solid over the texture */
+#ss-pip-hdr, #bb-pip-hdr, #mp-pip-hdr, #cs-pip-hdr,
+#ss-pip-ftr, #bb-pip-ftr, #mp-pip-ftr, #cs-pip-ftr { background: #3b1720; }
 
 /* ── glossary "back to pattern" pill — warm it ── */
 .mp-gloss-back-btn, .cs-gloss-back-btn { font-family: var(--font-mono); }
