@@ -1585,3 +1585,89 @@ input[type=number] {
 
 /* ── glossary "back to pattern" pill — warm it ── */
 .mp-gloss-back-btn, .cs-gloss-back-btn { font-family: var(--font-mono); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   STEP-MODE SPOTLIGHT  (desktop + mobile)
+   While stepping through a pattern, the full parchment sheet dissolves: only
+   the active step sits on a parchment tile — everything else reads directly
+   on the yarn-skein photo, lit by a warm cream ink + soft shadow.
+   Scoped under #page-body-mount so it out-specifies the base step-mode rules.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* let far more of the photo through the well while stepping */
+#page-body-mount .page-doc-wrap:has(.step-mode) { background: rgba(20, 6, 9, 0.20); }
+
+/* the sheet itself goes away — no parchment, no shadow, no card edge */
+#page-body-mount .step-mode {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* section heads float on the photo */
+#page-body-mount .step-mode h2 {
+  color: #f1e3c9;
+  border-bottom-color: rgba(226, 205, 170, 0.28);
+  text-shadow: 0 1px 4px rgba(8, 2, 4, 0.9), 0 0 2px rgba(8, 2, 4, 0.7);
+}
+
+/* dimmed copy: warm cream ink on the photo, shadowed for legibility */
+#page-body-mount .step-mode [data-step],
+#page-body-mount .step-mode [data-step-label],
+#page-body-mount .step-mode .substep-intro,
+#page-body-mount .step-mode .dist,
+#page-body-mount .step-mode .ss-dist,
+#page-body-mount .step-mode .ss-note,
+#page-body-mount .step-mode .mp-note,
+#page-body-mount .step-mode .cs-note {
+  color: #e9dabf;
+  opacity: 0.62;
+  text-shadow: 0 1px 3px rgba(8, 2, 4, 0.85), 0 0 2px rgba(8, 2, 4, 0.55);
+}
+#page-body-mount .step-mode .row-label { color: #ecdcc1; }
+#page-body-mount .step-mode strong { color: #ecab55; }
+#page-body-mount .step-mode em     { color: #d7c3ac; }
+
+/* ── the active step: a parchment tile spotlit out of the dark ── */
+#page-body-mount .step-mode p[data-step].step-active,
+#page-body-mount .step-mode .row-table:has([data-step].step-active) {
+  opacity: 1;
+  color: var(--parchment-ink);
+  background: var(--parchment);
+  padding: 13px 18px;
+  margin: 12px 0;
+  border-radius: 8px;
+  outline: none;
+  text-shadow: none;
+  box-shadow: 0 26px 64px -22px rgba(0, 0, 0, 0.9),
+              0 0 0 1px rgba(120, 70, 60, 0.30);
+}
+
+/* text inside the tile returns to parchment ink */
+#page-body-mount .step-mode p[data-step].step-active strong,
+#page-body-mount .step-mode .row-table:has([data-step].step-active) strong {
+  color: var(--oxblood-red);
+}
+#page-body-mount .step-mode p[data-step].step-active em,
+#page-body-mount .step-mode .row-table:has([data-step].step-active) em {
+  color: #7a5c4e;
+}
+
+/* rows sharing the active row-table tile: dark ink, active row emphasised */
+#page-body-mount .step-mode .row-table:has(.step-active) [data-step],
+#page-body-mount .step-mode .row-table:has(.step-active) [data-step-label] {
+  color: #6f5849;
+  opacity: 1;
+  text-shadow: none;
+}
+#page-body-mount .step-mode .row-table:has(.step-active) [data-step].step-active,
+#page-body-mount .step-mode .row-table:has(.step-active) [data-step-label].step-active {
+  color: var(--parchment-ink);
+  font-weight: 600;
+}
+
+/* a lone active <span> step (not in a row-table) — just brighten it */
+#page-body-mount .step-mode span[data-step].step-active {
+  opacity: 1;
+  color: #fbefd8;
+}
