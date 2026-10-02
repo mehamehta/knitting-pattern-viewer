@@ -19,6 +19,8 @@ window.KnittingSync = (() => {
     'ciro-sweater-step',
     'ciro-sweater-sleeves',
     'ciro-sweater-history',
+    'arachne-dress-step',
+    'arachne-dress-history',
     'knitting_pearl_earring_state',
     'knitting_pearl_earring_history',
     'knitting_pearl_earring_stitch_guide',
