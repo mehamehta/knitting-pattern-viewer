@@ -24,8 +24,8 @@ const GLOSSARY = [
   { id: 'yo',         term: 'YO',        def: 'Yarn over once: wrap the yarn over the right needle to make a new stitch (and a small eyelet hole).' },
   { id: 'pm',         term: 'PM',        def: 'Place Marker — put a stitch marker on the right needle.' },
   { id: 'sm',         term: 'SM',        def: 'Slip Marker — move the marker from the left needle to the right needle.' },
-  { id: 'elastic-co', term: 'Elastic cast-on', def: 'The stretchy cast-on the pattern asks for. The PDF links a video demonstration (Tutorial 1, QR code on page 4).' },
-  { id: 'picot-bo',   term: 'Picot bind-off', def: 'A decorative bind-off with small picot points. The PDF links a video demonstration (Tutorial 2, QR code on page 7).' },
+  { id: 'elastic-co', term: 'Elastic cast-on', def: 'The stretchy cast-on the pattern asks for — demonstrated in the designer\'s <a class="ad-video" href="https://youtu.be/V_d3ks1MrS8" target="_blank" rel="noopener">Tutorial 1 video</a>.' },
+  { id: 'picot-bo',   term: 'Picot bind-off', def: 'A decorative bind-off with small picot points — demonstrated in the designer\'s <a class="ad-video" href="https://youtu.be/2-xkGnWz7vo" target="_blank" rel="noopener">Tutorial 2 video</a>.' },
 ];
 
 function gl(id, label) {
@@ -44,9 +44,10 @@ const CONTENT_HTML = `
     <p class="ad-note">Yarn, size S: Long 180 g / 800 m (sample: Sandnes Garn TynnLine, 1 strand, 4 balls); Short 70 g / 590 m (sample: De Rerum Natura Berenice, 1 strand, 3 balls). Buttons: 10–13 mm, 10 (Long) / 6 (Short).</p>
     <p class="ad-note">The side with buttons is the front; the side without buttons is the back.</p>
     <p class="ad-note">If you are using a non-elastic yarn, work the slipped edge stitches (SL1) loosely.</p>
+    <p class="ad-note">Video tutorials from the designer (YouTube, Korean narration): <a class="ad-video" href="https://youtu.be/V_d3ks1MrS8" target="_blank" rel="noopener">&#9654; Tutorial 1 – Elastic Cast-on (video)</a> · <a class="ad-video" href="https://youtu.be/2-xkGnWz7vo" target="_blank" rel="noopener">&#9654; Tutorial 2 – Picot Bind-off (video)</a> · <a class="ad-video" href="https://youtu.be/T0azB-wEnU8" target="_blank" rel="noopener">&#9654; Tutorial 3 – Shoulder Straps (video)</a> · <a class="ad-video" href="https://youtu.be/VGhm-R4CNvA" target="_blank" rel="noopener">&#9654; Tutorial 4 – Button Hole (video)</a>.</p>
 
     <h2>1. Armhole Increase — Back</h2>
-    <p data-step="0">With <strong>4.5 mm</strong> needles, cast on <strong>43 sts</strong> using the ${gl('elastic-co', 'elastic cast-on')} method (Tutorial 1 in the PDF).</p>
+    <p data-step="0">With <strong>4.5 mm</strong> needles, cast on <strong>43 sts</strong> using the ${gl('elastic-co', 'elastic cast-on')} method — <a class="ad-video" href="https://youtu.be/V_d3ks1MrS8" target="_blank" rel="noopener">&#9654; Tutorial 1 – Elastic Cast-on (video)</a>.</p>
     <div class="row-table">
       <span class="row-label" data-step-label="1">Row 1 (RS):</span><span data-step="1">K2, (P1, K1) &times;19, P1, K2 <strong>(43 sts)</strong></span>
       <span class="row-label" data-step-label="2">Row 2 (WS):</span><span data-step="2">P2, (K1, P1) &times;19, K1, ${gl('m1lp', 'M1LP')}, P2 <strong>(44 sts)</strong></span>
@@ -76,7 +77,7 @@ const CONTENT_HTML = `
     <p data-step="19">Cut the yarn and place the <strong>76 sts</strong> on a spare cable or needle.</p>
 
     <h2>1. Armhole Increase — Right Front</h2>
-    <p data-step="20">With <strong>4.5 mm</strong> needles, cast on <strong>21 sts</strong> using the ${gl('elastic-co', 'elastic cast-on')} method.</p>
+    <p data-step="20">With <strong>4.5 mm</strong> needles, cast on <strong>21 sts</strong> using the ${gl('elastic-co', 'elastic cast-on')} method — <a class="ad-video" href="https://youtu.be/V_d3ks1MrS8" target="_blank" rel="noopener">&#9654; Tutorial 1 – Elastic Cast-on (video)</a>.</p>
     <div class="row-table">
       <span class="row-label" data-step-label="21">Row 1 (RS):</span><span data-step="21">K2, (P1, K1) &times;8, P1, ${gl('pm', 'PM')}, K2 <strong>(21 sts)</strong></span>
       <span class="row-label" data-step-label="22">Row 2 (WS):</span><span data-step="22">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, (K1, P1) &times;8, K1, ${gl('m1lp', 'M1LP')}, P2 <strong>(22 sts)</strong></span>
@@ -106,7 +107,7 @@ const CONTENT_HTML = `
     <p data-step="39">Cut the yarn and place the <strong>38 sts</strong> on a spare cable or needle.</p>
 
     <h2>1. Armhole Increase — Left Front</h2>
-    <p data-step="40">With <strong>4.5 mm</strong> needles, cast on <strong>21 sts</strong> using the ${gl('elastic-co', 'elastic cast-on')} method.</p>
+    <p data-step="40">With <strong>4.5 mm</strong> needles, cast on <strong>21 sts</strong> using the ${gl('elastic-co', 'elastic cast-on')} method — <a class="ad-video" href="https://youtu.be/V_d3ks1MrS8" target="_blank" rel="noopener">&#9654; Tutorial 1 – Elastic Cast-on (video)</a>.</p>
     <div class="row-table">
       <span class="row-label" data-step-label="41">Row 1 (RS):</span><span data-step="41">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('pm', 'PM')}, (P1, K1) &times;8, P1, K2 <strong>(21 sts)</strong></span>
       <span class="row-label" data-step-label="42">Row 2 (WS):</span><span data-step="42">P2, ${gl('m1rp', 'M1RP')}, (K1, P1) &times;8, K1, ${gl('sm', 'SM')}, P2 <strong>(22 sts)</strong></span>
@@ -356,18 +357,18 @@ const CONTENT_HTML = `
       <span class="row-label" data-step-label="269">Row 227 (RS):</span><span data-step="269">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;10, ${gl('sm', 'SM')}, K2 <strong>(244 sts)</strong></span>
       <span class="row-label" data-step-label="270">Row 228 (WS):</span><span data-step="270">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;10, ${gl('sm', 'SM')}, P2 <strong>(244 sts)</strong></span>
     </div>
-    <p data-step="271">Bind off using the ${gl('picot-bo', 'picot bind-off')} (Tutorial 2 in the PDF). You can also adjust the length to your liking before binding off.</p>
+    <p data-step="271">Bind off using the ${gl('picot-bo', 'picot bind-off')} — <a class="ad-video" href="https://youtu.be/2-xkGnWz7vo" target="_blank" rel="noopener">&#9654; Tutorial 2 – Picot Bind-off (video)</a>. You can also adjust the length to your liking before binding off.</p>
 
     <h2>4. Shoulder Straps</h2>
     <p data-step="272">First, mark the positions on the front and back panels where the shoulder straps will be attached using markers.</p>
-    <p data-step="273">Using a size 6/0 crochet hook, work slip stitch cord starting from the marked positions to make both shoulder straps (Tutorial 3 in the PDF). Before you start, leave a yarn tail about 3 times the shoulder strap length.</p>
+    <p data-step="273">Using a size 6/0 crochet hook, work slip stitch cord starting from the marked positions to make both shoulder straps (<a class="ad-video" href="https://youtu.be/T0azB-wEnU8" target="_blank" rel="noopener">&#9654; Tutorial 3 – Shoulder Straps (video)</a>). Before you start, leave a yarn tail about 3 times the shoulder strap length.</p>
     <p data-step="274">Before you attach the straps, adjust the length so that it is 2–3 cm shorter than your preferred length. The sample is 30 cm when worn.</p>
     <p data-step="275">Attach the other end of the strap to the opposite marker using slip stitch. Then add one more row of slip stitches to prevent excessive stretching.</p>
     <p class="ad-note">If you prefer a wider shoulder strap, work using 2 strands.</p>
 
     <h2>5. Button Hole</h2>
     <p data-step="276">Before making the buttonholes, place markers at each spot where buttons will be attached. Adjust the number and spacing to suit your design (10 buttons for Long, 6 for Short).</p>
-    <p data-step="277">Using a size 6/0 crochet hook, repeat (slip stitch, chain stitch) along the edges of both front panels (Tutorial 4 in the PDF). Work from the bottom upward on the right front, and from the top downward on the left front.</p>
+    <p data-step="277">Using a size 6/0 crochet hook, repeat (slip stitch, chain stitch) along the edges of both front panels (<a class="ad-video" href="https://youtu.be/VGhm-R4CNvA" target="_blank" rel="noopener">&#9654; Tutorial 4 – Button Hole (video)</a>). Work from the bottom upward on the right front, and from the top downward on the left front.</p>
     <p data-step="278">When you reach a marker, make 4 chain sts and slip st to create a buttonhole.</p>
     <p data-step="279">Weave in all ends and sew on the buttons to finish the Arachne Dress.</p>
 

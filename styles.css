@@ -1271,6 +1271,18 @@ input[type=number] {
   opacity: 1;
 }
 
+/* ── Arachne Dress video-tutorial links (inherit the surrounding ink so they
+      read on the parchment sheet and in the step-mode spotlight alike) ── */
+#ad-pattern-doc a.ad-video {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+#ad-pattern-doc a.ad-video:hover { color: var(--oxblood-red); }
+
 /* ── Ciro Sweater sleeve tracker ── */
 #cs-sleeve-tracker {
   margin: 1.4em 0;
