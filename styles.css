@@ -769,6 +769,7 @@ input[type=number] {
 .hist-page-moon-set-polo { background: rgba(180,120,60,0.3);  color: #d4a06c; }
 .hist-page-ciro-sweater  { background: rgba(150,90,170,0.3);  color: #c08ad0; }
 .hist-page-arachne-dress { background: rgba(70,140,160,0.3);  color: #7fc0cf; }
+.hist-page-ameesha-headband { background: rgba(200,90,130,0.3); color: #e09ab4; }
 
 .hist-ridge {
   font-size: 0.9rem;
@@ -1186,7 +1187,8 @@ input[type=number] {
 
 /* ═══ Ciro Sweater ═══════════════════════════════════════════════════════════ */
 #cs-pattern-doc,
-#ad-pattern-doc {
+#ad-pattern-doc,
+#ah-pattern-doc {
   max-width: 720px;
   margin: 0 auto;
   padding: 40px 32px 80px;
@@ -1195,7 +1197,8 @@ input[type=number] {
   color: #d8c4a8;
 }
 #cs-pattern-doc h2,
-#ad-pattern-doc h2 {
+#ad-pattern-doc h2,
+#ah-pattern-doc h2 {
   font-size: 1.05rem;
   font-weight: 700;
   color: #e8dcc4;
@@ -1204,28 +1207,35 @@ input[type=number] {
   border-bottom: 1px solid #562634;
 }
 #cs-pattern-doc h2:first-child,
-#ad-pattern-doc h2:first-child { margin-top: 0; }
+#ad-pattern-doc h2:first-child,
+#ah-pattern-doc h2:first-child { margin-top: 0; }
 #cs-pattern-doc p,
-#ad-pattern-doc p { margin: 0.6em 0; }
+#ad-pattern-doc p,
+#ah-pattern-doc p { margin: 0.6em 0; }
 #cs-pattern-doc strong,
-#ad-pattern-doc strong { color: #e8dcc4; }
+#ad-pattern-doc strong,
+#ah-pattern-doc strong { color: #e8dcc4; }
 #cs-pattern-doc em,
-#ad-pattern-doc em { color: #c9a08f; font-style: italic; }
+#ad-pattern-doc em,
+#ah-pattern-doc em { color: #c9a08f; font-style: italic; }
 #cs-pattern-doc .row-table,
-#ad-pattern-doc .row-table {
+#ad-pattern-doc .row-table,
+#ah-pattern-doc .row-table {
   display: grid;
   grid-template-columns: max-content 1fr;
   gap: 4px 16px;
   margin: 0.6em 0 0.6em 16px;
 }
 #cs-pattern-doc .row-label,
-#ad-pattern-doc .row-label {
+#ad-pattern-doc .row-label,
+#ah-pattern-doc .row-label {
   font-weight: 700;
   color: #e8dcc4;
   white-space: nowrap;
 }
 #cs-pattern-doc .cs-note,
-#ad-pattern-doc .ad-note {
+#ad-pattern-doc .ad-note,
+#ah-pattern-doc .ah-note {
   font-size: 0.84rem;
   color: #a9847a;
   margin: 0.5em 0 0.5em 16px;
@@ -1236,22 +1246,27 @@ input[type=number] {
 #cs-pattern-doc.step-mode [data-step],
 #cs-pattern-doc.step-mode [data-step-label],
 #ad-pattern-doc.step-mode [data-step],
-#ad-pattern-doc.step-mode [data-step-label] {
+#ad-pattern-doc.step-mode [data-step-label],
+#ah-pattern-doc.step-mode [data-step],
+#ah-pattern-doc.step-mode [data-step-label] {
   opacity: 0.18;
   transition: opacity 0.18s;
 }
 #cs-pattern-doc.step-mode h2,
-#ad-pattern-doc.step-mode h2 {
+#ad-pattern-doc.step-mode h2,
+#ah-pattern-doc.step-mode h2 {
   opacity: 0.25;
   transition: opacity 0.18s;
 }
 #cs-pattern-doc.step-mode .cs-note,
-#ad-pattern-doc.step-mode .ad-note {
+#ad-pattern-doc.step-mode .ad-note,
+#ah-pattern-doc.step-mode .ah-note {
   opacity: 0.18;
   transition: opacity 0.18s;
 }
 #cs-pattern-doc.step-mode [data-step].step-active,
-#ad-pattern-doc.step-mode [data-step].step-active {
+#ad-pattern-doc.step-mode [data-step].step-active,
+#ah-pattern-doc.step-mode [data-step].step-active {
   opacity: 1;
   background: rgba(215, 161, 63, 0.10);
   border-radius: 4px;
@@ -1260,20 +1275,24 @@ input[type=number] {
   outline-offset: 3px;
 }
 #cs-pattern-doc.step-mode [data-step-label].step-active,
-#ad-pattern-doc.step-mode [data-step-label].step-active {
+#ad-pattern-doc.step-mode [data-step-label].step-active,
+#ah-pattern-doc.step-mode [data-step-label].step-active {
   opacity: 1;
 }
 /* Glossary stays readable in step mode */
 #cs-pattern-doc.step-mode .cs-glossary-hdr,
 #cs-pattern-doc.step-mode .bb-glossary,
 #ad-pattern-doc.step-mode .ad-glossary-hdr,
-#ad-pattern-doc.step-mode .bb-glossary {
+#ad-pattern-doc.step-mode .bb-glossary,
+#ah-pattern-doc.step-mode .ah-glossary-hdr,
+#ah-pattern-doc.step-mode .bb-glossary {
   opacity: 1;
 }
 
 /* ── Arachne Dress video-tutorial links (inherit the surrounding ink so they
       read on the parchment sheet and in the step-mode spotlight alike) ── */
-#ad-pattern-doc a.ad-video {
+#ad-pattern-doc a.ad-video,
+#ah-pattern-doc a.ah-video {
   color: inherit;
   font-weight: 600;
   text-decoration: underline;
@@ -1281,7 +1300,8 @@ input[type=number] {
   text-underline-offset: 2px;
   white-space: nowrap;
 }
-#ad-pattern-doc a.ad-video:hover { color: var(--oxblood-red); }
+#ad-pattern-doc a.ad-video:hover,
+#ah-pattern-doc a.ah-video:hover { color: var(--oxblood-red); }
 
 /* ── Ciro Sweater sleeve tracker ── */
 #cs-sleeve-tracker {
@@ -1301,14 +1321,17 @@ input[type=number] {
 
 /* ── Ciro Sweater glossary term links + "back to pattern" ── */
 #cs-pattern-doc .gloss-link,
-#ad-pattern-doc .gloss-link {
+#ad-pattern-doc .gloss-link,
+#ah-pattern-doc .gloss-link {
   cursor: pointer;
   border-bottom: 1px dotted currentColor;
 }
 #cs-pattern-doc .gloss-link:hover,
-#ad-pattern-doc .gloss-link:hover { color: #d7a13f; }
+#ad-pattern-doc .gloss-link:hover,
+#ah-pattern-doc .gloss-link:hover { color: #d7a13f; }
 .cs-gloss-back-btn,
-.ad-gloss-back-btn {
+.ad-gloss-back-btn,
+.ah-gloss-back-btn {
   display: none;
   position: fixed;
   bottom: 20px;
@@ -1327,13 +1350,16 @@ input[type=number] {
   box-shadow: 0 4px 20px rgba(0,0,0,0.55);
 }
 .cs-gloss-back-btn.visible,
-.ad-gloss-back-btn.visible { display: flex; }
+.ad-gloss-back-btn.visible,
+.ah-gloss-back-btn.visible { display: flex; }
 .cs-gloss-back-btn:hover,
-.ad-gloss-back-btn:hover { background: #43202a; border-color: #9a5563; }
+.ad-gloss-back-btn:hover,
+.ah-gloss-back-btn:hover { background: #43202a; border-color: #9a5563; }
 
 /* ── Ciro Sweater mini-view overlay ── */
 #cs-pip-overlay,
-#ad-pip-overlay {
+#ad-pip-overlay,
+#ah-pip-overlay {
   display: none;
   position: fixed;
   bottom: 48px;
@@ -1349,7 +1375,8 @@ input[type=number] {
   user-select: none;
 }
 #cs-pip-overlay.visible,
-#ad-pip-overlay.visible { display: block; }
+#ad-pip-overlay.visible,
+#ah-pip-overlay.visible { display: block; }
 
 /* ── left nav sidebar ── */
 #nav-sidebar {
@@ -1469,7 +1496,8 @@ input[type=number] {
   #ss-pattern-doc,
   #mp-pattern-doc,
   #cs-pattern-doc,
-#ad-pattern-doc {
+#ad-pattern-doc,
+#ah-pattern-doc {
     margin: 14px 10px 40px;
     padding: 24px 20px 40px;
   }
@@ -1492,7 +1520,8 @@ input[type=number] {
 /* ── display face: section heads, big numerals, overlay title ── */
 #bb-pattern-doc h2, #ss-pattern-doc h2, #mp-pattern-doc h2, #cs-pattern-doc h2,
 #rs-overlay-title, #sb-current-ridge, .slt-panel-hdr, .tk-panel h4,
-#ad-pattern-doc h2 {
+#ad-pattern-doc h2,
+#ah-pattern-doc h2 {
   font-family: var(--font-display);
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -1513,13 +1542,15 @@ input[type=number] {
 #mp-pattern-doc .row-label, #cs-pattern-doc .row-label,
 .option-hdr, .pip-slt-label, .pip-slt-rows, #ss-pip-badge, #bb-pip-badge,
 #bb-pip-rep, #ss-pip-rep,
-#ad-pattern-doc .row-label {
+#ad-pattern-doc .row-label,
+#ah-pattern-doc .row-label {
   font-family: var(--font-mono);
 }
 
 /* ── PATTERN DOCUMENT — parchment card floating on the dark well ── */
 #bb-pattern-doc, #ss-pattern-doc, #mp-pattern-doc, #cs-pattern-doc,
-#ad-pattern-doc {
+#ad-pattern-doc,
+#ah-pattern-doc {
   max-width: 760px;
   margin: 28px auto 64px;
   padding: 44px 48px 56px;
@@ -1529,36 +1560,43 @@ input[type=number] {
   box-shadow: 0 30px 70px -34px rgba(0,0,0,0.7);
 }
 #bb-pattern-doc h2, #ss-pattern-doc h2, #mp-pattern-doc h2, #cs-pattern-doc h2,
-#ad-pattern-doc h2 {
+#ad-pattern-doc h2,
+#ah-pattern-doc h2 {
   font-size: 1.42rem;
   color: #2b1a16;
   border-bottom-color: var(--parchment-line);
 }
 #bb-pattern-doc strong, #ss-pattern-doc strong,
 #mp-pattern-doc strong, #cs-pattern-doc strong,
-#ad-pattern-doc strong { color: var(--oxblood-red); }
+#ad-pattern-doc strong,
+#ah-pattern-doc strong { color: var(--oxblood-red); }
 #bb-pattern-doc em, #ss-pattern-doc em, #mp-pattern-doc em, #cs-pattern-doc em,
 #bb-pattern-doc .dist, #ss-pattern-doc .ss-dist, #ss-pattern-doc .ss-note,
 #mp-pattern-doc .mp-note, #cs-pattern-doc .cs-note,
 #ad-pattern-doc em,
-#ad-pattern-doc .ad-note {
+#ad-pattern-doc .ad-note,
+#ah-pattern-doc em,
+#ah-pattern-doc .ah-note {
   color: #7a5c4e;
 }
 #bb-pattern-doc .row-label, #ss-pattern-doc .row-label,
 #mp-pattern-doc .row-label, #cs-pattern-doc .row-label,
-#ad-pattern-doc .row-label {
+#ad-pattern-doc .row-label,
+#ah-pattern-doc .row-label {
   color: #4a3128;
   font-weight: 600;
 }
 #mp-pattern-doc .gloss-link:hover, #cs-pattern-doc .gloss-link:hover,
-#ad-pattern-doc .gloss-link:hover { color: var(--oxblood-red); }
+#ad-pattern-doc .gloss-link:hover,
+#ah-pattern-doc .gloss-link:hover { color: var(--oxblood-red); }
 
 /* step-mode highlight — oxblood tint instead of gold, on parchment */
 #bb-pattern-doc.step-mode [data-step].step-active,
 #ss-pattern-doc.step-mode [data-step].step-active,
 #mp-pattern-doc.step-mode [data-step].step-active,
 #cs-pattern-doc.step-mode [data-step].step-active,
-#ad-pattern-doc.step-mode [data-step].step-active {
+#ad-pattern-doc.step-mode [data-step].step-active,
+#ah-pattern-doc.step-mode [data-step].step-active {
   background: rgba(163, 50, 46, 0.10);
   box-shadow: 0 0 0 4px rgba(163, 50, 46, 0.10);
   outline-color: rgba(163, 50, 46, 0.30);
@@ -1582,14 +1620,18 @@ input[type=number] {
 #cs-pattern-doc.step-mode .cs-note,
 #ad-pattern-doc.step-mode [data-step],
 #ad-pattern-doc.step-mode [data-step-label],
-#ad-pattern-doc.step-mode .ad-note {
+#ad-pattern-doc.step-mode .ad-note,
+#ah-pattern-doc.step-mode [data-step],
+#ah-pattern-doc.step-mode [data-step-label],
+#ah-pattern-doc.step-mode .ah-note {
   opacity: 0.42;
 }
 #bb-pattern-doc.step-mode h2,
 #ss-pattern-doc.step-mode h2,
 #mp-pattern-doc.step-mode h2,
 #cs-pattern-doc.step-mode h2,
-#ad-pattern-doc.step-mode h2 {
+#ad-pattern-doc.step-mode h2,
+#ah-pattern-doc.step-mode h2 {
   opacity: 0.5;
 }
 #bb-pattern-doc.step-mode .has-substeps.substep-active [data-step]:not(.step-active),
@@ -1623,7 +1665,8 @@ input[type=number] {
 /* Mini View panels — a tighter crop of the same skein photo */
 #ss-pip-overlay, #bb-pip-overlay, #bbt-pip-overlay,
 #mp-pip-overlay, #cs-pip-overlay, #pip-fallback,
-#ad-pip-overlay {
+#ad-pip-overlay,
+#ah-pip-overlay {
   background-color: #290d13;
   background-image: var(--yarn-img);
   background-repeat: no-repeat;
@@ -1634,14 +1677,18 @@ input[type=number] {
 #ss-pip-hdr, #bb-pip-hdr, #mp-pip-hdr, #cs-pip-hdr,
 #ss-pip-ftr, #bb-pip-ftr, #mp-pip-ftr, #cs-pip-ftr,
 #ad-pip-hdr,
-#ad-pip-ftr { background: #3b1720; }
+#ad-pip-ftr,
+#ah-pip-hdr,
+#ah-pip-ftr { background: #3b1720; }
 #ss-pip-content, #bb-pip-content, #mp-pip-content, #cs-pip-content,
 #bbt-pip-content,
-#ad-pip-content { background: rgba(29, 9, 14, 0.72); }
+#ad-pip-content,
+#ah-pip-content { background: rgba(29, 9, 14, 0.72); }
 
 /* ── glossary "back to pattern" pill — warm it ── */
 .mp-gloss-back-btn, .cs-gloss-back-btn,
-.ad-gloss-back-btn { font-family: var(--font-mono); }
+.ad-gloss-back-btn,
+.ah-gloss-back-btn { font-family: var(--font-mono); }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    STEP-MODE SPOTLIGHT  (desktop + mobile)
@@ -1677,7 +1724,8 @@ input[type=number] {
 #page-body-mount .step-mode .ss-note,
 #page-body-mount .step-mode .mp-note,
 #page-body-mount .step-mode .cs-note,
-#page-body-mount .step-mode .ad-note {
+#page-body-mount .step-mode .ad-note,
+#page-body-mount .step-mode .ah-note {
   color: #e9dabf;
   opacity: 0.62;
   text-shadow: 0 1px 3px rgba(8, 2, 4, 0.85), 0 0 2px rgba(8, 2, 4, 0.55);
@@ -1729,3 +1777,38 @@ input[type=number] {
   opacity: 1;
   color: #fbefd8;
 }
+
+/* ── Ameesha's Headband: length tracker ── */
+#ah-pattern-doc .ah-calc {
+  display: grid;
+  gap: 8px;
+  margin: 0.8em 0 0.8em 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--parchment-line);
+  border-radius: 6px;
+  background: #ece0c9;
+}
+#ah-pattern-doc .ah-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.88rem;
+}
+#ah-pattern-doc .ah-field input[type=number] { width: 72px; }
+#ah-pattern-doc .ah-calc-out {
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid var(--parchment-line);
+  font-size: 0.9rem;
+}
+#ah-pattern-doc a { color: var(--oxblood-red); }
+/* Materials values float on the photo in step mode like the other copy */
+#page-body-mount .step-mode .ah-info span:not(.row-label) {
+  color: #e9dabf;
+  opacity: 0.62;
+  text-shadow: 0 1px 3px rgba(8, 2, 4, 0.85), 0 0 2px rgba(8, 2, 4, 0.55);
+}
+/* the length tracker stays a parchment card in step mode, so keep parchment ink */
+#page-body-mount .step-mode .ah-calc strong { color: var(--oxblood-red); }
+#page-body-mount .step-mode .ah-calc em     { color: #7a5c4e; }
