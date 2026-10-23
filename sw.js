@@ -1,4 +1,4 @@
-const CACHE = 'knitting-v4';
+const CACHE = 'knitting-v5';
 const STATIC = [
   '/',
   '/index.html',

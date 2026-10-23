@@ -1,11 +1,11 @@
-// ─── Arachne Dress pattern document page (Size S only) ──────────────────────
+// ─── Arachne Dress pattern document page ────────────────────────────────────
+// Two versions, picked from the toolbar: Size S at the pattern's gauge, and
+// Size M on smaller needles (4 mm / 3.5 mm) to land near S measurements.
 // Bosong Knit · Arachne Dress · worked top-down.
 // Every chart row is written out stitch by stitch (WS rows already reversed),
 // generated from the PDF's charts and checked stitch-for-stitch against them.
 
 (function () {
-
-const TOTAL_STEPS = 280;
 
 // ── Glossary ──────────────────────────────────────────────────────────────────
 const GLOSSARY = [
@@ -33,7 +33,7 @@ function gl(id, label) {
 }
 
 // ── HTML template ─────────────────────────────────────────────────────────────
-const CONTENT_HTML = `
+const CONTENT_S = `
 <div class="page-doc-wrap">
   <div id="ad-pattern-doc">
 
@@ -380,30 +380,409 @@ const CONTENT_HTML = `
   </div>
 </div>`;
 
+const CONTENT_M = `
+<div class="page-doc-wrap">
+  <div id="ad-pattern-doc">
+
+    <p class="ad-note">Size M, worked on smaller needles so it comes out close to size S measurements. The Arachne Dress is worked top-down. The back, right front and left front are each worked flat until the armhole increases are done, then joined and worked flat together for the body and skirt. The shoulder straps and button bands are finished with a crochet hook.</p>
+    <p class="ad-note">Every chart has been written out row by row. Each row is given in the order you work it, already reversed for WS rows (knits and purls already swapped) — just read left to right and work each stitch as written.</p>
+    <p class="ad-note">Needles for this version: <strong>4 mm</strong> (main), <strong>3.5 mm</strong> (ribbing) — two sizes down from the pattern's 5 mm / 4.5 mm. Crochet hook: <strong>3 mm</strong> (the pattern uses 3.5 mm / size 6/0). Target gauge: about 23 sts / 10 cm in stockinette (22–24 is fine), measured on a swatch that has been washed and hung overnight. The pattern's own gauge is 20 sts &times; 23 rows on 5 mm.</p>
+    <p class="ad-note">Finished size at about 23 sts / 10 cm: A (top edge) &asymp; 22 cm · B (bust) &asymp; 76 cm · C (hem) &asymp; 115 cm — close to size S (choose a size with 0–5 cm negative ease). At the pattern's gauge, size M would be A 25 cm · B 87 cm · C 132 cm.</p>
+    <p class="ad-note">Length: the row counts give Long 98 cm / Short 68 cm only at 23 rows / 10 cm. On smaller needles you will get more rows per 10 cm, so the dress comes out shorter — work extra plain rows before binding off until it reaches your length (measure with the work hanging, as silk grows lengthwise).</p>
+    <p class="ad-note">Yarn, size M: Long 200 g / 880 m; Short 85 g / 715 m. (The designer's samples are size S, each worked with 1 strand: Long in Sandnes Garn TynnLine, Short in De Rerum Natura Berenice.) Buttons: 10–13 mm, 10 (Long) / 6 (Short).</p>
+    <p class="ad-note">The side with buttons is the front; the side without buttons is the back.</p>
+    <p class="ad-note">If you are using a non-elastic yarn, work the slipped edge stitches (SL1) loosely.</p>
+    <p class="ad-note">Video tutorials from the designer (YouTube, Korean narration): <a class="ad-video" href="https://youtu.be/V_d3ks1MrS8" target="_blank" rel="noopener">&#9654; Tutorial 1 – Elastic Cast-on (video)</a> · <a class="ad-video" href="https://youtu.be/2-xkGnWz7vo" target="_blank" rel="noopener">&#9654; Tutorial 2 – Picot Bind-off (video)</a> · <a class="ad-video" href="https://youtu.be/T0azB-wEnU8" target="_blank" rel="noopener">&#9654; Tutorial 3 – Shoulder Straps (video)</a> · <a class="ad-video" href="https://youtu.be/VGhm-R4CNvA" target="_blank" rel="noopener">&#9654; Tutorial 4 – Button Hole (video)</a>.</p>
+
+    <h2>1. Armhole Increase — Back</h2>
+    <p data-step="0">With <strong>3.5 mm</strong> needles, cast on <strong>47 sts</strong> using the ${gl('elastic-co', 'elastic cast-on')} method — <a class="ad-video" href="https://youtu.be/V_d3ks1MrS8" target="_blank" rel="noopener">&#9654; Tutorial 1 – Elastic Cast-on (video)</a>.</p>
+    <div class="row-table">
+      <span class="row-label" data-step-label="1">Row 1 (RS):</span><span data-step="1">K2, (P1, K1) &times;21, P1, K2 <strong>(47 sts)</strong></span>
+      <span class="row-label" data-step-label="2">Row 2 (WS):</span><span data-step="2">P2, (K1, P1) &times;21, K1, ${gl('m1lp', 'M1LP')}, P2 <strong>(48 sts)</strong></span>
+      <span class="row-label" data-step-label="3">Row 3 (RS):</span><span data-step="3">K2, ${gl('m1l', 'M1L')}, (K1, P1) &times;22, ${gl('m1r', 'M1R')}, K2 <strong>(50 sts)</strong></span>
+      <span class="row-label" data-step-label="4">Row 4 (WS):</span><span data-step="4">P2, ${gl('m1rp', 'M1RP')}, (P1, K1) &times;22, P2, ${gl('m1lp', 'M1LP')}, P2 <strong>(52 sts)</strong></span>
+    </div>
+    <p class="ad-note">Change to <strong>4 mm</strong> needles now (after the 4 ribbing rows).</p>
+    <p class="ad-note">Markers: on Row 5 you place 2 markers (PM). Each marker sits where one of the chart's green lines is, with exactly 24 sts between them. The chart's third green line (at the start of RS rows) only begins at Row 15, so its marker is placed later, on Row 17.</p>
+    <div class="row-table">
+      <span class="row-label" data-step-label="5">Row 5 (RS):</span><span data-step="5">K2, ${gl('m1l', 'M1L')}, K12, ${gl('pm', 'PM')}, K24, ${gl('pm', 'PM')}, K12, ${gl('m1r', 'M1R')}, K2 <strong>(54 sts)</strong></span>
+      <span class="row-label" data-step-label="6">Row 6 (WS):</span><span data-step="6">P2, ${gl('m1rp', 'M1RP')}, P13, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P13, ${gl('m1lp', 'M1LP')}, P2 <strong>(56 sts)</strong></span>
+      <span class="row-label" data-step-label="7">Row 7 (RS):</span><span data-step="7">K2, ${gl('m1l', 'M1L')}, K14, ${gl('sm', 'SM')}, K24, ${gl('sm', 'SM')}, K14, ${gl('m1r', 'M1R')}, K2 <strong>(58 sts)</strong></span>
+      <span class="row-label" data-step-label="8">Row 8 (WS):</span><span data-step="8">P2, ${gl('m1rp', 'M1RP')}, P15, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P15, ${gl('m1lp', 'M1LP')}, P2 <strong>(60 sts)</strong></span>
+      <span class="row-label" data-step-label="9">Row 9 (RS):</span><span data-step="9">K2, ${gl('m1l', 'M1L')}, K16, ${gl('sm', 'SM')}, K24, ${gl('sm', 'SM')}, K16, ${gl('m1r', 'M1R')}, K2 <strong>(62 sts)</strong></span>
+      <span class="row-label" data-step-label="10">Row 10 (WS):</span><span data-step="10">P2, ${gl('m1rp', 'M1RP')}, P17, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P17, ${gl('m1lp', 'M1LP')}, P2 <strong>(64 sts)</strong></span>
+      <span class="row-label" data-step-label="11">Row 11 (RS):</span><span data-step="11">K2, ${gl('m1l', 'M1L')}, K18, ${gl('sm', 'SM')}, K24, ${gl('sm', 'SM')}, K18, ${gl('m1r', 'M1R')}, K2 <strong>(66 sts)</strong></span>
+      <span class="row-label" data-step-label="12">Row 12 (WS):</span><span data-step="12">P2, ${gl('m1rp', 'M1RP')}, P19, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P19, ${gl('m1lp', 'M1LP')}, P2 <strong>(68 sts)</strong></span>
+      <span class="row-label" data-step-label="13">Row 13 (RS):</span><span data-step="13">K2, ${gl('m1l', 'M1L')}, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K18, ${gl('sm', 'SM')}, K4, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K18, ${gl('sm', 'SM')}, K4, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K14, ${gl('m1r', 'M1R')}, K2 <strong>(70 sts)</strong></span>
+      <span class="row-label" data-step-label="14">Row 14 (WS):</span><span data-step="14">P2, ${gl('m1rp', 'M1RP')}, P21, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P21, ${gl('m1lp', 'M1LP')}, P2 <strong>(72 sts)</strong></span>
+      <span class="row-label" data-step-label="15">Row 15 (RS):</span><span data-step="15">K2, ${gl('m1l', 'M1L')}, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K17, ${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K17, ${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K15, ${gl('m1r', 'M1R')}, K2 <strong>(74 sts)</strong></span>
+      <span class="row-label" data-step-label="16">Row 16 (WS):</span><span data-step="16">P2, ${gl('m1rp', 'M1RP')}, P23, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P23, ${gl('m1lp', 'M1LP')}, P2 <strong>(76 sts)</strong></span>
+    </div>
+    <p class="ad-note">Third marker: placed on Row 17, right after the M1L at the start of the row (the chart's green line starts at Row 15, but there it runs through the increase edge; Row 17 is the first row where it lines up with the stitches). From here there are exactly 24 sts between neighbouring markers.</p>
+    <div class="row-table">
+      <span class="row-label" data-step-label="17">Row 17 (RS):</span><span data-step="17">K2, ${gl('m1l', 'M1L')}, ${gl('pm', 'PM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K17, (${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K17) &times;2, ${gl('m1r', 'M1R')}, K2 <strong>(78 sts)</strong></span>
+      <span class="row-label" data-step-label="18">Row 18 (WS):</span><span data-step="18">P2, ${gl('m1rp', 'M1RP')}, P25, (${gl('sm', 'SM')}, P24) &times;2, ${gl('sm', 'SM')}, P1, ${gl('m1lp', 'M1LP')}, P2 <strong>(80 sts)</strong></span>
+      <span class="row-label" data-step-label="19">Row 19 (RS):</span><span data-step="19">K2, ${gl('m1l', 'M1L')}, K2, (${gl('sm', 'SM')}, K10, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K12) &times;2, ${gl('sm', 'SM')}, K10, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K14, ${gl('m1r', 'M1R')}, K2 <strong>(82 sts)</strong></span>
+      <span class="row-label" data-step-label="20">Row 20 (WS):</span><span data-step="20">P2, ${gl('m1rp', 'M1RP')}, P27, (${gl('sm', 'SM')}, P24) &times;2, ${gl('sm', 'SM')}, P3, ${gl('m1lp', 'M1LP')}, P2 <strong>(84 sts)</strong></span>
+      <span class="row-label" data-step-label="21">Row 21 (RS):</span><span data-step="21">K2, ${gl('m1l', 'M1L')}, K4, (${gl('sm', 'SM')}, K9, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K13) &times;2, ${gl('sm', 'SM')}, K9, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K17, ${gl('m1r', 'M1R')}, K2 <strong>(86 sts)</strong></span>
+      <span class="row-label" data-step-label="22">Row 22 (WS):</span><span data-step="22">P2, ${gl('m1rp', 'M1RP')}, P29, (${gl('sm', 'SM')}, P24) &times;2, ${gl('sm', 'SM')}, P5, ${gl('m1lp', 'M1LP')}, P2 <strong>(88 sts)</strong></span>
+    </div>
+    <p data-step="23">Cut the yarn and place the <strong>88 sts</strong> on a spare cable or needle.</p>
+
+    <h2>1. Armhole Increase — Right Front</h2>
+    <p data-step="24">With <strong>3.5 mm</strong> needles, cast on <strong>23 sts</strong> using the ${gl('elastic-co', 'elastic cast-on')} method — <a class="ad-video" href="https://youtu.be/V_d3ks1MrS8" target="_blank" rel="noopener">&#9654; Tutorial 1 – Elastic Cast-on (video)</a>.</p>
+    <div class="row-table">
+      <span class="row-label" data-step-label="25">Row 1 (RS):</span><span data-step="25">K2, (P1, K1) &times;9, P1, ${gl('pm', 'PM')}, K2 <strong>(23 sts)</strong></span>
+      <span class="row-label" data-step-label="26">Row 2 (WS):</span><span data-step="26">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, (K1, P1) &times;9, K1, ${gl('m1lp', 'M1LP')}, P2 <strong>(24 sts)</strong></span>
+      <span class="row-label" data-step-label="27">Row 3 (RS):</span><span data-step="27">K2, ${gl('m1l', 'M1L')}, (K1, P1) &times;10, ${gl('sm', 'SM')}, K2 <strong>(25 sts)</strong></span>
+      <span class="row-label" data-step-label="28">Row 4 (WS):</span><span data-step="28">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, (K1, P1) &times;9, K1, P2, ${gl('m1lp', 'M1LP')}, P2 <strong>(26 sts)</strong></span>
+    </div>
+    <p class="ad-note">Change to <strong>4 mm</strong> needles now (after the 4 ribbing rows).</p>
+    <div class="row-table">
+      <span class="row-label" data-step-label="29">Row 5 (RS):</span><span data-step="29">K2, ${gl('m1l', 'M1L')}, K22, ${gl('sm', 'SM')}, K2 <strong>(27 sts)</strong></span>
+      <span class="row-label" data-step-label="30">Row 6 (WS):</span><span data-step="30">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P23, ${gl('m1lp', 'M1LP')}, P2 <strong>(28 sts)</strong></span>
+    </div>
+    <p class="ad-note">Second marker: placed on Row 7 (the chart's green line starts at Row 5, but there it runs through the increase edge; Row 7 is the first row where it lines up with the stitches). From here there are 24 sts between the two markers.</p>
+    <div class="row-table">
+      <span class="row-label" data-step-label="31">Row 7 (RS):</span><span data-step="31">K2, ${gl('m1l', 'M1L')}, ${gl('pm', 'PM')}, K24, ${gl('sm', 'SM')}, K2 <strong>(29 sts)</strong></span>
+      <span class="row-label" data-step-label="32">Row 8 (WS):</span><span data-step="32">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P1, ${gl('m1lp', 'M1LP')}, P2 <strong>(30 sts)</strong></span>
+      <span class="row-label" data-step-label="33">Row 9 (RS):</span><span data-step="33">K2, ${gl('m1l', 'M1L')}, K2, ${gl('sm', 'SM')}, K24, ${gl('sm', 'SM')}, K2 <strong>(31 sts)</strong></span>
+      <span class="row-label" data-step-label="34">Row 10 (WS):</span><span data-step="34">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P3, ${gl('m1lp', 'M1LP')}, P2 <strong>(32 sts)</strong></span>
+      <span class="row-label" data-step-label="35">Row 11 (RS):</span><span data-step="35">K2, ${gl('m1l', 'M1L')}, K4, ${gl('sm', 'SM')}, K24, ${gl('sm', 'SM')}, K2 <strong>(33 sts)</strong></span>
+      <span class="row-label" data-step-label="36">Row 12 (WS):</span><span data-step="36">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P5, ${gl('m1lp', 'M1LP')}, P2 <strong>(34 sts)</strong></span>
+      <span class="row-label" data-step-label="37">Row 13 (RS):</span><span data-step="37">K2, ${gl('m1l', 'M1L')}, K6, ${gl('sm', 'SM')}, K4, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K18, ${gl('sm', 'SM')}, K2 <strong>(35 sts)</strong></span>
+      <span class="row-label" data-step-label="38">Row 14 (WS):</span><span data-step="38">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P7, ${gl('m1lp', 'M1LP')}, P2 <strong>(36 sts)</strong></span>
+      <span class="row-label" data-step-label="39">Row 15 (RS):</span><span data-step="39">K2, ${gl('m1l', 'M1L')}, K8, ${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K17, ${gl('sm', 'SM')}, K2 <strong>(37 sts)</strong></span>
+      <span class="row-label" data-step-label="40">Row 16 (WS):</span><span data-step="40">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P9, ${gl('m1lp', 'M1LP')}, P2 <strong>(38 sts)</strong></span>
+      <span class="row-label" data-step-label="41">Row 17 (RS):</span><span data-step="41">K2, ${gl('m1l', 'M1L')}, K10, ${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K17, ${gl('sm', 'SM')}, K2 <strong>(39 sts)</strong></span>
+      <span class="row-label" data-step-label="42">Row 18 (WS):</span><span data-step="42">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P11, ${gl('m1lp', 'M1LP')}, P2 <strong>(40 sts)</strong></span>
+      <span class="row-label" data-step-label="43">Row 19 (RS):</span><span data-step="43">K2, ${gl('m1l', 'M1L')}, K12, ${gl('sm', 'SM')}, K10, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K12, ${gl('sm', 'SM')}, K2 <strong>(41 sts)</strong></span>
+      <span class="row-label" data-step-label="44">Row 20 (WS):</span><span data-step="44">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P13, ${gl('m1lp', 'M1LP')}, P2 <strong>(42 sts)</strong></span>
+      <span class="row-label" data-step-label="45">Row 21 (RS):</span><span data-step="45">K2, ${gl('m1l', 'M1L')}, K14, ${gl('sm', 'SM')}, K9, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K13, ${gl('sm', 'SM')}, K2 <strong>(43 sts)</strong></span>
+      <span class="row-label" data-step-label="46">Row 22 (WS):</span><span data-step="46">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P15, ${gl('m1lp', 'M1LP')}, P2 <strong>(44 sts)</strong></span>
+    </div>
+    <p data-step="47">Cut the yarn and place the <strong>44 sts</strong> on a spare cable or needle.</p>
+
+    <h2>1. Armhole Increase — Left Front</h2>
+    <p data-step="48">With <strong>3.5 mm</strong> needles, cast on <strong>23 sts</strong> using the ${gl('elastic-co', 'elastic cast-on')} method — <a class="ad-video" href="https://youtu.be/V_d3ks1MrS8" target="_blank" rel="noopener">&#9654; Tutorial 1 – Elastic Cast-on (video)</a>.</p>
+    <div class="row-table">
+      <span class="row-label" data-step-label="49">Row 1 (RS):</span><span data-step="49">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('pm', 'PM')}, (P1, K1) &times;9, P1, K2 <strong>(23 sts)</strong></span>
+      <span class="row-label" data-step-label="50">Row 2 (WS):</span><span data-step="50">P2, ${gl('m1rp', 'M1RP')}, (K1, P1) &times;9, K1, ${gl('sm', 'SM')}, P2 <strong>(24 sts)</strong></span>
+      <span class="row-label" data-step-label="51">Row 3 (RS):</span><span data-step="51">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, (P1, K1) &times;10, ${gl('m1r', 'M1R')}, K2 <strong>(25 sts)</strong></span>
+      <span class="row-label" data-step-label="52">Row 4 (WS):</span><span data-step="52">P2, ${gl('m1rp', 'M1RP')}, P2, (K1, P1) &times;9, K1, ${gl('sm', 'SM')}, P2 <strong>(26 sts)</strong></span>
+    </div>
+    <p class="ad-note">Change to <strong>4 mm</strong> needles now (after the 4 ribbing rows).</p>
+    <div class="row-table">
+      <span class="row-label" data-step-label="53">Row 5 (RS):</span><span data-step="53">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K22, ${gl('m1r', 'M1R')}, K2 <strong>(27 sts)</strong></span>
+      <span class="row-label" data-step-label="54">Row 6 (WS):</span><span data-step="54">P2, ${gl('m1rp', 'M1RP')}, P23, ${gl('sm', 'SM')}, P2 <strong>(28 sts)</strong></span>
+    </div>
+    <p class="ad-note">Second marker: placed on Row 7 (the chart's green line starts at Row 5, but there it runs through the increase edge; Row 7 is the first row where it lines up with the stitches). From here there are 24 sts between the two markers.</p>
+    <div class="row-table">
+      <span class="row-label" data-step-label="55">Row 7 (RS):</span><span data-step="55">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K24, ${gl('pm', 'PM')}, ${gl('m1r', 'M1R')}, K2 <strong>(29 sts)</strong></span>
+      <span class="row-label" data-step-label="56">Row 8 (WS):</span><span data-step="56">P2, ${gl('m1rp', 'M1RP')}, P1, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P2 <strong>(30 sts)</strong></span>
+      <span class="row-label" data-step-label="57">Row 9 (RS):</span><span data-step="57">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K24, ${gl('sm', 'SM')}, K2, ${gl('m1r', 'M1R')}, K2 <strong>(31 sts)</strong></span>
+      <span class="row-label" data-step-label="58">Row 10 (WS):</span><span data-step="58">P2, ${gl('m1rp', 'M1RP')}, P3, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P2 <strong>(32 sts)</strong></span>
+      <span class="row-label" data-step-label="59">Row 11 (RS):</span><span data-step="59">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K24, ${gl('sm', 'SM')}, K4, ${gl('m1r', 'M1R')}, K2 <strong>(33 sts)</strong></span>
+      <span class="row-label" data-step-label="60">Row 12 (WS):</span><span data-step="60">P2, ${gl('m1rp', 'M1RP')}, P5, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P2 <strong>(34 sts)</strong></span>
+      <span class="row-label" data-step-label="61">Row 13 (RS):</span><span data-step="61">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K4, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K18, ${gl('sm', 'SM')}, K4, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, ${gl('m1r', 'M1R')}, K2 <strong>(35 sts)</strong></span>
+      <span class="row-label" data-step-label="62">Row 14 (WS):</span><span data-step="62">P2, ${gl('m1rp', 'M1RP')}, P7, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P2 <strong>(36 sts)</strong></span>
+      <span class="row-label" data-step-label="63">Row 15 (RS):</span><span data-step="63">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K17, ${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K1, ${gl('m1r', 'M1R')}, K2 <strong>(37 sts)</strong></span>
+      <span class="row-label" data-step-label="64">Row 16 (WS):</span><span data-step="64">P2, ${gl('m1rp', 'M1RP')}, P9, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P2 <strong>(38 sts)</strong></span>
+      <span class="row-label" data-step-label="65">Row 17 (RS):</span><span data-step="65">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K17, ${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K3, ${gl('m1r', 'M1R')}, K2 <strong>(39 sts)</strong></span>
+      <span class="row-label" data-step-label="66">Row 18 (WS):</span><span data-step="66">P2, ${gl('m1rp', 'M1RP')}, P11, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P2 <strong>(40 sts)</strong></span>
+      <span class="row-label" data-step-label="67">Row 19 (RS):</span><span data-step="67">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K10, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K12, ${gl('sm', 'SM')}, K10, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, ${gl('m1r', 'M1R')}, K2 <strong>(41 sts)</strong></span>
+      <span class="row-label" data-step-label="68">Row 20 (WS):</span><span data-step="68">P2, ${gl('m1rp', 'M1RP')}, P13, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P2 <strong>(42 sts)</strong></span>
+      <span class="row-label" data-step-label="69">Row 21 (RS):</span><span data-step="69">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K9, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K13, ${gl('sm', 'SM')}, K9, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K3, ${gl('m1r', 'M1R')}, K2 <strong>(43 sts)</strong></span>
+      <span class="row-label" data-step-label="70">Row 22 (WS):</span><span data-step="70">P2, ${gl('m1rp', 'M1RP')}, P15, ${gl('sm', 'SM')}, P24, ${gl('sm', 'SM')}, P2 <strong>(44 sts)</strong></span>
+    </div>
+    <p data-step="71">Do not cut the yarn — you will start the body from here.</p>
+
+    <h2>3. Body &amp; Skirt</h2>
+    <p class="ad-note">(The PDF numbers this section 3 — there is no section 2.)</p>
+    <p data-step="72">Place all the pieces on your working needle in order <strong>left front – back – right front</strong>, RS facing, so Row 23 starts at the left front's front edge (where your yarn is). Keep all markers.</p>
+    <p class="ad-note">Row 23 joins the pieces: the K2TOG, SSK pairs at the two joins are where left front meets back and back meets right front.</p>
+    <p class="ad-note">Row 23 also places <strong>one new marker</strong> (the PM in the row), 8 sts before the end of the back. The size M back chart has only three green lines, but the pattern's Row 23 (and the body chart) has a marker here: the back's last 8 sts plus the right front's first 18 sts make up one 24-st section.</p>
+    <p class="ad-note">On every row: the first 2 sts and last 2 sts are the edge sts (SL1, K1 / K2 on RS; SL1, P1 / P2 on WS), separated from the rest by the 2 edge markers.</p>
+    <p class="ad-note">Increase rows (49, 73, 97, 121, 145, 169, 193): remove the inner markers as you work the increase row, then place them back in their new positions on the following WS row (written out as PM).</p>
+    <div class="row-table">
+      <span class="row-label" data-step-label="73">Row 23 (RS):</span><span data-step="73">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K8, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K14, ${gl('sm', 'SM')}, K8, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K6, ${gl('k2tog', 'K2TOG')}, ${gl('ssk', 'SSK')}, K6, (${gl('sm', 'SM')}, K8, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K14) &times;3, ${gl('pm', 'PM')}, K6, ${gl('k2tog', 'K2TOG')}, ${gl('ssk', 'SSK')}, K16, ${gl('sm', 'SM')}, K8, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K14, ${gl('sm', 'SM')}, K2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="74">Row 24 (WS):</span><span data-step="74">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="75">Row 25 (RS):</span><span data-step="75">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;7, ${gl('sm', 'SM')}, K2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="76">Row 26 (WS):</span><span data-step="76">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="77">Row 27 (RS):</span><span data-step="77">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;7, ${gl('sm', 'SM')}, K2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="78">Row 28 (WS):</span><span data-step="78">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="79">Row 29 (RS):</span><span data-step="79">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;7, ${gl('sm', 'SM')}, K2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="80">Row 30 (WS):</span><span data-step="80">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="81">Row 31 (RS):</span><span data-step="81">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;7, ${gl('sm', 'SM')}, K2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="82">Row 32 (WS):</span><span data-step="82">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="83">Row 33 (RS):</span><span data-step="83">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;7, ${gl('sm', 'SM')}, K2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="84">Row 34 (WS):</span><span data-step="84">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="85">Row 35 (RS):</span><span data-step="85">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;7, ${gl('sm', 'SM')}, K2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="86">Row 36 (WS):</span><span data-step="86">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="87">Row 37 (RS):</span><span data-step="87">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K19, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K3) &times;7, ${gl('sm', 'SM')}, K2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="88">Row 38 (WS):</span><span data-step="88">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="89">Row 39 (RS):</span><span data-step="89">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K17, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K2) &times;7, ${gl('sm', 'SM')}, K2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="90">Row 40 (WS):</span><span data-step="90">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="91">Row 41 (RS):</span><span data-step="91">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K17, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K2) &times;7, ${gl('sm', 'SM')}, K2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="92">Row 42 (WS):</span><span data-step="92">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="93">Row 43 (RS):</span><span data-step="93">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K12, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K10) &times;7, ${gl('sm', 'SM')}, K2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="94">Row 44 (WS):</span><span data-step="94">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="95">Row 45 (RS):</span><span data-step="95">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K13, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K9) &times;7, ${gl('sm', 'SM')}, K2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="96">Row 46 (WS):</span><span data-step="96">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="97">Row 47 (RS):</span><span data-step="97">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K14, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K8) &times;7, ${gl('sm', 'SM')}, K2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="98">Row 48 (WS):</span><span data-step="98">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P2 <strong>(172 sts)</strong></span>
+      <span class="row-label" data-step-label="99">Row 49 (RS):</span><span data-step="99"><em>Remove each inner marker as you reach it (keep the 2 edge markers).</em> ${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K3, (${gl('m1l', 'M1L')}, K7) &times;23, ${gl('m1l', 'M1L')}, K4, ${gl('sm', 'SM')}, K2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="100">Row 50 (WS):</span><span data-step="100">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('pm', 'PM')}, P24) &times;7, ${gl('pm', 'PM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="101">Row 51 (RS):</span><span data-step="101">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K24) &times;7, ${gl('sm', 'SM')}, K12, ${gl('sm', 'SM')}, K2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="102">Row 52 (WS):</span><span data-step="102">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="103">Row 53 (RS):</span><span data-step="103">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K24) &times;7, ${gl('sm', 'SM')}, K12, ${gl('sm', 'SM')}, K2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="104">Row 54 (WS):</span><span data-step="104">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="105">Row 55 (RS):</span><span data-step="105">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K24) &times;7, ${gl('sm', 'SM')}, K12, ${gl('sm', 'SM')}, K2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="106">Row 56 (WS):</span><span data-step="106">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="107">Row 57 (RS):</span><span data-step="107">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K24) &times;7, ${gl('sm', 'SM')}, K12, ${gl('sm', 'SM')}, K2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="108">Row 58 (WS):</span><span data-step="108">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="109">Row 59 (RS):</span><span data-step="109">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K24) &times;7, ${gl('sm', 'SM')}, K12, ${gl('sm', 'SM')}, K2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="110">Row 60 (WS):</span><span data-step="110">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="111">Row 61 (RS):</span><span data-step="111">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K4, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K18) &times;7, ${gl('sm', 'SM')}, K4, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K6, ${gl('sm', 'SM')}, K2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="112">Row 62 (WS):</span><span data-step="112">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="113">Row 63 (RS):</span><span data-step="113">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K17) &times;7, ${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K5, ${gl('sm', 'SM')}, K2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="114">Row 64 (WS):</span><span data-step="114">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="115">Row 65 (RS):</span><span data-step="115">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K17) &times;7, ${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K5, ${gl('sm', 'SM')}, K2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="116">Row 66 (WS):</span><span data-step="116">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="117">Row 67 (RS):</span><span data-step="117">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K10, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K12) &times;7, ${gl('sm', 'SM')}, K10, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, ${gl('sm', 'SM')}, K2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="118">Row 68 (WS):</span><span data-step="118">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="119">Row 69 (RS):</span><span data-step="119">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K9, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K13) &times;7, ${gl('sm', 'SM')}, K9, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K1, ${gl('sm', 'SM')}, K2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="120">Row 70 (WS):</span><span data-step="120">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="121">Row 71 (RS):</span><span data-step="121">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K8, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K14) &times;7, ${gl('sm', 'SM')}, K8, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K2, ${gl('sm', 'SM')}, K2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="122">Row 72 (WS):</span><span data-step="122">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(196 sts)</strong></span>
+      <span class="row-label" data-step-label="123">Row 73 (RS):</span><span data-step="123"><em>Remove each inner marker as you reach it (keep the 2 edge markers).</em> ${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K8, (${gl('m1l', 'M1L')}, K16) &times;11, ${gl('m1l', 'M1L')}, K8, ${gl('sm', 'SM')}, K2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="124">Row 74 (WS):</span><span data-step="124">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('pm', 'PM')}, P24) &times;7, ${gl('pm', 'PM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="125">Row 75 (RS):</span><span data-step="125">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K18, (${gl('sm', 'SM')}, K24) &times;7, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="126">Row 76 (WS):</span><span data-step="126">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="127">Row 77 (RS):</span><span data-step="127">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K18, (${gl('sm', 'SM')}, K24) &times;7, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="128">Row 78 (WS):</span><span data-step="128">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="129">Row 79 (RS):</span><span data-step="129">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K18, (${gl('sm', 'SM')}, K24) &times;7, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="130">Row 80 (WS):</span><span data-step="130">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="131">Row 81 (RS):</span><span data-step="131">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K18, (${gl('sm', 'SM')}, K24) &times;7, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="132">Row 82 (WS):</span><span data-step="132">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="133">Row 83 (RS):</span><span data-step="133">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K18, (${gl('sm', 'SM')}, K24) &times;7, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="134">Row 84 (WS):</span><span data-step="134">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="135">Row 85 (RS):</span><span data-step="135">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K13, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K3, (${gl('sm', 'SM')}, K19, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K3) &times;7, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="136">Row 86 (WS):</span><span data-step="136">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="137">Row 87 (RS):</span><span data-step="137">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K11, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K2, (${gl('sm', 'SM')}, K17, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K2) &times;7, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="138">Row 88 (WS):</span><span data-step="138">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="139">Row 89 (RS):</span><span data-step="139">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K11, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K2, (${gl('sm', 'SM')}, K17, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K2) &times;7, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="140">Row 90 (WS):</span><span data-step="140">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="141">Row 91 (RS):</span><span data-step="141">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K6, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K10, (${gl('sm', 'SM')}, K12, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K10) &times;7, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="142">Row 92 (WS):</span><span data-step="142">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="143">Row 93 (RS):</span><span data-step="143">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K7, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K9, (${gl('sm', 'SM')}, K13, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K9) &times;7, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="144">Row 94 (WS):</span><span data-step="144">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="145">Row 95 (RS):</span><span data-step="145">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K8, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K8, (${gl('sm', 'SM')}, K14, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K8) &times;7, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="146">Row 96 (WS):</span><span data-step="146">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;7, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(208 sts)</strong></span>
+      <span class="row-label" data-step-label="147">Row 97 (RS):</span><span data-step="147"><em>Remove each inner marker as you reach it (keep the 2 edge markers).</em> ${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K8, (${gl('m1l', 'M1L')}, K17) &times;11, ${gl('m1l', 'M1L')}, K9, ${gl('sm', 'SM')}, K2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="148">Row 98 (WS):</span><span data-step="148">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P24, (${gl('pm', 'PM')}, P24) &times;8, ${gl('sm', 'SM')}, P2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="149">Row 99 (RS):</span><span data-step="149">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="150">Row 100 (WS):</span><span data-step="150">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="151">Row 101 (RS):</span><span data-step="151">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="152">Row 102 (WS):</span><span data-step="152">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="153">Row 103 (RS):</span><span data-step="153">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="154">Row 104 (WS):</span><span data-step="154">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="155">Row 105 (RS):</span><span data-step="155">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="156">Row 106 (WS):</span><span data-step="156">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="157">Row 107 (RS):</span><span data-step="157">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="158">Row 108 (WS):</span><span data-step="158">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="159">Row 109 (RS):</span><span data-step="159">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K4, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K18) &times;9, ${gl('sm', 'SM')}, K2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="160">Row 110 (WS):</span><span data-step="160">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="161">Row 111 (RS):</span><span data-step="161">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K17) &times;9, ${gl('sm', 'SM')}, K2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="162">Row 112 (WS):</span><span data-step="162">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="163">Row 113 (RS):</span><span data-step="163">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K17) &times;9, ${gl('sm', 'SM')}, K2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="164">Row 114 (WS):</span><span data-step="164">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="165">Row 115 (RS):</span><span data-step="165">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K10, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K12) &times;9, ${gl('sm', 'SM')}, K2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="166">Row 116 (WS):</span><span data-step="166">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="167">Row 117 (RS):</span><span data-step="167">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K9, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K13) &times;9, ${gl('sm', 'SM')}, K2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="168">Row 118 (WS):</span><span data-step="168">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="169">Row 119 (RS):</span><span data-step="169">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K8, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K14) &times;9, ${gl('sm', 'SM')}, K2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="170">Row 120 (WS):</span><span data-step="170">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P2 <strong>(220 sts)</strong></span>
+      <span class="row-label" data-step-label="171">Row 121 (RS):</span><span data-step="171"><em>Remove each inner marker as you reach it (keep the 2 edge markers).</em> ${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K9, (${gl('m1l', 'M1L')}, K18) &times;11, ${gl('m1l', 'M1L')}, K9, ${gl('sm', 'SM')}, K2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="172">Row 122 (WS):</span><span data-step="172">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P6, (${gl('pm', 'PM')}, P24) &times;9, ${gl('pm', 'PM')}, P6, ${gl('sm', 'SM')}, P2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="173">Row 123 (RS):</span><span data-step="173">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K6, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K6, ${gl('sm', 'SM')}, K2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="174">Row 124 (WS):</span><span data-step="174">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P6, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P6, ${gl('sm', 'SM')}, P2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="175">Row 125 (RS):</span><span data-step="175">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K6, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K6, ${gl('sm', 'SM')}, K2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="176">Row 126 (WS):</span><span data-step="176">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P6, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P6, ${gl('sm', 'SM')}, P2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="177">Row 127 (RS):</span><span data-step="177">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K6, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K6, ${gl('sm', 'SM')}, K2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="178">Row 128 (WS):</span><span data-step="178">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P6, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P6, ${gl('sm', 'SM')}, P2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="179">Row 129 (RS):</span><span data-step="179">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K6, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K6, ${gl('sm', 'SM')}, K2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="180">Row 130 (WS):</span><span data-step="180">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P6, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P6, ${gl('sm', 'SM')}, P2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="181">Row 131 (RS):</span><span data-step="181">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K6, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K6, ${gl('sm', 'SM')}, K2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="182">Row 132 (WS):</span><span data-step="182">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P6, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P6, ${gl('sm', 'SM')}, P2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="183">Row 133 (RS):</span><span data-step="183">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K6, (${gl('sm', 'SM')}, K19, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K3) &times;9, ${gl('sm', 'SM')}, K6, ${gl('sm', 'SM')}, K2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="184">Row 134 (WS):</span><span data-step="184">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P6, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P6, ${gl('sm', 'SM')}, P2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="185">Row 135 (RS):</span><span data-step="185">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K6, (${gl('sm', 'SM')}, K17, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K2) &times;9, ${gl('sm', 'SM')}, K6, ${gl('sm', 'SM')}, K2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="186">Row 136 (WS):</span><span data-step="186">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P6, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P6, ${gl('sm', 'SM')}, P2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="187">Row 137 (RS):</span><span data-step="187">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K6, (${gl('sm', 'SM')}, K17, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K2) &times;9, ${gl('sm', 'SM')}, K6, ${gl('sm', 'SM')}, K2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="188">Row 138 (WS):</span><span data-step="188">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P6, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P6, ${gl('sm', 'SM')}, P2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="189">Row 139 (RS):</span><span data-step="189">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K6, (${gl('sm', 'SM')}, K12, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K10) &times;9, ${gl('sm', 'SM')}, K6, ${gl('sm', 'SM')}, K2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="190">Row 140 (WS):</span><span data-step="190">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P6, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P6, ${gl('sm', 'SM')}, P2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="191">Row 141 (RS):</span><span data-step="191">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K6, (${gl('sm', 'SM')}, K13, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K9) &times;9, ${gl('sm', 'SM')}, K6, ${gl('sm', 'SM')}, K2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="192">Row 142 (WS):</span><span data-step="192">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P6, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P6, ${gl('sm', 'SM')}, P2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="193">Row 143 (RS):</span><span data-step="193">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K6, (${gl('sm', 'SM')}, K14, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K8) &times;9, ${gl('sm', 'SM')}, K6, ${gl('sm', 'SM')}, K2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="194">Row 144 (WS):</span><span data-step="194">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P6, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P6, ${gl('sm', 'SM')}, P2 <strong>(232 sts)</strong></span>
+      <span class="row-label" data-step-label="195">Row 145 (RS):</span><span data-step="195"><em>Remove each inner marker as you reach it (keep the 2 edge markers).</em> ${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K9, (${gl('m1l', 'M1L')}, K19) &times;11, ${gl('m1l', 'M1L')}, K10, ${gl('sm', 'SM')}, K2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="196">Row 146 (WS):</span><span data-step="196">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('pm', 'PM')}, P24) &times;9, ${gl('pm', 'PM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="197">Row 147 (RS):</span><span data-step="197">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K12, ${gl('sm', 'SM')}, K2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="198">Row 148 (WS):</span><span data-step="198">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="199">Row 149 (RS):</span><span data-step="199">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K12, ${gl('sm', 'SM')}, K2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="200">Row 150 (WS):</span><span data-step="200">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="201">Row 151 (RS):</span><span data-step="201">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K12, ${gl('sm', 'SM')}, K2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="202">Row 152 (WS):</span><span data-step="202">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="203">Row 153 (RS):</span><span data-step="203">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K12, ${gl('sm', 'SM')}, K2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="204">Row 154 (WS):</span><span data-step="204">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="205">Row 155 (RS):</span><span data-step="205">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K12, ${gl('sm', 'SM')}, K2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="206">Row 156 (WS):</span><span data-step="206">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(244 sts)</strong></span>
+    </div>
+    <p class="ad-note"><strong>Short version:</strong> stop after Row 156 and go to Bind off. <strong>Long version:</strong> continue to Row 228.</p>
+    <div class="row-table">
+      <span class="row-label" data-step-label="207">Row 157 (RS):</span><span data-step="207">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K4, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K18) &times;9, ${gl('sm', 'SM')}, K4, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K6, ${gl('sm', 'SM')}, K2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="208">Row 158 (WS):</span><span data-step="208">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="209">Row 159 (RS):</span><span data-step="209">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K17) &times;9, ${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K5, ${gl('sm', 'SM')}, K2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="210">Row 160 (WS):</span><span data-step="210">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="211">Row 161 (RS):</span><span data-step="211">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K17) &times;9, ${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K5, ${gl('sm', 'SM')}, K2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="212">Row 162 (WS):</span><span data-step="212">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="213">Row 163 (RS):</span><span data-step="213">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K10, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K12) &times;9, ${gl('sm', 'SM')}, K10, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, ${gl('sm', 'SM')}, K2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="214">Row 164 (WS):</span><span data-step="214">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="215">Row 165 (RS):</span><span data-step="215">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K9, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K13) &times;9, ${gl('sm', 'SM')}, K9, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K1, ${gl('sm', 'SM')}, K2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="216">Row 166 (WS):</span><span data-step="216">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="217">Row 167 (RS):</span><span data-step="217">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K12, (${gl('sm', 'SM')}, K8, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K14) &times;9, ${gl('sm', 'SM')}, K8, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K2, ${gl('sm', 'SM')}, K2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="218">Row 168 (WS):</span><span data-step="218">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P12, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P12, ${gl('sm', 'SM')}, P2 <strong>(244 sts)</strong></span>
+      <span class="row-label" data-step-label="219">Row 169 (RS):</span><span data-step="219"><em>Remove each inner marker as you reach it (keep the 2 edge markers).</em> ${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K10, (${gl('m1l', 'M1L')}, K20) &times;11, ${gl('m1l', 'M1L')}, K10, ${gl('sm', 'SM')}, K2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="220">Row 170 (WS):</span><span data-step="220">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('pm', 'PM')}, P24) &times;9, ${gl('pm', 'PM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="221">Row 171 (RS):</span><span data-step="221">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K18, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="222">Row 172 (WS):</span><span data-step="222">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="223">Row 173 (RS):</span><span data-step="223">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K18, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="224">Row 174 (WS):</span><span data-step="224">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="225">Row 175 (RS):</span><span data-step="225">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K18, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="226">Row 176 (WS):</span><span data-step="226">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="227">Row 177 (RS):</span><span data-step="227">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K18, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="228">Row 178 (WS):</span><span data-step="228">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="229">Row 179 (RS):</span><span data-step="229">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K18, (${gl('sm', 'SM')}, K24) &times;9, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="230">Row 180 (WS):</span><span data-step="230">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="231">Row 181 (RS):</span><span data-step="231">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K13, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K3, (${gl('sm', 'SM')}, K19, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K3) &times;9, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="232">Row 182 (WS):</span><span data-step="232">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="233">Row 183 (RS):</span><span data-step="233">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K11, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K2, (${gl('sm', 'SM')}, K17, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K2) &times;9, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="234">Row 184 (WS):</span><span data-step="234">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="235">Row 185 (RS):</span><span data-step="235">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K11, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K2, (${gl('sm', 'SM')}, K17, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K2) &times;9, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="236">Row 186 (WS):</span><span data-step="236">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="237">Row 187 (RS):</span><span data-step="237">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K6, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K10, (${gl('sm', 'SM')}, K12, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K10) &times;9, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="238">Row 188 (WS):</span><span data-step="238">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="239">Row 189 (RS):</span><span data-step="239">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K7, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K9, (${gl('sm', 'SM')}, K13, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K9) &times;9, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="240">Row 190 (WS):</span><span data-step="240">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="241">Row 191 (RS):</span><span data-step="241">${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K8, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K8, (${gl('sm', 'SM')}, K14, ${gl('yo', 'YO')}, ${gl('ssk', 'SSK')}, K8) &times;9, ${gl('sm', 'SM')}, K18, ${gl('sm', 'SM')}, K2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="242">Row 192 (WS):</span><span data-step="242">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P18, (${gl('sm', 'SM')}, P24) &times;9, ${gl('sm', 'SM')}, P18, ${gl('sm', 'SM')}, P2 <strong>(256 sts)</strong></span>
+      <span class="row-label" data-step-label="243">Row 193 (RS):</span><span data-step="243"><em>Remove each inner marker as you reach it (keep the 2 edge markers).</em> ${gl('sl-rs', 'SL1 wyib')}, K1, ${gl('sm', 'SM')}, K10, (${gl('m1l', 'M1L')}, K21) &times;11, ${gl('m1l', 'M1L')}, K11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="244">Row 194 (WS):</span><span data-step="244">${gl('sl-ws', 'SL1 wyif')}, P1, ${gl('sm', 'SM')}, P24, (${gl('pm', 'PM')}, P24) &times;10, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="245">Row 195 (RS):</span><span data-step="245">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="246">Row 196 (WS):</span><span data-step="246">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="247">Row 197 (RS):</span><span data-step="247">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="248">Row 198 (WS):</span><span data-step="248">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="249">Row 199 (RS):</span><span data-step="249">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="250">Row 200 (WS):</span><span data-step="250">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="251">Row 201 (RS):</span><span data-step="251">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="252">Row 202 (WS):</span><span data-step="252">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="253">Row 203 (RS):</span><span data-step="253">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="254">Row 204 (WS):</span><span data-step="254">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="255">Row 205 (RS):</span><span data-step="255">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K4, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K18) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="256">Row 206 (WS):</span><span data-step="256">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="257">Row 207 (RS):</span><span data-step="257">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K17) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="258">Row 208 (WS):</span><span data-step="258">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="259">Row 209 (RS):</span><span data-step="259">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K2, ${gl('ssk', 'SSK')}, ${gl('yo', 'YO')}, K1, ${gl('yo', 'YO')}, ${gl('k2tog', 'K2TOG')}, K17) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="260">Row 210 (WS):</span><span data-step="260">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="261">Row 211 (RS):</span><span data-step="261">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K10, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K12) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="262">Row 212 (WS):</span><span data-step="262">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="263">Row 213 (RS):</span><span data-step="263">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K9, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K13) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="264">Row 214 (WS):</span><span data-step="264">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="265">Row 215 (RS):</span><span data-step="265">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K8, ${gl('k2tog', 'K2TOG')}, ${gl('yo', 'YO')}, K14) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="266">Row 216 (WS):</span><span data-step="266">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="267">Row 217 (RS):</span><span data-step="267">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="268">Row 218 (WS):</span><span data-step="268">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="269">Row 219 (RS):</span><span data-step="269">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="270">Row 220 (WS):</span><span data-step="270">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="271">Row 221 (RS):</span><span data-step="271">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="272">Row 222 (WS):</span><span data-step="272">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="273">Row 223 (RS):</span><span data-step="273">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="274">Row 224 (WS):</span><span data-step="274">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="275">Row 225 (RS):</span><span data-step="275">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="276">Row 226 (WS):</span><span data-step="276">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="277">Row 227 (RS):</span><span data-step="277">${gl('sl-rs', 'SL1 wyib')}, K1, (${gl('sm', 'SM')}, K24) &times;11, ${gl('sm', 'SM')}, K2 <strong>(268 sts)</strong></span>
+      <span class="row-label" data-step-label="278">Row 228 (WS):</span><span data-step="278">${gl('sl-ws', 'SL1 wyif')}, P1, (${gl('sm', 'SM')}, P24) &times;11, ${gl('sm', 'SM')}, P2 <strong>(268 sts)</strong></span>
+    </div>
+    <p data-step="279">Bind off using the ${gl('picot-bo', 'picot bind-off')} — <a class="ad-video" href="https://youtu.be/2-xkGnWz7vo" target="_blank" rel="noopener">&#9654; Tutorial 2 – Picot Bind-off (video)</a>. You can also adjust the length to your liking before binding off.</p>
+
+    <h2>4. Shoulder Straps</h2>
+    <p data-step="280">First, mark the positions on the front and back panels where the shoulder straps will be attached using markers.</p>
+    <p data-step="281">Using a 3 mm crochet hook, work slip stitch cord starting from the marked positions to make both shoulder straps (<a class="ad-video" href="https://youtu.be/T0azB-wEnU8" target="_blank" rel="noopener">&#9654; Tutorial 3 – Shoulder Straps (video)</a>). Before you start, leave a yarn tail about 3 times the shoulder strap length.</p>
+    <p data-step="282">Before you attach the straps, adjust the length so that it is 2–3 cm shorter than your preferred length. The sample is 30 cm when worn.</p>
+    <p data-step="283">Attach the other end of the strap to the opposite marker using slip stitch. Then add one more row of slip stitches to prevent excessive stretching.</p>
+    <p class="ad-note">If you prefer a wider shoulder strap, work using 2 strands.</p>
+
+    <h2>5. Button Hole</h2>
+    <p data-step="284">Before making the buttonholes, place markers at each spot where buttons will be attached. Adjust the number and spacing to suit your design (10 buttons for Long, 6 for Short).</p>
+    <p data-step="285">Using a 3 mm crochet hook, repeat (slip stitch, chain stitch) along the edges of both front panels (<a class="ad-video" href="https://youtu.be/VGhm-R4CNvA" target="_blank" rel="noopener">&#9654; Tutorial 4 – Button Hole (video)</a>). Work from the bottom upward on the right front, and from the top downward on the left front.</p>
+    <p data-step="286">When you reach a marker, make 4 chain sts and slip st to create a buttonhole.</p>
+    <p data-step="287">Weave in all ends and sew on the buttons to finish the Arachne Dress.</p>
+
+    <h2 class="ad-glossary-hdr">Glossary</h2>
+    <div class="bb-glossary">
+      ${GLOSSARY.map(g => `<div class="bb-gloss-entry" id="ad-gloss-${g.id}"><span class="bb-gloss-term">${g.term}</span><span class="bb-gloss-def">${g.def}</span></div>`).join('\n      ')}
+    </div>
+
+  </div>
+</div>`;
+
+// ── Versions ──────────────────────────────────────────────────────────────────
+// Each version keeps its own step position and history.
+const VERSIONS = {
+  s: { label: 'S · original gauge (5 mm)',   status: 'Size S, original gauge',     html: CONTENT_S, total: 280, stepKey: 'arachne-dress-step',   histKey: 'arachne-dress-history'   },
+  m: { label: 'M · smaller needles (4 mm)', status: 'Size M on smaller needles', html: CONTENT_M, total: 288, stepKey: 'arachne-dress-m-step', histKey: 'arachne-dress-m-history' },
+};
+const VERSION_KEY = 'arachne-dress-version';
+
+let version = 's';
+
+function V() { return VERSIONS[version]; }
+
+function loadVersion() {
+  const v = localStorage.getItem(VERSION_KEY);
+  version = VERSIONS[v] ? v : 's';
+}
+
 const TOOLBAR_HTML = `
 <div id="page-toolbar">
   <h1>Arachne Dress</h1>
+  <select id="ad-version-select" class="btn" style="cursor:pointer;">
+    ${Object.entries(VERSIONS).map(([k, v]) => `<option value="${k}">${v.label}</option>`).join('')}
+  </select>
   <div class="divider"></div>
   <button class="btn" id="ad-step-toggle">Step Mode</button>
   <button class="btn small" id="ad-step-prev" title="Previous step (Left arrow)">&#8592;</button>
-  <span id="ad-step-badge" style="font-size:0.82rem;color:#b0897a;white-space:nowrap;">Step — / ${TOTAL_STEPS}</span>
+  <span id="ad-step-badge" style="font-size:0.82rem;color:#b0897a;white-space:nowrap;">Step —</span>
   <button class="btn small" id="ad-step-next" title="Next step (Space / Right arrow)">&#8594;</button>
 </div>`;
 
 // ── State ─────────────────────────────────────────────────────────────────────
-const STORAGE_KEY = 'arachne-dress-step';
-
 let stepMode    = false;
 let currentStep = 0;
 
 let doc         = null;  // #ad-pattern-doc element
+let _bodyMount  = null;
 let _shellAPI   = null;
 let adPipEl     = null;  // fallback overlay element
 let adPipWindow = null;  // documentPictureInPicture window
 
 function loadState() {
+  stepMode    = false;
+  currentStep = 0;
   try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+    const saved = JSON.parse(localStorage.getItem(V().stepKey) || 'null');
     if (saved) {
       stepMode    = saved.stepMode ?? false;
       currentStep = saved.step     ?? 0;
@@ -412,21 +791,20 @@ function loadState() {
 }
 
 function saveState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({ stepMode, step: currentStep }));
+  localStorage.setItem(V().stepKey, JSON.stringify({ stepMode, step: currentStep }));
 }
 
 // ── History ───────────────────────────────────────────────────────────────────
-const LS_HISTORY_AD = 'arachne-dress-history';
 const MAX_HIST_AD   = 500;
 
 let histTimerAD   = null;
 let lastHistKeyAD = null;
 
 function loadHistory() {
-  try { return JSON.parse(localStorage.getItem(LS_HISTORY_AD)) || []; } catch { return []; }
+  try { return JSON.parse(localStorage.getItem(V().histKey)) || []; } catch { return []; }
 }
 function saveHistory(hist) {
-  localStorage.setItem(LS_HISTORY_AD, JSON.stringify(hist));
+  localStorage.setItem(V().histKey, JSON.stringify(hist));
 }
 function scheduleHistEntry() {
   if (!stepMode) return;
@@ -529,14 +907,14 @@ function updateToolbarBadges() {
   const badge = document.getElementById('ad-step-badge');
   if (badge) {
     badge.textContent = stepMode
-      ? `Step ${currentStep + 1} / ${TOTAL_STEPS}`
-      : `Step — / ${TOTAL_STEPS}`;
+      ? `Step ${currentStep + 1} / ${V().total}`
+      : `Step — / ${V().total}`;
   }
 }
 
 // ── Navigation ────────────────────────────────────────────────────────────────
 function advance() {
-  if (currentStep < TOTAL_STEPS - 1) currentStep++;
+  if (currentStep < V().total - 1) currentStep++;
   hideGlossBackBtn();
   updateDisplay();
   scheduleHistEntry();
@@ -576,7 +954,7 @@ function updatePip() {
     const contentEl = d.getElementById('ad-pip-content');
     const badgeEl   = d.getElementById('ad-pip-badge');
     if (contentEl) contentEl.innerHTML = pipStepHTML();
-    if (badgeEl)   badgeEl.textContent = stepMode ? `Step ${currentStep + 1} / ${TOTAL_STEPS}` : '—';
+    if (badgeEl)   badgeEl.textContent = stepMode ? `Step ${currentStep + 1} / ${V().total}` : '—';
   }
 
   if (fbVis) apply(document);
@@ -695,6 +1073,26 @@ async function togglePip() {
   updatePip();
 }
 
+// ── Version change ────────────────────────────────────────────────────────────
+function changeVersion(v) {
+  if (!VERSIONS[v] || v === version) return;
+  clearTimeout(histTimerAD);
+  lastHistKeyAD = null;
+  version = v;
+  localStorage.setItem(VERSION_KEY, version);
+  loadState();
+  _bodyMount.innerHTML = V().html;
+  doc = document.getElementById('ad-pattern-doc');
+  wireGlossaryLinks();
+  hideGlossBackBtn();
+  if (_shellAPI) {
+    _shellAPI.setStatus(`Arachne Dress — pattern reference · ${V().status}`);
+    _shellAPI.updateHistBadge();
+    _shellAPI.refreshHistory();
+  }
+  updateDisplay();
+}
+
 // ── Key handler ───────────────────────────────────────────────────────────────
 function handleKey(e) {
   if (!stepMode) {
@@ -710,21 +1108,27 @@ function handleKey(e) {
 PageRegistry.register("arachne-dress", {
   id:     "arachne-dress",
   title:  "Arachne Dress",
-  status: "Pattern reference · Size S",
+  status: "Pattern reference · Size S / M",
 
   mount(toolbarMount, bodyMount, shellAPI) {
     _shellAPI = shellAPI;
+    _bodyMount = bodyMount;
+    loadVersion();
     loadState();
 
     toolbarMount.innerHTML = TOOLBAR_HTML;
-    bodyMount.innerHTML    = CONTENT_HTML;
+    bodyMount.innerHTML    = V().html;
     doc = document.getElementById('ad-pattern-doc');
+
+    const versionSelect = document.getElementById('ad-version-select');
+    versionSelect.value = version;
+    versionSelect.addEventListener('change', e => changeVersion(e.target.value));
 
     document.getElementById('ad-step-toggle').addEventListener('click', toggleStepMode);
     document.getElementById('ad-step-next').addEventListener('click',   advance);
     document.getElementById('ad-step-prev').addEventListener('click',   retreat);
 
-    shellAPI.setStatus("Arachne Dress — pattern reference · Size S");
+    shellAPI.setStatus(`Arachne Dress — pattern reference · ${V().status}`);
     shellAPI.updateHistBadge();
     updateDisplay();
     scheduleHistEntry();
@@ -749,6 +1153,7 @@ PageRegistry.register("arachne-dress", {
     if (backBtn) backBtn.remove();
     glossReturnEl = null;
     _shellAPI = null;
+    _bodyMount = null;
     doc = null;
   },
 
@@ -778,7 +1183,7 @@ PageRegistry.register("arachne-dress", {
     const labelEl = doc && doc.querySelector(`[data-step-label="${currentStep}"]`);
     return {
       label: stepMode ? (labelEl ? labelEl.textContent.replace(/:$/, '') : `Step ${currentStep + 1}`) : "No active step",
-      sub:   "Arachne Dress",
+      sub:   `Arachne Dress · ${V().status}`,
     };
   },
 });
