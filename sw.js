@@ -1,4 +1,4 @@
-const CACHE = 'knitting-v5';
+const CACHE = 'knitting-v6';
 const STATIC = [
   '/',
   '/index.html',
@@ -16,6 +16,7 @@ const STATIC = [
   '/pages/ciro-sweater/page.js',
   '/pages/arachne-dress/page.js',
   '/pages/ameesha-headband/page.js',
+  '/pages/lakes-pullover/page.js',
 ];
 
 self.addEventListener('install', e => {
