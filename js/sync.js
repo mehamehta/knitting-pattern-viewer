@@ -1,6 +1,7 @@
 // Syncs all knitting localStorage keys to/from the server.
-// Loaded before shell.js. Exposes window.KnittingSync.init() which shell.js
-// awaits before booting, so server state is in localStorage by first page load.
+// Loaded before shell.js. Exposes window.KnittingSync.init(), which pulls server
+// state into localStorage. shell.js renders from localStorage straight away when
+// it already has progress and runs init() in the background.
 
 window.KnittingSync = (() => {
   const KEYS = [
@@ -44,11 +45,16 @@ window.KnittingSync = (() => {
   let dirty    = false;
   let pushTimer = null;
 
+  // One set per in-flight init(): keys written locally while it waits on the
+  // server. Those local writes are newer, so the server value is skipped.
+  const inflight = new Set();
+
   // Intercept writes to known keys so we know when to push
   localStorage.setItem = function (key, value) {
     const old = _getItem(key);
     _setItem(key, value);
     if (KEYS.includes(key) && value !== old) {
+      inflight.forEach(touched => touched.add(key));
       dirty = true;
       schedulePush();
     }
@@ -89,9 +95,17 @@ window.KnittingSync = (() => {
     );
   });
 
+  function hasLocalData() {
+    return KEYS.some(k => _getItem(k) !== null);
+  }
+
+  // Resolves to the list of keys that changed from server data.
   async function init() {
+    const touched = new Set();
+    const changed = [];
+    inflight.add(touched);
     try {
-      const resp = await fetch('/api/progress');
+      const resp = await fetch('/api/progress', { cache: 'no-store' });
 
       if (resp.status === 401) {
         window.location.href = '/login.html';
@@ -99,26 +113,32 @@ window.KnittingSync = (() => {
         return new Promise(() => {});
       }
 
-      if (!resp.ok) return;
+      if (!resp.ok) return changed;
 
       const serverData = await resp.json();
       const serverEmpty = Object.keys(serverData).length === 0;
-      const localHasData = KEYS.some(k => _getItem(k) !== null);
 
-      if (serverEmpty && localHasData) {
+      if (serverEmpty && hasLocalData()) {
         // First time using this device with the server — migrate local data up
         dirty = true;
         await push();
       } else if (!serverEmpty) {
         // Write server state into localStorage (server is the source of truth)
         KEYS.forEach(k => {
-          if (serverData[k] !== undefined) _setItem(k, serverData[k]);
+          if (serverData[k] === undefined || touched.has(k)) return;
+          if (_getItem(k) !== serverData[k]) {
+            _setItem(k, serverData[k]);
+            changed.push(k);
+          }
         });
       }
     } catch {
       // Network error — continue with whatever is in localStorage
+    } finally {
+      inflight.delete(touched);
     }
+    return changed;
   }
 
-  return { init, push };
+  return { init, push, hasLocalData };
 })();

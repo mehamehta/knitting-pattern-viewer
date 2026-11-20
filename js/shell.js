@@ -233,13 +233,36 @@
     if (page && page.handleKey) page.handleKey(e);
   });
 
-  // ── Boot: wait for server sync, then navigate to last visited page ───────────
-  KnittingSync.init().then(() => {
+  // Unmount and remount the current page so it picks up new localStorage state
+  function reloadCurrentPage() {
+    if (!currentPageId) return;
+    const id   = currentPageId;
+    const page = PageRegistry.get(id);
+    if (page && page.unmount) page.unmount();
+    currentPageId = null;
+    navigateTo(id);
+  }
+
+  // ── Boot: navigate to last visited page ─────────────────────────────────────
+  function bootToLastPage() {
     const savedPageId = localStorage.getItem("knitting_last_page");
     const bootPageId  = (savedPageId && PageRegistry.get(savedPageId)) ? savedPageId
                       : (PageRegistry.getAll()[0] || {}).id;
     if (bootPageId) navigateTo(bootPageId);
-  });
+  }
+
+  if (KnittingSync.hasLocalData()) {
+    // Render from local progress immediately; sync with the server in the
+    // background and only remount if another device changed something.
+    const sync = KnittingSync.init();
+    bootToLastPage();
+    sync.then(changed => {
+      if (changed.some(k => k !== "knitting_last_page")) reloadCurrentPage();
+    });
+  } else {
+    // New device: nothing to show until the server responds
+    KnittingSync.init().then(bootToLastPage);
+  }
 
   // ── Pull-to-refresh ─────────────────────────────────────────────────────────
   {
@@ -306,11 +329,7 @@
         el.classList.remove("releasing");
         try {
           await KnittingSync.init();
-          if (currentPageId) {
-            const id = currentPageId;
-            currentPageId = null;
-            navigateTo(id);
-          }
+          reloadCurrentPage();
         } finally {
           refreshing = false;
         }
