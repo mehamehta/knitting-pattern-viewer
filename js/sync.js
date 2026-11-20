@@ -30,6 +30,8 @@ window.KnittingSync = (() => {
     'lakes-pullover-state',
     'lakes-pullover-sleeves',
     'lakes-pullover-history',
+    'olio-net-bag-step',
+    'olio-net-bag-history',
     'knitting_pearl_earring_state',
     'knitting_pearl_earring_history',
     'knitting_pearl_earring_stitch_guide',
